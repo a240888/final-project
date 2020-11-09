@@ -25,7 +25,7 @@ def phydmg(power,atk,defense,counter):
     return result
 def magdmg(power,magatk,magdefense,counter):
     """魔攻傷害"""
-    result = (int)(42*power*magatkrandom.uniform(0.95,1.15)/magdefense/50+2*1.5*counter*(217-255)/255)
+    result = (int)(42*power*magatk*random.uniform(0.95,1.15)/magdefense/50+2*1.5*counter*(217-255)/255)
     return result
 global haskill
 haskill='1:龍之意志 2:迴避 3:龍王波 4:龍王滅碎陣'
@@ -89,6 +89,84 @@ def 技能說明():
         卡利斯技能()
     elif me==6:
         雷伊技能()
+def 判斷pp(me):
+    global skill
+    global 哈莫雷特pp
+    if me==1 and skill=='1':
+        if 哈莫雷特pp[0]>0:
+            return True
+    elif me==1 and skill=='2':
+        if 哈莫雷特pp[1]>0:
+            return True
+    elif me==1 and skill=='3':
+        if 哈莫雷特pp[2]>0:
+            return True
+    elif me==1 and skill=='4':
+        if 哈莫雷特pp[3]>0:
+            return True
+    elif me==2 and skill=='1':
+        if 羅特利斯pp[0]>0:
+            return True
+    elif me==2 and skill=='2':
+        if 羅特利斯pp[1]>0:
+            return True
+    elif me==2 and skill=='3':
+        if 羅特利斯pp[2]>0:
+            return True
+    elif me==2 and skill=='4':
+        if 羅特利斯pp[3]>0:
+            return True
+    elif me==3 and skill=='1':
+        if 魔焰猩猩pp[0]>0:
+            return True
+    elif me==3 and skill=='2':
+        if 魔焰猩猩pp[1]>0:
+            return True
+    elif me==3 and skill=='3':
+        if 魔焰猩猩pp[2]>0:
+            return True
+    elif me==3 and skill=='4':
+        if 魔焰猩猩pp[3]>0:
+            return True
+    elif me==4 and skill=='1':
+        if 薩帕克pp[0]>0:
+            return True
+    elif me==4 and skill=='2':
+        if 薩帕克pp[1]>0:
+            return True
+    elif me==4 and skill=='3':
+        if 薩帕克pp[2]>0:
+            return True
+    elif me==4 and skill=='4':
+        if 薩帕克pp[3]>0:
+            return True
+    elif me==5 and skill=='1':
+        if 卡利斯pp[0]>0:
+            return True
+    elif me==5 and skill=='2':
+        if 卡利斯pp[1]>0:
+            return True
+    elif me==5 and skill=='3':
+        if 卡利斯pp[2]>0:
+            return True
+    elif me==5 and skill=='4':
+        if 卡利斯pp[3]>0:
+            return True
+    elif me==6 and skill=='1':
+        if 雷伊pp[0]>0:
+            return True
+    elif me==6 and skill=='2':
+        if 雷伊pp[1]>0:
+            return True
+    elif me==6 and skill=='3':
+        if 雷伊pp[2]>0:
+            return True
+    elif me==6 and skill=='4':
+        if 雷伊pp[3]>0:
+            return True
+
+             
+
 
 def 技能():
      global haskill
@@ -99,26 +177,81 @@ def 技能():
      global reskill
      for case in switch(me):
         if case(int(1)):
-            print (haskill)
+            print ('1:龍之意志',哈莫雷特pp[0],'/10  2:迴避',哈莫雷特pp[1],'/15  3:龍王波',哈莫雷特pp[2],'/15  4:龍王滅碎陣',哈莫雷特pp[3],'/5',sep='')
             break
         if case(int(2)):
-            print (loskill)
+            print ('1:幻化之火',羅特利斯pp[0],'/20  2:火之意志',羅特利斯pp[1],'/25  3:灼燒',羅特利斯pp[2],'/25   4:天火鳳凰',羅特利斯pp[3],'/25',sep='' )
             break
         if case(int(3)):
-            print (moskill)
+            print ('1:覺醒',魔焰猩猩pp[0],'/10  2:絕命火焰',魔焰猩猩pp[1],'/10  3:全力一擊',魔焰猩猩pp[2],'/5   4:火焰漩渦',魔焰猩猩pp[3],'/15',sep='')
             break
         if case(int(4)):
-            print (saskill)
+            print ('1:相位移動',薩帕克pp[0],'/20  2:精神強化',薩帕克pp[1],'/20  3:樂鏡迷蹤',薩帕克pp[2],'/5   4:淨化街',薩帕克pp[3],'/30',sep='')
             break
         if case(int(5)):
-            print (caskill)
+            print ('1:寄生種子',卡利斯pp[0],'/10  2:催眠粉',卡利斯pp[1],'/15  3:硬化',卡利斯pp[2],'/20   4:疾風快刀',卡利斯pp[3],'/10',sep='')
             break
         if case(int(6)):
-            print (reskill)
+            print ('1:雷神天明閃',雷伊pp[0],'/3  2:元氣電光球',雷伊pp[1],'/10  3:瞬雷天閃',雷伊pp[2],'/5   4:閃電鬥氣',雷伊pp[3],'/15',sep='')
             break
         if True:
             print('輸入錯誤')
+            
             break
+def 我方技能名稱(me,skill):
+    global hskill;global rskill;global mskill;global rskill;global caskill;global rskill
+    if me==1 and skill=='1':
+        return hskill[1]
+    elif me==1 and skill=='2':
+        return hskill[2]
+    elif me==1 and skill=='3':
+        return hskill[3]
+    elif me==1 and skill=='4':
+        return hskill[4]
+    elif me==2 and skill=='1':
+        return lskill[1]
+    elif me==2 and skill=='2':
+        return lskill[2]
+    elif me==2 and skill=='3':
+        return lskill[3]
+    elif me==2 and skill=='4':
+        return lskill[4]
+    elif me==3 and skill=='1':
+        return mskill[1]
+    elif me==3 and skill=='2':
+        return mskill[2]
+    elif me==3 and skill=='3':
+        return mskill[3]
+    elif me==3 and skill=='4':
+        return mskill[4]
+    elif me==4 and skill=='1':
+        return sskill[1]
+    elif me==4 and skill=='2':
+        return sskill[2]
+    elif me==4 and skill=='3':
+        return sskill[3]
+    elif me==4 and skill=='4':
+        return sskill[4]
+    elif me==5 and skill=='1':
+        return cskill[1]
+    elif me==5 and skill=='2':
+        return cskill[2]
+    elif me==5 and skill=='3':
+        return cskill[3]
+    elif me==5 and skill=='4':
+        return cskill[4]
+    elif me==6 and skill=='1':
+        return rskill[1]
+    elif me==6 and skill=='2':
+        return rskill[2]
+    elif me==6 and skill=='3':
+        return rskill[3]
+    elif me==6 and skill=='4':
+        return rskill[4]
+
+
+    
+
 def 技能威力(skill):
     global skilltype
     global mypower
@@ -128,18 +261,22 @@ def 技能威力(skill):
                 if a('1'):
                     mypower=0
                     skilltype=哈莫雷特pp[4]
+                    哈莫雷特pp[0]-=1
                     break
                 if a('2'):
                     mypower=0
                     skilltype=哈莫雷特pp[5]
+                    哈莫雷特pp[1]-=1
                     break
                 if a('3'):
                     mypower=100
                     skilltype=哈莫雷特pp[6]
+                    哈莫雷特pp[2]-=1
                     break
                 if a('4'):
                     mypower=150
                     skilltype=哈莫雷特pp[7]
+                    哈莫雷特pp[3]-=1
                     break
                 if True:
                     print('輸入錯誤')
@@ -151,18 +288,22 @@ def 技能威力(skill):
                if a('1'):
                     mypower=0
                     skilltype=羅特利斯pp[4]
+                    羅特利斯pp[0]-=1
                     break
                if a('2'):
                     mypower=0
                     skilltype=羅特利斯pp[5]
+                    羅特利斯pp[1]-=1
                     break
                if a('3'):
                     mypower=0
                     skilltype=羅特利斯pp[6]
+                    羅特利斯pp[2]-=1
                     break
                if a('4'):
                     mypower=150
                     skilltype=羅特利斯pp[7]
+                    羅特利斯pp[3]-=1
                     break
                if True:
                     print('輸入錯誤')
@@ -174,18 +315,22 @@ def 技能威力(skill):
                if a('1'):
                     mypower=0
                     skilltype=魔焰猩猩pp[4]
+                    魔焰猩猩pp[0]-=1
                     break
                if a('2'):
                     mypower=100
                     skilltype=魔焰猩猩pp[5]
+                    魔焰猩猩pp[1]-=1
                     break
                if a('3'):
                     mypower=120
                     skilltype=魔焰猩猩pp[6]
+                    魔焰猩猩pp[2]-=1
                     break
                if a('4'):
                     mypower=15
                     skilltype=魔焰猩猩pp[7]
+                    魔焰猩猩pp[3]-=1
                     break
                if True:
                     print('輸入錯誤')
@@ -197,18 +342,22 @@ def 技能威力(skill):
                if a('1'):
                     mypower=0
                     skilltype=薩帕克pp[4]
+                    薩帕克pp[0]-=1
                     break
                if a('2'):
                     mypower=0
                     skilltype=薩帕克pp[5]
+                    薩帕克pp[1]-=1
                     break
                if a('3'):
                     mypower=110
                     skilltype=薩帕克pp[6]
+                    薩帕克pp[2]-=1
                     break
                if a('4'):
                     mypower=50
                     skilltype=薩帕克pp[7]
+                    薩帕克pp[3]-=1
                     break
                if True:
                     print('輸入錯誤')
@@ -221,18 +370,22 @@ def 技能威力(skill):
                if a('1'):
                     mypower=0
                     skilltype=卡利斯pp[4]
+                    卡利斯pp[0]-=1
                     break
                if a('2'):
                     mypower=0
                     skilltype=卡利斯pp[5]
+                    卡利斯pp[1]-=1
                     break
                if a('3'):
                     mypower=0
                     skilltype=卡利斯pp[6]
+                    卡利斯pp[2]-=1
                     break
                if a('4'):
                     mypower=125
                     skilltype=卡利斯pp[7]
+                    卡利斯pp[3]-=1
                     break
                if True:
                     print('輸入錯誤')
@@ -244,18 +397,22 @@ def 技能威力(skill):
                if a('1'):
                     mypower=160
                     skilltype=雷伊pp[4]
+                    雷伊pp[0]-=1
                     break
                if a('2'):
                     mypower=140
                     skilltype=雷伊pp[5]
+                    雷伊pp[0]-=1
                     break
                if a('3'):
                     mypower=150
                     skilltype=雷伊pp[6]
+                    雷伊pp[0]-=1
                     break
                if a('4'):
                     mypower=0
                     skilltype=雷伊pp[7]
+                    雷伊pp[0]-=1
                     break
                if True:
                     print('輸入錯誤')
@@ -263,6 +420,20 @@ def 技能威力(skill):
                     break            
             
             break
+def 我方誰在場上(me):
+    if me ==1: 
+        return ha
+    if me ==2: 
+        return lo
+    if me ==3: 
+        return mo
+    if me ==4:
+        return sa
+    if me ==5: 
+        return ca
+    if me ==6:
+        return re
+
 
 def 我方血量(me):
      for case in switch(me):
@@ -333,27 +504,27 @@ def 能力提升():
     if me==1 and skill=='1':
                 haskilllv+=0.5
                 哈莫雷特[1]=int(原哈莫雷特[1]*haskilllv);哈莫雷特[2]=int(原哈莫雷特[2]*haskilllv);哈莫雷特[3]=int(原哈莫雷特[3]*haskilllv);哈莫雷特[4]=int(原哈莫雷特[4]*haskilllv)
-                print('哈莫雷特使用了龍之意志,攻擊、防禦、特攻、特防提高了')
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',攻擊、防禦、特攻、特防提高了')
     elif  me==2 and skill=='2':
                 loskilllv+=0.5
                 羅特利斯[3]=int(原哈莫雷特[3]*loskilllv)
-                print('羅特利斯使用了火之意志,特攻大幅提高了')
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),'特攻大幅提高了')
     elif me==3 and skill=='2':
                 moskilllv+=1
                 魔焰猩猩[1]=int(原魔焰猩猩[1]*moskilllv);魔焰猩猩[3]=int(原魔焰猩猩[3]*moskilllv)
-                print('魔焰猩猩使用了覺醒,物攻、特攻大幅提高了')
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',物攻、特攻大幅提高了')
     elif me==4 and skill=='2':
                 saskilllv+=1
                 薩帕克[3]=int(原薩帕克[3]*saskilllv)
-                print('薩帕克使用了精神強化,特攻大幅提高了')
+                print(我方誰在場上(me),'用了',我方技能名稱(me,skill),',特攻大幅提高了')
     elif me==5 and skill=='3':
                 caskilllv+=0.5
                 卡利斯[1]=int(原卡利斯[1]*caskilllv);卡利斯[2]=int(原卡利斯[2]*caskilllv)
-                print('卡利斯使用了硬化,攻擊、防禦提高了')
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',攻擊、防禦提高了')
     elif me==6 and skill=='4':
                 reskilllv+=0.5
                 雷伊[2]=int(雷伊[2]*reskilllv);雷伊[4]=int(雷伊[4]*reskilllv)
-                print('雷伊使用了閃電鬥氣,防禦、特防提高了')
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',防禦、特防提高了')
 def 特殊狀態(me):
      global skilltype;global hitrate
      global skill; global mypower
@@ -402,19 +573,18 @@ def 特殊狀態(me):
             break
         if case(int(6)):
             if skill=='1':
-                if random.randiant(1,100)<=10:
+                if random.randint(1,100)<=10:
                     mypower*=4
             if skill=='2':
-                if random.randiant(1,100)<=5:
+                if random.randint(1,100)<=5:
                     print('譜尼麻痺了')
                     stop=1
             if skill=='3':
-                if random.randiant(1,100)<=5:
+                if random.randint(1,100)<=5:
                     print('譜尼麻痺了')
                     stop=1
             break
 
-            
 def 判斷傷害(me):
      global skilltype;global hitrate
      global skill; global mypower
@@ -432,7 +602,7 @@ def 判斷傷害(me):
                     return phydmg(mypower,羅特利斯[1],boss1[2],羅特利斯[6])
 
                 elif skilltype==2:
-                    return magdmg(mypower羅特利斯[3],boss1[4],羅特利斯[6])
+                    return magdmg(mypower,羅特利斯[3],boss1[4],羅特利斯[6])
             break
         if case(int(3)):
             if  me==3 and (skill=='2'or skill=='3'or skill=='4'):
@@ -440,12 +610,12 @@ def 判斷傷害(me):
                     return phydmg(mypower,魔焰猩猩[1],boss1[2],魔焰猩猩[6])
 
                 elif skilltype==2:
-                    return magdmg(mypower魔焰猩猩[3],boss1[4],魔焰猩猩[6])
+                    return magdmg(mypower,魔焰猩猩[3],boss1[4],魔焰猩猩[6])
             break
         if case(int(4)):
             if  me==4 and skill=='3':
                 if skilltype==2:
-                    return magdmg(mypower薩帕克[3],boss1[4],薩帕克[6])
+                    return magdmg(mypower,薩帕克[3],boss1[4],薩帕克[6])
             break
         if case(int(5)):
             if me==5 and skill=='4':
@@ -455,12 +625,12 @@ def 判斷傷害(me):
             
             break
         if case(int(6)):
-            if me==6 and (skill=='1'or skill=='2'):
+            if me==6 and (skill=='1'or skill=='2'or skill=='3'):
                 if skilltype==1:
                     return phydmg(mypower,雷伊[1],boss1[2],雷伊[6])
 
                 elif skilltype==2:
-                    return magdmg(mypower雷伊[3],boss1[4],雷伊[6])
+                    return magdmg(mypower,雷伊[3],boss1[4],雷伊[6])
                 
             break
 
@@ -468,19 +638,21 @@ def 判斷效果(you):
     global skilltype;global hitrate;global me
     global skill; global mypower;global haskilllv;global loskilllv;global moskilllv;global saskilllv;global reskilllv;global caskilllv
     for case in switch(you):
+        #第一條血
         if case(int(1)):
             if  me==1 and skill=='3':
-                print('哈莫雷特使用了龍王波,造成了',判斷傷害(me),'傷害')
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
                 boss1[0]-=判斷傷害(me)
             elif me==1 and skill=='1':
                 能力提升()
             elif me==1 and skill=='2':
-                print('哈莫雷特使用了迴避')
-                hitrate=0
+                特殊狀態(me)
             elif me==2 and skill=='2':
                 能力提升()
-            elif me==3 and skill=='2':
+            elif me==3 and skill=='1':
                 能力提升()
+            elif me==4 and skill=='1':
+                特殊狀態(me)
             elif me==4 and skill=='2':
                 能力提升()
             elif me==5 and skill=='3':
@@ -488,11 +660,13 @@ def 判斷效果(you):
             elif me==6 and skill=='4':
                 能力提升()
             elif me==6 and skill=='1':
+                特殊狀態(me)
                 boss1[0]-=判斷傷害(me)
-                print('雷伊使用了雷神天明閃,造成了',判斷傷害(me),'傷害')
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
             else:
                 print('Miss')
             break
+        #第二條血
         if case(int(2)):
             if me==1 and skill=='1':
                 能力提升()
@@ -500,7 +674,7 @@ def 判斷效果(you):
                 特殊狀態(me)
             elif me==2 and skill=='2':
                 能力提升()
-            elif me==3 and skill=='2':
+            elif me==3 and skill=='1':
                 能力提升()
             elif me==4 and skill=='2':
                 能力提升()
@@ -523,17 +697,224 @@ def 判斷效果(you):
             else:
                  print('Miss')
             break
+        #第三條血
         if case(int(3)):
-            return boss3[0]
+            if  me==1 and skill=='3':
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                boss3[0]-=判斷傷害(me)
+            elif me==1 and skill=='1':
+                能力提升()
+            elif me==1 and skill=='2':
+                特殊狀態(me)
+            elif me==1 and skill=='4':
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                特殊狀態(me)
+                boss3[0]-=判斷傷害(me)
+            elif me==2 and skill=='2':
+                能力提升()
+            elif me==2 and skill=='1':
+                特殊狀態(me)
+            elif me==2 and skill=='3':
+                特殊狀態(me)
+            elif me==2 and skill=='4':
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                boss3[0]-=判斷傷害(me)
+            elif me==3 and skill=='1':
+                能力提升()
+            elif me==3 and skill=='4':
+                特殊狀態(me)
+            elif me==3 and skill=='2':
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                boss3[0]-=判斷傷害(me)
+            elif me==3 and skill=='3':
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                boss3[0]-=判斷傷害(me)
+            elif me==4 and skill=='2':
+                能力提升()
+            elif me==4 and skill=='1':
+                特殊狀態(me)
+            elif me==4 and skill=='3':
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                boss3[0]-=判斷傷害(me)
+            elif me==4 and skill=='4':
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),'清除了譜尼的狀態')
+            elif me==5 and skill=='3':
+                能力提升()
+            elif me==5 and skill=='1':
+                特殊狀態(me)
+            elif me==5 and skill=='2':
+                特殊狀態(me)
+            elif me==5 and skill=='4':
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                boss3[0]-=判斷傷害(me)
+            elif me==6 and skill=='4':
+                能力提升()
+            elif me==6 and skill=='1':
+                特殊狀態(me)
+                boss3[0]-=判斷傷害(me)
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+            elif me==6 and skill=='2':
+                boss3[0]-=判斷傷害(me)
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                特殊狀態(me)
+            elif me==6 and skill=='3':
+                boss3[0]-=判斷傷害(me)
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                特殊狀態(me)
+            else:
+                print('Miss')
             break
+        #第四條血
         if case(int(4)):
-            return boss4[0]
+            if  me==1 and skill=='3':
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                boss4[0]-=判斷傷害(me)
+            elif me==1 and skill=='1':
+                能力提升()
+            elif me==1 and skill=='2':
+                特殊狀態(me)
+            elif me==1 and skill=='4':
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                特殊狀態(me)
+                boss4[0]-=判斷傷害(me)
+            elif me==2 and skill=='2':
+                能力提升()
+            elif me==2 and skill=='1':
+                特殊狀態(me)
+            elif me==2 and skill=='3':
+                特殊狀態(me)
+            elif me==2 and skill=='4':
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                boss4[0]-=判斷傷害(me)
+            elif me==3 and skill=='1':
+                能力提升()
+            elif me==3 and skill=='4':
+                特殊狀態(me)
+            elif me==3 and skill=='2':
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                boss4[0]-=判斷傷害(me)
+            elif me==3 and skill=='3':
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                boss4[0]-=判斷傷害(me)
+            elif me==4 and skill=='2':
+                能力提升()
+            elif me==4 and skill=='1':
+                特殊狀態(me)
+            elif me==4 and skill=='3':
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                boss4[0]-=判斷傷害(me)
+            elif me==4 and skill=='4':
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),'清除了譜尼的狀態')
+            elif me==5 and skill=='3':
+                能力提升()
+            elif me==5 and skill=='1':
+                特殊狀態(me)
+            elif me==5 and skill=='2':
+                特殊狀態(me)
+            elif me==5 and skill=='4':
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                boss4[0]-=判斷傷害(me)
+            elif me==6 and skill=='4':
+                能力提升()
+            elif me==6 and skill=='1':
+                特殊狀態(me)
+                boss4[0]-=判斷傷害(me)
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+            elif me==6 and skill=='2':
+                boss4[0]-=判斷傷害(me)
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                特殊狀態(me)
+            elif me==6 and skill=='3':
+                boss4[0]-=判斷傷害(me)
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                特殊狀態(me)
+
+            else:
+                print('Miss')
             break
+        #第五條血
         if case(int(5)):
-            return boss5[0]
+            if  me==1 and skill=='3':
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me)/2,'傷害')
+                boss5[0]-=判斷傷害(me)/2
+            elif me==1 and skill=='1':
+                能力提升()
+            elif me==1 and skill=='2':
+                特殊狀態(me)
+            elif me==2 and skill=='2':
+                能力提升()
+            elif me==3 and skill=='1':
+                能力提升()
+            elif me==4 and skill=='1':
+                特殊狀態(me)
+            elif me==4 and skill=='2':
+                能力提升()
+            elif me==5 and skill=='3':
+                能力提升()
+            elif me==6 and skill=='4':
+                能力提升()
+            elif me==6 and skill=='1':
+                特殊狀態(me)
+                boss5[0]-=判斷傷害(me)/2
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me)/2,'傷害')
+            else:
+                print('Miss')
             break
+            break
+        #第六條血
         if case(int(6)):
-            return boss6[0]
+            if  me==1 and skill=='3':
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                boss6[0]-=判斷傷害(me)
+            elif me==1 and skill=='1':
+                能力提升()
+            elif me==1 and skill=='2':
+                特殊狀態(me)
+            elif me==1 and skill=='4':
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                特殊狀態(me)
+                boss6[0]-=判斷傷害(me)
+            elif me==2 and skill=='2':
+                能力提升()
+            elif me==2 and skill=='4':
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                boss6[0]-=判斷傷害(me)
+            elif me==3 and skill=='1':
+                能力提升()
+            elif me==3 and skill=='2':
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                boss6[0]-=判斷傷害(me)
+            elif me==3 and skill=='3':
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                boss6[0]-=判斷傷害(me)
+            elif me==4 and skill=='2':
+                能力提升()
+            elif me==4 and skill=='1':
+                特殊狀態(me)
+            elif me==4 and skill=='3':
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                boss6[0]-=判斷傷害(me)
+            elif me==4 and skill=='4':
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),'清除了譜尼的狀態')
+            elif me==5 and skill=='3':
+                能力提升()
+            elif me==5 and skill=='4':
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                boss6[0]-=判斷傷害(me)
+            elif me==6 and skill=='4':
+                能力提升()
+            elif me==6 and skill=='1':
+                特殊狀態(me)
+                boss6[0]-=判斷傷害(me)
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+            elif me==6 and skill=='2':
+                boss6[0]-=判斷傷害(me)
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+            elif me==6 and skill=='3':
+                boss6[0]-=判斷傷害(me)
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+            else:
+                print('Miss')
             break
 def 友方登場精靈(n):
     print(n,'出場了!')
@@ -541,12 +922,14 @@ def 敵方登場精靈(n):
     print(n,'出場了!')
 def 玩家攻擊():
     global skill
+    global me
     global skilltype
+    print('我方血量:',我方血量(me))
+    print('敵方血量:',敵方血量(you))
     print('輪到你進攻了')
     print('1:替換 2:攻擊 3:顯示狀態 4:技能說明 5:使用道具')
     now=str(input())
     if now=='1':
-        global me
         name=input('要換誰上場?(1:哈莫雷特 2:羅特利斯 3:魔焰猩猩 4:薩帕克 5:卡利斯 6:雷伊\n')
         for case in switch(name):
            if case('1'):
@@ -594,8 +977,13 @@ def 玩家攻擊():
         print('請選擇技能')
         技能()
         skill=str(input())
-        技能威力(skill)
-        判斷效果(you)
+        if 判斷pp(me)==True:
+          技能威力(skill)
+          判斷效果(you)
+          譜尼攻擊()
+        else:
+            print('pp不足')
+            玩家攻擊()
 
     elif now=='3':
         顯示狀態(me)
@@ -613,7 +1001,12 @@ def 玩家攻擊():
         玩家攻擊()
 
 def 譜尼攻擊():
-    print('幹')
+    global you
+    if 敵方血量(you)<=0:
+        you+=1
+    if you>6:
+        print('恭喜你戰勝了譜尼!')
+    玩家攻擊()
     
 import time
 #import os
@@ -635,12 +1028,18 @@ haskilllv=loskilllv=moskilllv=saskilllv=caskilllv=reskilllv=1
 hitrate=1
 stop=0
 
-哈莫雷特=[390,302,225,202,215,0.5,2];原哈莫雷特=[390,302,225,202,215,0.5,2] 
+哈莫雷特=[402,302,225,202,215,0.5,2];原哈莫雷特=[402,302,225,202,215,0.5,2] 
 羅特利斯=[342,236,191,234,197,1.5,0.75];原羅特利斯=[342,236,191,234,197,1.5,0.75]
 魔焰猩猩=[378,282,193,231,193,2,0.5];原魔焰猩猩=[378,282,193,231,193,2,0.5]
 薩帕克=[358,232,191,234,235,0.5,2];原薩帕克=[358,232,191,234,235,0.5,2]
 卡利斯=[308,256,233,180,201,2,0.5];原卡利斯=[308,256,233,180,201,2,0.5]
 雷伊=[343,229,206,221,210,1,1];原雷伊=[343,229,206,221,210,1,1]
+hskill=[0,'龍之意志','迴避','龍王波','龍王滅碎陣']
+lskill=[0,'幻化之火','火之意志','灼燒','天火鳳凰']
+mskill=[0,'覺醒','絕命火焰','全力一擊','火焰漩渦']
+sskill=[0,'相位移動','精神強化','樂鏡迷蹤','淨化街']
+cskill=[0,'寄生種子','催眠粉','硬化','疾風快刀']
+rskill=[0,'雷神天明閃','元氣電光球','瞬雷天閃','閃電鬥氣']
 ha='哈莫雷特'
 lo='羅特利斯'
 mo='魔焰猩猩'
@@ -680,8 +1079,6 @@ boss6=[65000,281,236,248,236]
 #    time.sleep(1)
 友方登場精靈(ha)
 敵方登場精靈(b1)
-print('我方血量:',我方血量(me))
-print('敵方血量:',敵方血量(you))
 玩家攻擊()                  
 
 
