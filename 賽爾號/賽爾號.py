@@ -1,5 +1,6 @@
 import random
 import os
+
 class switch(object):
     def __init__(self, value):
         self.value = value
@@ -811,12 +812,14 @@ def 判斷傷害(me):
 def 判斷效果(you):
     global skilltype;global hitrate;global me
     global skill; global mypower;global haskilllv;global loskilllv;global moskilllv;global saskilllv;global reskilllv;global caskilllv
+    global damage
     for case in switch(you):
         #第一條血
         if case(int(1)):
             if  me==1 and skill=='3':
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
-                boss1[0]-=判斷傷害(me)
+                damage=判斷傷害(me)
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
+                boss1[0]-=damage
             elif me==1 and skill=='1':
                 能力提升()
             elif me==1 and skill=='2':
@@ -835,8 +838,9 @@ def 判斷效果(you):
                 能力提升()
             elif me==6 and skill=='1':
                 特殊狀態(me)
-                boss1[0]-=判斷傷害(me)
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                damage=判斷傷害(me)
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
+                boss1[0]-=damage
             else:
                 print('Miss')
             break
@@ -874,16 +878,18 @@ def 判斷效果(you):
         #第三條血
         if case(int(3)):
             if  me==1 and skill=='3':
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
-                boss3[0]-=判斷傷害(me)
+                damage=判斷傷害(me)
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
+                boss3[0]-=damage
             elif me==1 and skill=='1':
                 能力提升()
             elif me==1 and skill=='2':
                 特殊狀態(me)
             elif me==1 and skill=='4':
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                damage=判斷傷害(me)
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
                 特殊狀態(me)
-                boss3[0]-=判斷傷害(me)
+                boss3[0]-=damage
             elif me==2 and skill=='2':
                 能力提升()
             elif me==2 and skill=='1':
@@ -891,8 +897,9 @@ def 判斷效果(you):
             elif me==2 and skill=='3':
                 特殊狀態(me)
             elif me==2 and skill=='4':
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
-                boss3[0]-=判斷傷害(me)
+                damage=判斷傷害(me)
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
+                boss3[0]-=damage
             elif me==3 and skill=='1':
                 能力提升()
             elif me==3 and skill=='4':
@@ -902,18 +909,21 @@ def 判斷效果(you):
                     print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',boss3[0],'傷害')
                     boss3[0]=0
                 else:
-                    print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
-                    boss3[0]-=判斷傷害(me)
+                    damage=判斷傷害(me)
+                    print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
+                    boss3[0]-=damage
             elif me==3 and skill=='3':
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
-                boss3[0]-=判斷傷害(me)
+                damage=判斷傷害(me)
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
+                boss3[0]-=damage
             elif me==4 and skill=='2':
                 能力提升()
             elif me==4 and skill=='1':
                 特殊狀態(me)
             elif me==4 and skill=='3':
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
-                boss3[0]-=判斷傷害(me)
+                damage=判斷傷害(me)
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
+                boss3[0]-=damage
             elif me==4 and skill=='4':
                 print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),'清除了譜尼的狀態')
             elif me==5 and skill=='3':
@@ -923,21 +933,23 @@ def 判斷效果(you):
             elif me==5 and skill=='2':
                 特殊狀態(me)
             elif me==5 and skill=='4':
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
-                boss3[0]-=判斷傷害(me)
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
+                boss3[0]-=damage
             elif me==6 and skill=='4':
                 能力提升()
             elif me==6 and skill=='1':
                 特殊狀態(me)
-                boss3[0]-=判斷傷害(me)
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                damage=判斷傷害(me)
+                boss3[0]-=damage
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
             elif me==6 and skill=='2':
-                boss3[0]-=判斷傷害(me)
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                damage=判斷傷害(me)
+                boss3[0]-=damage
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
                 特殊狀態(me)
             elif me==6 and skill=='3':
-                boss3[0]-=判斷傷害(me)
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                boss3[0]-=damage
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
                 特殊狀態(me)
             else:
                 print('Miss')
@@ -945,16 +957,18 @@ def 判斷效果(you):
         #第四條血
         if case(int(4)):
             if  me==1 and skill=='3':
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
-                boss4[0]-=判斷傷害(me)
+                damage=判斷傷害(me)
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
+                boss4[0]-=damage
             elif me==1 and skill=='1':
                 能力提升()
             elif me==1 and skill=='2':
                 特殊狀態(me)
             elif me==1 and skill=='4':
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                damage=判斷傷害(me)
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
                 特殊狀態(me)
-                boss4[0]-=判斷傷害(me)
+                boss4[0]-=damage
             elif me==2 and skill=='2':
                 能力提升()
             elif me==2 and skill=='1':
@@ -962,8 +976,9 @@ def 判斷效果(you):
             elif me==2 and skill=='3':
                 特殊狀態(me)
             elif me==2 and skill=='4':
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
-                boss4[0]-=判斷傷害(me)
+                damage=判斷傷害(me)
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
+                boss4[0]-=damage
             elif me==3 and skill=='1':
                 能力提升()
             elif me==3 and skill=='4':
@@ -971,20 +986,23 @@ def 判斷效果(you):
             elif me==3 and skill=='2':
                 if random.randint(1,100)<=5:
                     print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',boss3[0],'傷害')
-                    boss3[0]=0
+                    boss4[0]=0
                 else:
-                    print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
-                    boss3[0]-=判斷傷害(me)
+                    damage=判斷傷害(me)
+                    print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
+                    boss3[0]-=damage
             elif me==3 and skill=='3':
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
-                boss4[0]-=判斷傷害(me)
+                damage=判斷傷害(me)
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
+                boss4[0]-=damage
             elif me==4 and skill=='2':
                 能力提升()
             elif me==4 and skill=='1':
                 特殊狀態(me)
             elif me==4 and skill=='3':
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
-                boss4[0]-=判斷傷害(me)
+                damage=判斷傷害(me)
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
+                boss4[0]-=damage
             elif me==4 and skill=='4':
                 print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),'清除了譜尼的狀態')
             elif me==5 and skill=='3':
@@ -994,21 +1012,25 @@ def 判斷效果(you):
             elif me==5 and skill=='2':
                 特殊狀態(me)
             elif me==5 and skill=='4':
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
-                boss4[0]-=判斷傷害(me)
+                damage=判斷傷害(me)
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
+                boss4[0]-=damage
             elif me==6 and skill=='4':
                 能力提升()
             elif me==6 and skill=='1':
                 特殊狀態(me)
-                boss4[0]-=判斷傷害(me)
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                damage=判斷傷害(me)
+                boss4[0]-=damage
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
             elif me==6 and skill=='2':
-                boss4[0]-=判斷傷害(me)
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                damage=判斷傷害(me)
+                boss4[0]-=damage
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
                 特殊狀態(me)
             elif me==6 and skill=='3':
-                boss4[0]-=判斷傷害(me)
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                damage=判斷傷害(me)
+                boss4[0]-=damage
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
                 特殊狀態(me)
 
             else:
@@ -1017,8 +1039,9 @@ def 判斷效果(you):
         #第五條血
         if case(int(5)):
             if  me==1 and skill=='3':
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me)/2,'傷害')
-                boss5[0]-=判斷傷害(me)/2
+                damage=int(判斷傷害(me)/2)
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
+                boss5[0]-=damage
             elif me==1 and skill=='1':
                 能力提升()
             elif me==1 and skill=='2':
@@ -1037,8 +1060,9 @@ def 判斷效果(you):
                 能力提升()
             elif me==6 and skill=='1':
                 特殊狀態(me)
-                boss5[0]-=判斷傷害(me)/2
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me)/2,'傷害')
+                damage=int(判斷傷害(me)/2)
+                boss5[0]-=damage
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
             else:
                 print('Miss')
             break
@@ -1046,21 +1070,24 @@ def 判斷效果(you):
         #第六條血
         if case(int(6)):
             if  me==1 and skill=='3':
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
-                boss6[0]-=判斷傷害(me)
+                damage=判斷傷害(me)
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
+                boss6[0]-=damage
             elif me==1 and skill=='1':
                 能力提升()
             elif me==1 and skill=='2':
                 特殊狀態(me)
             elif me==1 and skill=='4':
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                damage=判斷傷害(me)
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
                 特殊狀態(me)
-                boss6[0]-=判斷傷害(me)
+                boss6[0]-=damage
             elif me==2 and skill=='2':
                 能力提升()
             elif me==2 and skill=='4':
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
-                boss6[0]-=判斷傷害(me)
+                damage=判斷傷害(me)
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
+                boss6[0]-=damage
             elif me==3 and skill=='1':
                 能力提升()
             elif me==3 and skill=='2':
@@ -1068,37 +1095,44 @@ def 判斷效果(you):
                     print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',boss3[0],'傷害')
                     boss3[0]=0
                 else:
-                    print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
-                    boss3[0]-=判斷傷害(me)
+                    damage=判斷傷害(me)
+                    print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
+                    boss3[0]-=damage
             elif me==3 and skill=='3':
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
-                boss6[0]-=判斷傷害(me)
+                damage=判斷傷害(me)
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
+                boss6[0]-=damage
             elif me==4 and skill=='2':
                 能力提升()
             elif me==4 and skill=='1':
                 特殊狀態(me)
             elif me==4 and skill=='3':
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
-                boss6[0]-=判斷傷害(me)
+                damage=判斷傷害(me)
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
+                boss6[0]-=damage
             elif me==4 and skill=='4':
                 print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),'清除了譜尼的狀態')
             elif me==5 and skill=='3':
                 能力提升()
             elif me==5 and skill=='4':
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
-                boss6[0]-=判斷傷害(me)
+                damage=判斷傷害(me)
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
+                boss6[0]-=damage
             elif me==6 and skill=='4':
                 能力提升()
             elif me==6 and skill=='1':
                 特殊狀態(me)
-                boss6[0]-=判斷傷害(me)
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                damage=判斷傷害(me)
+                boss6[0]-=damage
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
             elif me==6 and skill=='2':
-                boss6[0]-=判斷傷害(me)
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                damage=判斷傷害(me)
+                boss6[0]-=damage
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
             elif me==6 and skill=='3':
-                boss6[0]-=判斷傷害(me)
-                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',判斷傷害(me),'傷害')
+                damage=判斷傷害(me)
+                boss6[0]-=damage
+                print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
             else:
                 print('Miss')
             break
@@ -1112,12 +1146,20 @@ def 玩家攻擊():
     global skilltype
     global name
     global namepp
-    os.system('clear')
+    global pp不足;global ha;global b1;global start
+    if start==True:
+        友方登場精靈(ha)
+        敵方登場精靈(b1)
+        start=False
+    if pp不足==True:
+        print('pp不足')
+        pp不足=False
     print('我方血量:',我方血量(me),'/',原我方血量(me),sep='')
     print('敵方血量:',敵方血量(you),'/',原敵方血量(you),sep='')
     print('輪到你進攻了')
     print('1:替換 2:攻擊 3:顯示狀態 4:技能說明 5:使用道具')
     now=str(input())
+
     if now=='1':
         name=input('要換誰上場?(1:哈莫雷特 2:羅特利斯 3:魔焰猩猩 4:薩帕克 5:卡利斯 6:雷伊\n')
         for case in switch(name):
@@ -1167,6 +1209,7 @@ def 玩家攻擊():
         技能()
         skill=str(input())
         if 判斷pp(me)==True:
+          os.system('cls')
           技能威力(skill)
           判斷效果(you)
           譜尼攻擊()
@@ -1174,7 +1217,7 @@ def 玩家攻擊():
             print('輸入錯誤')
             玩家攻擊()
         else:
-            print('pp不足')
+            pp不足=True
             玩家攻擊()
 
     elif now=='3':
@@ -1222,14 +1265,15 @@ global skilltype
 global haskilllv;global loskilllv;global moskilllv;global saskilllv;global caskilllv;global reskilllv
 global hitrate;global stop;global fire;global 寄生;
 global 哈莫雷特;global 羅特利斯;global 魔焰猩猩;global 薩帕克;global 卡利斯;global 雷伊
-global 道具數量;global namepp
-
+global 道具數量;global namepp;global damage;global pp不足;global start
 me=1
-you=3
+you=1
 haskilllv=loskilllv=moskilllv=saskilllv=caskilllv=reskilllv=1
 hitrate=1
 stop=0
+damage=0
 namepp=True
+pp不足=False
 哈莫雷特=[402,302,225,202,215,0.5,2];原哈莫雷特=[402,302,225,202,215,0.5,2] 
 羅特利斯=[342,236,191,234,197,1.5,0.75];原羅特利斯=[342,236,191,234,197,1.5,0.75]
 魔焰猩猩=[378,282,193,231,193,2,0.5];原魔焰猩猩=[378,282,193,231,193,2,0.5]
@@ -1288,8 +1332,7 @@ boss6pp=[100000,100000,100000]
 #    time.sleep(1)
 #    print('進入戰鬥......')
 #    time.sleep(1)
-友方登場精靈(ha)
-敵方登場精靈(b1)
+start=True
 玩家攻擊()                  
 
 

@@ -11,6 +11,7 @@
     <OutputPath>.</OutputPath>
     <Name>賽爾號</Name>
     <RootNamespace>賽爾號</RootNamespace>
+    <IsWindowsApplication>False</IsWindowsApplication>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
