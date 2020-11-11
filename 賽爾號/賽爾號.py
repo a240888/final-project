@@ -24,11 +24,11 @@ class switch(object):
 
 def phydmg(power,atk,defense,counter):
     """物攻傷害"""
-    result = (int)(42*power*atk*random.uniform(0.95,1.15)/defense/50+2*1.5*counter*(217-255)/255)
+    result = (int)((42*power*atk/defense/50+2)*1.1*counter*random.randint(217,255)/255)
     return result
 def magdmg(power,magatk,magdefense,counter):
     """魔攻傷害"""
-    result = (int)(42*power*magatk*random.uniform(0.95,1.15)/magdefense/50+2*1.5*counter*(217-255)/255)
+    result = (int)((42*power*magatk/magdefense/50+2)*1.1*counter*random.randint(217,255)/255)
     return result
 global haskill
 haskill='1:龍之意志 2:迴避 3:龍王波 4:龍王滅碎陣'
@@ -579,6 +579,27 @@ def 原我方血量(me):
             break
         if case(int(6)):
             return 原雷伊[0]
+            break
+def 我方扣血(me):
+     global 哈莫雷特;global 羅特利斯;global 魔焰猩猩;global 薩帕克;global 卡利斯;global 雷伊
+     for case in switch(me):
+        if case(int(1)):
+            return 哈莫雷特
+            break
+        if case(int(2)):
+            return 羅特利斯
+            break
+        if case(int(3)):
+            return 魔焰猩猩
+            break
+        if case(int(4)):
+            return 薩帕克
+            break
+        if case(int(5)):
+            return 卡利斯
+            break
+        if case(int(6)):
+            return 雷伊
             break
 def 我方血量(me):
      global 哈莫雷特;global 羅特利斯;global 魔焰猩猩;global 薩帕克;global 卡利斯;global 雷伊
@@ -1241,13 +1262,194 @@ def 玩家攻擊():
     elif True:
         print('輸入錯誤')
         玩家攻擊()
+def 譜尼pp():
+    global you
+    if you==2:
+        return boss2pp
+    elif you==3:
+        return boss3pp
+    elif you==4:
+        return boss4pp
+    elif you==5:
+        return boss5pp
+    elif you==6:
+        return boss6pp
+def 譜尼登場():
+    global you
+    if you==2:
+        return b2
+    elif you==3:
+        return b3
+    elif you==4:
+        return b4
+    elif you==5:
+        return b5
+    elif you==6:
+        return b6
+def 我方數值(me):
+     global 哈莫雷特;global 羅特利斯;global 魔焰猩猩;global 薩帕克;global 卡利斯;global 雷伊
+     for case in switch(me):
+        if case(int(1)):
+            return 哈莫雷特
+            break
+        if case(int(2)):
+            return 羅特利斯
+            break
+        if case(int(3)):
+            return 魔焰猩猩
+            break
+        if case(int(4)):
+            return 薩帕克
+            break
+        if case(int(5)):
+            return 卡利斯
+            break
+        if case(int(6)):
+            return 雷伊
+            break
+def 譜尼傷害(type):
+    global me;global you;
+    if you==1:
+        if type==1:
+            return phydmg(135,950,我方數值(me)[2],我方數值(me)[5])
+        elif type==2:
+            return int(magdmg(160,518,我方數值(me)[4],我方數值(me)[5])+我方血量(me)/10/(我方數值(me)[4]/100))
+        elif type==3:
+            return magdmg(140,518,我方數值(me)[4],我方數值(me)[5])
+    else:
+        if type==1:
+            return phydmg(135,475,我方數值(me)[2],我方數值(me)[5])
+        elif type==2:
+            return int(magdmg(160,518,我方數值(me)[4],我方數值(me)[5])+我方血量(me)/10/(我方數值(me)[4]/100))
+        elif type==3:
+            return magdmg(140,518,我方數值(me)[4],我方數值(me)[5])
+def 譜尼pp():
+    global you
+    if you==2:
+        return boss2pp
+    elif you==3:
+        return boss3pp
+    elif you==4:
+        return boss4pp
+def 譜尼技能234():
+    global you;global bosstype;global noskill
+    noskill=False
+    hit=random.randint(1,4)
+    if hit==1:
+        if 譜尼pp()[0]>0:
+            bosstype=1
+            譜尼pp()[0]-=1
+            return bossskill[1]
+        else:
+            return 譜尼技能234()
+    elif hit==2:
+        if 譜尼pp()[1]>0:
+            bosstype=2
+            譜尼pp()[1]-=1
+            return bossskill[2]
+        else:
+            return 譜尼技能234()
+    elif hit==3:
+        if 譜尼pp()[2]>0:
+            bosstype=3
+            譜尼pp()[2]-=1
+            return bossskill[3]
+        else:
+            return 譜尼技能234()
+    elif hit==4:
+        if 譜尼pp()[3]>0:
+            bosstype=4
+            譜尼pp()[3]-=1
+            return bossskill[4]
+        else:
+            return 譜尼技能234()
+    
+def 譜尼技能56():
+    global you;global bosstype
+    hit=random.randint(1,4)
+    if hit==1:
+        bosstype=1
+        return bossskill[1]
+    elif hit==2:
+        bosstype=2
+        return bossskill[2]
+    elif hit==3:
+        bosstype=3
+        return bossskill[3]
+    elif hit==4:
+        bosstype=4
+        return bossskill[4]
+def 譜尼技能1():
+    global you;global bosstype
+    hit=random.randint(1,3)
+    if hit==1:
+        bosstype=1
+        return bossskill[1]
+    elif hit==2:
+        bosstype=2
+        return bossskill[2]
+    elif hit==3:
+        bosstype=4
+        return bossskill[4]
 
 def 譜尼攻擊():
-    global you
+    global you;global bosstype;global noskill
     if 敵方血量(you)<=0:
         you+=1
+        敵方登場精靈(譜尼登場())
     if you>6:
         print('恭喜你戰勝了譜尼!')
+    if you==1:
+        use=譜尼技能1()
+        if bosstype==1:
+            damage=譜尼傷害(1)
+            print('譜尼使用了',use,'造成了',damage,'傷害')
+            我方扣血(me)[0]-=damage
+        elif bosstype==2:
+            damage=譜尼傷害(2)
+            print('譜尼使用了',use,'造成了',damage,'傷害')
+            我方扣血(me)[0]-=damage
+        if bosstype==4:
+            print('譜尼使用了',use,'自身充滿了能量')
+    elif you==5 or you==6:
+        use=譜尼技能1()
+        if bosstype==1:
+            damage=譜尼傷害(1)
+            print('譜尼使用了',use,'造成了',damage,'傷害')
+            我方扣血(me)[0]-=damage
+        elif bosstype==2:
+            damage=譜尼傷害(2)
+            print('譜尼使用了',use,'造成了',damage,'傷害')
+            我方扣血(me)[0]-=damage
+        elif bosstype==3:
+            damage=譜尼傷害(3)
+            print('譜尼使用了',use,'造成了',damage,'傷害')
+            我方扣血(me)[0]-=damage
+        if bosstype==4:
+            print('譜尼使用了',use,'自身充滿了能量')
+    elif you==2 or you==3 or you==4:
+        if 譜尼pp()[0]+譜尼pp()[1]+譜尼pp()[2]+譜尼pp()[3]==0:
+            noskill=True
+        if noskill==False:
+            use=譜尼技能234()
+            if bosstype==1:
+                damage=譜尼傷害(1)
+                print('譜尼使用了',use,'造成了',damage,'傷害')
+                我方扣血(me)[0]-=damage
+            elif bosstype==2:
+                damage=譜尼傷害(2)
+                print('譜尼使用了',use,'造成了',damage,'傷害')
+                我方扣血(me)[0]-=damage
+            elif bosstype==3:
+                damage=譜尼傷害(3)
+                print('譜尼使用了',use,'造成了',damage,'傷害')
+                我方扣血(me)[0]-=damage
+            if bosstype==4:
+                print('譜尼使用了',use,'自身充滿了能量')
+      
+
+
+
     玩家攻擊()
     
 import time
@@ -1265,9 +1467,10 @@ global skilltype
 global haskilllv;global loskilllv;global moskilllv;global saskilllv;global caskilllv;global reskilllv
 global hitrate;global stop;global fire;global 寄生;
 global 哈莫雷特;global 羅特利斯;global 魔焰猩猩;global 薩帕克;global 卡利斯;global 雷伊
-global 道具數量;global namepp;global damage;global pp不足;global start
+global 道具數量;global namepp;global damage;global pp不足;global start;global noskill
+noskill=False
 me=1
-you=1
+you=3
 haskilllv=loskilllv=moskilllv=saskilllv=caskilllv=reskilllv=1
 hitrate=1
 stop=0
@@ -1279,14 +1482,14 @@ pp不足=False
 魔焰猩猩=[378,282,193,231,193,2,0.5];原魔焰猩猩=[378,282,193,231,193,2,0.5]
 薩帕克=[358,232,191,234,235,0.5,2];原薩帕克=[358,232,191,234,235,0.5,2]
 卡利斯=[308,256,233,180,201,2,0.5];原卡利斯=[308,256,233,180,201,2,0.5]
-雷伊=[343,229,206,221,210,1,1];原雷伊=[343,229,206,221,210,2,0.5]
+雷伊=[343,229,206,221,210,2,0.5];原雷伊=[343,229,206,221,210,2,0.5]
 hskill=[0,'龍之意志','迴避','龍王波','龍王滅碎陣']
 lskill=[0,'幻化之火','火之意志','灼燒','天火鳳凰']
 mskill=[0,'覺醒','絕命火焰','全力一擊','火焰漩渦']
 sskill=[0,'相位移動','精神強化','樂鏡迷蹤','淨化街']
 cskill=[0,'寄生種子','催眠粉','硬化','疾風快刀']
 rskill=[0,'雷神天明閃','元氣電光球','瞬雷天閃','閃電鬥氣']
-bossskill=[0,'旋滅裂空陣','千烈虛光閃','聖光氣']
+bossskill=[0,'旋滅裂空陣','聖靈魔閃光','千裂虛光閃','聖光氣']
 ha='哈莫雷特'
 lo='羅特利斯'
 mo='魔焰猩猩'
@@ -1299,12 +1502,12 @@ b3='譜尼三血'
 b4='譜尼四血'
 b5='譜尼五血'
 b6='譜尼六血'
-boss1=[7000,281,236,248,236];原boss1=[7000,281,236,248,236]
-boss2=[8000,281,236,248,236];原boss2=[8000,281,236,248,236]
-boss3=[9000,281,236,248,236];原boss3=[9000,281,236,248,236]
-boss4=[10000,281,236,248,236];原boss4=[10000,281,236,248,236]
-boss5=[20000,281,236,248,236];原boss5=[20000,281,236,248,236]
-boss6=[65000,281,236,248,236];原boss6=[65000,281,236,248,236]
+boss1=[7000,1062,236,518,236];原boss1=[7000,1062,236,518,236]
+boss2=[8000,531,236,518,236];原boss2=[8000,531,236,518,236]
+boss3=[9000,531,236,518,236];原boss3=[9000,531,236,518,236]
+boss4=[10000,531,236,518,236];原boss4=[10000,531,236,518,236]
+boss5=[20000,531,236,518,236];原boss5=[20000,531,236,518,236]
+boss6=[65000,531,236,518,236];原boss6=[65000,531,236,518,236]
 哈莫雷特pp=[10,15,15,5,3,4,1,1];原哈莫雷特pp=[10,15,15,5,3,4,1,1]
 羅特利斯pp=[20,15,25,5,0,3,0,2];原羅特利斯pp=[20,15,25,5,0,3,0,2]
 魔焰猩猩pp=[10,10,5,15,3,1,1,2];原魔焰猩猩pp=[10,10,5,15,3,1,1,2]
@@ -1312,9 +1515,9 @@ boss6=[65000,281,236,248,236];原boss6=[65000,281,236,248,236]
 卡利斯pp=[10,15,20,10,0,0,3,1];原卡利斯pp=[10,15,20,10,0,0,3,1]
 雷伊pp=[3,10,5,15,1,2,1,3];原雷伊pp=[3,10,5,15,1,2,1,3]
 boss1pp=[100000,100000,100000]
-boss2pp=[10,10,10]
-boss3pp=[10,10,10]
-boss4pp=[10,10,10]
+boss2pp=[10,5,10,10]
+boss3pp=[10,5,10,10]
+boss4pp=[10,5,10,10]
 boss5pp=[100000,100000,100000]
 boss6pp=[100000,100000,100000]
 道具數量=[5,5,15,15,5]
@@ -1334,6 +1537,7 @@ boss6pp=[100000,100000,100000]
 #    time.sleep(1)
 start=True
 玩家攻擊()                  
+#血量低於0要換角色
 
 
 
