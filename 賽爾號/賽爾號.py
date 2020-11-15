@@ -305,7 +305,7 @@ def 技能():
             print ('1:龍之意志',哈莫雷特pp[0],'/10  2:迴避',哈莫雷特pp[1],'/15  3:龍王波',哈莫雷特pp[2],'/15  4:龍王滅碎陣',哈莫雷特pp[3],'/5',sep='')
             break
         if case(int(2)):
-            print ('1:幻化之火',羅特利斯pp[0],'/20  2:火之意志',羅特利斯pp[1],'/25  3:灼燒',羅特利斯pp[2],'/25   4:天火鳳凰',羅特利斯pp[3],'/25',sep='' )
+            print ('1:幻化之火',羅特利斯pp[0],'/20  2:火之意志',羅特利斯pp[1],'/15  3:灼燒',羅特利斯pp[2],'/25   4:天火鳳凰',羅特利斯pp[3],'/5',sep='' )
             break
         if case(int(3)):
             print ('1:覺醒',魔焰猩猩pp[0],'/10  2:絕命火焰',魔焰猩猩pp[1],'/10  3:全力一擊',魔焰猩猩pp[2],'/5   4:火焰漩渦',魔焰猩猩pp[3],'/15',sep='')
@@ -558,6 +558,25 @@ def 我方誰在場上(me):
         return ca
     if me ==6:
         return re
+def 負面狀態(debuff):
+    global 迴避;global 疲憊;global 睡眠;global 燒傷;global 寄生;
+    if debuff==1:
+        迴避=1
+        return 迴避
+    elif debuff==2:
+        疲憊=1
+        return 疲憊
+    elif debuff==3:
+        睡眠=2
+        return 睡眠
+    elif debuff==4:
+        燒傷=2
+        return 燒傷
+    elif debuff==5:
+        寄生=5
+        return 寄生
+
+
 
 def 原我方血量(me):
      global 原哈莫雷特;global 原羅特利斯;global 原魔焰猩猩;global 原薩帕克;global 原卡利斯;global 原雷伊
@@ -643,6 +662,28 @@ def 原敵方血量(you):
             return 原boss6[0]
             break
         if True:
+            break
+def 敵方扣血(you):
+     for case in switch(you):
+        if case(int(1)):
+            return boss1
+            break
+        if case(int(2)):
+            return boss2
+            break
+        if case(int(3)):
+            return boss3
+            break
+        if case(int(4)):
+            return boss4
+            break
+        if case(int(5)):
+            return boss5
+            break
+        if case(int(6)):
+            return boss6
+            break
+        if True:
             print('bug')
             break
 def 敵方血量(you):
@@ -669,32 +710,45 @@ def 敵方血量(you):
             print('bug')
             break
 def 顯示狀態(me):
+    global haskilllv;global loskilllv;global moskilllv;global saskilllv;global reskilllv;global caskilllv
+    global haphydef;global hamagdef;global caphydef;global rephydef;global remagdef;
     for case in switch(me):
         if case(int(1)):
             print('生命:',哈莫雷特[0],'物攻:',哈莫雷特[1],'物防:',哈莫雷特[2],'特攻:',哈莫雷特[3],'特防:',哈莫雷特[4])
+            print('物攻、特攻上升了',haskilllv-1,'倍,物防上升了',haphydef-1,'倍,特防上升了',hamagdef-1,'倍')
             break
         if case(int(2)):
             print('生命:',羅特利斯[0],'物攻:',羅特利斯[1],'物防:',羅特利斯[2],'特攻:',羅特利斯[3],'特防:',羅特利斯[4])
+            print('特攻上升了',loskilllv-1,'倍')
             break
         if case(int(3)):
             print('生命:',魔焰猩猩[0],'物攻:',魔焰猩猩[1],'物防:',魔焰猩猩[2],'特攻:',魔焰猩猩[3],'特防:',魔焰猩猩[4])
+            print('攻擊、特攻上升了',moskilllv-1,'倍')
             break
         if case(int(4)):
             print('生命:',薩帕克[0],'物攻:',薩帕克[1],'物防:',薩帕克[2],'特攻:',薩帕克[3],'特防:',薩帕克[4])
+            print('特攻上升了',saskilllv-1,'倍')
             break
         if case(int(5)):
             print('生命:',卡利斯[0],'物攻:',卡利斯[1],'物防:',卡利斯[2],'特攻:',卡利斯[3],'特防:',卡利斯[4])
+            print('攻擊上升了',caskilllv-1,'倍,物防上升了',caphydef-1,'倍')
             break
         if case(int(6)):
             print('生命:',雷伊[0],'物攻:',雷伊[1],'物防:',雷伊[2],'特攻:',雷伊[3],'特防:',雷伊[4])
+            print('物防上升了',rephydef-1,'倍,特防上升了',remagdef-1,'倍')
             break
 def 能力提升():
     global skilltype;global hitrate;global me
     global skill; global mypower;global haskilllv;global loskilllv;global moskilllv;global saskilllv;global reskilllv;global caskilllv
+    global haphydef;global hamagdef;global caphydef;global rephydef;global remagdef;
     if me==1 and skill=='1':
                 if haskilllv<4:
                     haskilllv+=0.5
-                哈莫雷特[1]=int(原哈莫雷特[1]*haskilllv);哈莫雷特[2]=int(原哈莫雷特[2]*haskilllv);哈莫雷特[3]=int(原哈莫雷特[3]*haskilllv);哈莫雷特[4]=int(原哈莫雷特[4]*haskilllv)
+                if haphydef<4:
+                    haphydef+=0.5
+                if hamagdef<4:
+                    hamagdef+=0.5
+                哈莫雷特[1]=int(原哈莫雷特[1]*haskilllv);哈莫雷特[2]=int(原哈莫雷特[2]*haphydef);哈莫雷特[3]=int(原哈莫雷特[3]*haskilllv);哈莫雷特[4]=int(原哈莫雷特[4]*hamagdef)
                 print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',攻擊、防禦、特攻、特防提高了')
     elif  me==2 and skill=='2':
                 if loskilllv<4:
@@ -714,57 +768,102 @@ def 能力提升():
     elif me==5 and skill=='3':
                 if caskilllv<4:
                     caskilllv+=0.5
-                卡利斯[1]=int(原卡利斯[1]*caskilllv);卡利斯[2]=int(原卡利斯[2]*caskilllv)
+                if caphydef<4:
+                    caphydef+=0.5
+                卡利斯[1]=int(原卡利斯[1]*caskilllv);卡利斯[2]=int(原卡利斯[2]*caphydef)
                 print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',攻擊、防禦提高了')
     elif me==6 and skill=='4':
-                if reskilllv:
+                if reskilllv<4:
                     reskilllv+=0.5
-                雷伊[2]=int(雷伊[2]*reskilllv);雷伊[4]=int(雷伊[4]*reskilllv)
+                if rephydef<4:
+                    rephydef+=0.5
+                if remagdef<4:
+                    remagdef+=0.5
+                雷伊[2]=int(雷伊[2]*rephydef);雷伊[4]=int(雷伊[4]*remagdef)
                 print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',防禦、特防提高了')
+def 被爆擊(type):
+    global you;global me
+    global haphydef;global hamagdef;global caphydef;global rephydef;global remagdef;
+    global 哈莫雷特;global 卡利斯;global 雷伊
+    if me==1:
+        if type==1:
+            haphydef=1
+            哈莫雷特[2]=int(原哈莫雷特[2]*haphydef)
+        elif type==2:
+            hamagdef=1
+            哈莫雷特[4]=int(原哈莫雷特[4]*hamagdef)
+    elif me==5:
+        if type==1:
+            caphydef=1
+            卡利斯[2]=int(原卡利斯[2]*caphydef)
+    elif me==6:
+        if type==1:
+            rephydef=1
+            雷伊[2]=int(原雷伊[2]*rephydef)
+        elif type==2:
+            remagdef=1
+            雷伊[4]=int(原雷伊[4]*remagdef)
+
+
+
 def 特殊狀態(me):
      global skilltype;global hitrate
      global skill; global mypower
      global stop;global fire
-     global you
+     global you;global debuff
      for case in switch(me):
         if case(int(1)):
             if skill=='2':
+                debuff=1
+                負面狀態(debuff)
                 print('哈莫雷特使用了迴避')
                 hitrate=0
             elif skill=='4':
                 if random.randint(1,100)<=5:
+                    debuff=2
+                    負面狀態(debuff)
                     print('譜尼疲憊了')
                     stop=1;
             break
         if case(int(2)):
             if skill=='1':
+                debuff=3
+                負面狀態(debuff)
                 print('羅特利斯使用了幻化之火')
-                print('譜尼睡著了')
                 stop=2
             elif skill=='3':
+                debuff=4
+                負面狀態(debuff)
                 print('羅特利斯使用了灼燒')
                 print('譜尼燒傷了')
                 fire=1
             break
         if case(int(3)):
             if skill=='4':
+                debuff=4
+                負面狀態(debuff)
                 print('魔焰猩猩使用了火焰漩渦')
                 print('譜尼燒傷了')
                 fire=1
             break
         if case(int(4)):
             if skill=='1':
+                debuff=1
+                負面狀態(debuff)
                 print('薩帕克使用了相位移動')
                 hitrate=0
             break
         if case(int(5)):
             if skill=='1':
+                debuff=5
+                負面狀態(debuff)
                 print('卡利斯使用了寄生種子')
                 print('譜尼被寄生了')
                 寄生=1
             if skill=='2':
+                debuff=3
+                負面狀態(debuff)
                 print('卡利斯使用了催眠粉')
-                print('譜尼睡著了')
                 stop=2
             break
         if case(int(6)):
@@ -773,10 +872,14 @@ def 特殊狀態(me):
                     mypower*=4
             if skill=='2':
                 if random.randint(1,100)<=5:
+                    debuff=2
+                    負面狀態(debuff)
                     print('譜尼麻痺了')
                     stop=1
             if skill=='3':
                 if random.randint(1,100)<=5:
+                    debuff=2
+                    負面狀態(debuff)
                     print('譜尼麻痺了')
                     stop=1
             break
@@ -902,6 +1005,10 @@ def 判斷效果(you):
                 damage=判斷傷害(me)
                 print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
                 boss3[0]-=damage
+                if damage>120:
+                    print('反彈!')
+                    我方扣血(me)[0]=0
+                    血量過低()
             elif me==1 and skill=='1':
                 能力提升()
             elif me==1 and skill=='2':
@@ -911,6 +1018,10 @@ def 判斷效果(you):
                 print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
                 特殊狀態(me)
                 boss3[0]-=damage
+                if damage>120:
+                    print('反彈!')
+                    我方扣血(me)[0]=0
+                    血量過低()
             elif me==2 and skill=='2':
                 能力提升()
             elif me==2 and skill=='1':
@@ -921,6 +1032,10 @@ def 判斷效果(you):
                 damage=判斷傷害(me)
                 print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
                 boss3[0]-=damage
+                if damage>120:
+                    print('反彈!')
+                    我方扣血(me)[0]=0
+                    血量過低()
             elif me==3 and skill=='1':
                 能力提升()
             elif me==3 and skill=='4':
@@ -933,10 +1048,18 @@ def 判斷效果(you):
                     damage=判斷傷害(me)
                     print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
                     boss3[0]-=damage
+                    if damage>120:
+                        print('反彈!')
+                        我方扣血(me)[0]=0
+                        血量過低()
             elif me==3 and skill=='3':
                 damage=判斷傷害(me)
                 print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
                 boss3[0]-=damage
+                if damage>120:
+                    print('反彈!')
+                    我方扣血(me)[0]=0
+                    血量過低()
             elif me==4 and skill=='2':
                 能力提升()
             elif me==4 and skill=='1':
@@ -945,17 +1068,23 @@ def 判斷效果(you):
                 damage=判斷傷害(me)
                 print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
                 boss3[0]-=damage
+                if damage>120:
+                    print('反彈!')
+                    我方扣血(me)[0]=0
+                    血量過低()
             elif me==4 and skill=='4':
                 print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),'清除了譜尼的狀態')
             elif me==5 and skill=='3':
                 能力提升()
-            elif me==5 and skill=='1':
-                特殊狀態(me)
             elif me==5 and skill=='2':
                 特殊狀態(me)
             elif me==5 and skill=='4':
                 print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
                 boss3[0]-=damage
+                if damage>120:
+                    print('反彈!')
+                    我方扣血(me)[0]=0
+                    血量過低()
             elif me==6 and skill=='4':
                 能力提升()
             elif me==6 and skill=='1':
@@ -963,15 +1092,27 @@ def 判斷效果(you):
                 damage=判斷傷害(me)
                 boss3[0]-=damage
                 print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
+                if damage>120:
+                    print('反彈!')
+                    我方扣血(me)[0]=0
+                    血量過低()
             elif me==6 and skill=='2':
                 damage=判斷傷害(me)
                 boss3[0]-=damage
                 print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
                 特殊狀態(me)
+                if damage>120:
+                    print('反彈!')
+                    我方扣血(me)[0]=0
+                    血量過低()
             elif me==6 and skill=='3':
                 boss3[0]-=damage
                 print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
                 特殊狀態(me)
+                if damage>120:
+                    print('反彈!')
+                    我方扣血(me)[0]=0
+                    血量過低()
             else:
                 print('Miss')
             break
@@ -1006,12 +1147,12 @@ def 判斷效果(you):
                 特殊狀態(me)
             elif me==3 and skill=='2':
                 if random.randint(1,100)<=5:
-                    print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',boss3[0],'傷害')
+                    print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',boss4[0],'傷害')
                     boss4[0]=0
                 else:
                     damage=判斷傷害(me)
                     print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
-                    boss3[0]-=damage
+                    boss4[0]-=damage
             elif me==3 and skill=='3':
                 damage=判斷傷害(me)
                 print(我方誰在場上(me),'使用了',我方技能名稱(me,skill),',造成了',damage,'傷害')
@@ -1161,13 +1302,67 @@ def 友方登場精靈(n):
     print(n,'出場了!')
 def 敵方登場精靈(n):
     print(n,'出場了!')
+def 血量過低():
+    global me;global you
+    if 我方血量(me)<=0:
+        global die
+        die=True
+        print('我方血量:',我方血量(me),'/',原我方血量(me),sep='')
+        print('敵方血量:',int(敵方血量(you)),'/',原敵方血量(you),sep='')
+        name=input('要換誰上場?(1:哈莫雷特 2:羅特利斯 3:魔焰猩猩 4:薩帕克 5:卡利斯 6:雷伊\n')
+        for case in switch(name):
+           if case('1'):
+                os.system('cls')
+                友方登場精靈('哈莫雷特')
+                me=1
+                玩家攻擊()
+                break
+           if case('2'):
+                os.system('cls')
+                友方登場精靈('羅特利斯')
+                me=2
+                玩家攻擊()
+                break
+           if case('3'):
+                os.system('cls')
+                友方登場精靈('魔焰猩猩')
+                me=3
+                玩家攻擊()
+                break
+           if case('4'):
+                os.system('cls')
+                me=4
+                友方登場精靈('薩帕克')
+                玩家攻擊()
+                break
+           if case('5'):
+                os.system('cls')
+                友方登場精靈('卡利斯')
+                me=5
+                玩家攻擊()
+                break
+           if case('6'):
+                os.system('cls')
+                友方登場精靈('雷伊')
+                me=6
+                玩家攻擊()
+                break
+           else:
+               os.system('cls')
+               print('輸入錯誤')
+               血量過低()
+               break
+    else:
+        die=False
+
 def 玩家攻擊():
     global skill
     global me
     global skilltype
     global name
     global namepp
-    global pp不足;global ha;global b1;global start
+    global pp不足;global ha;global b1;global start;global die
+    血量過低()
     if start==True:
         友方登場精靈(ha)
         敵方登場精靈(b1)
@@ -1176,92 +1371,95 @@ def 玩家攻擊():
         print('pp不足')
         pp不足=False
     print('我方血量:',我方血量(me),'/',原我方血量(me),sep='')
-    print('敵方血量:',敵方血量(you),'/',原敵方血量(you),sep='')
-    print('輪到你進攻了')
-    print('1:替換 2:攻擊 3:顯示狀態 4:技能說明 5:使用道具')
-    now=str(input())
+    print('敵方血量:',int(敵方血量(you)),'/',原敵方血量(you),sep='')
+    if die==False:
+        print('輪到你進攻了')
+        print('1:替換 2:攻擊 3:顯示狀態 4:技能說明 5:使用道具')
+        now=str(input())
+        if now=='1':
+            name=input('要換誰上場?(1:哈莫雷特 2:羅特利斯 3:魔焰猩猩 4:薩帕克 5:卡利斯 6:雷伊\n')
+            for case in switch(name):
+               if case('1'):
+                    友方登場精靈('哈莫雷特')
+                    me=1
+                    譜尼攻擊()
+                    玩家攻擊()
+                    break
+               if case('2'):
+                    友方登場精靈('羅特利斯')
+                    me=2
+                    譜尼攻擊()
+                    玩家攻擊()
+                    break
+               if case('3'):
+                    友方登場精靈('魔焰猩猩')
+                    me=3
+                    譜尼攻擊()
+                    玩家攻擊()
+                    break
+               if case('4'):
+                    me=4
+                    友方登場精靈('薩帕克')
+                    譜尼攻擊()
+                    玩家攻擊()
+                    break
+               if case('5'):
+                    友方登場精靈('卡利斯')
+                    me=5
+                    譜尼攻擊()
+                    玩家攻擊()
+                    break
+               if case('6'):
+                    友方登場精靈('雷伊')
+                    me=6
+                    譜尼攻擊()
+                    玩家攻擊()
+                    break
+               else:
+                   print('輸入錯誤')
+                   玩家攻擊()
+                   break
 
-    if now=='1':
-        name=input('要換誰上場?(1:哈莫雷特 2:羅特利斯 3:魔焰猩猩 4:薩帕克 5:卡利斯 6:雷伊\n')
-        for case in switch(name):
-           if case('1'):
-                友方登場精靈('哈莫雷特')
-                me=1
-                譜尼攻擊()
+        elif now=='2':
+            print('請選擇技能')
+            技能()
+            skill=str(input())
+            if 判斷pp(me)==True:
+              os.system('cls')
+              技能威力(skill)
+              判斷效果(you)
+              譜尼攻擊()
+            elif skill!='1' and skill!='2' and skill!='3' and skill!='4':
+                print('輸入錯誤')
                 玩家攻擊()
-                break
-           if case('2'):
-                友方登場精靈('羅特利斯')
-                me=2
-                譜尼攻擊()
+            else:
+                pp不足=True
                 玩家攻擊()
-                break
-           if case('3'):
-                友方登場精靈('魔焰猩猩')
-                me=3
-                譜尼攻擊()
-                玩家攻擊()
-                break
-           if case('4'):
-                me=4
-                友方登場精靈('薩帕克')
-                譜尼攻擊()
-                玩家攻擊()
-                break
-           if case('5'):
-                友方登場精靈('卡利斯')
-                me=5
-                譜尼攻擊()
-                玩家攻擊()
-                break
-           if case('6'):
-                友方登場精靈('雷伊')
-                me=6
-                譜尼攻擊()
-                玩家攻擊()
-                break
-           else:
-               print('輸入錯誤')
-               玩家攻擊()
-               break
 
-    elif now=='2':
-        print('請選擇技能')
-        技能()
-        skill=str(input())
-        if 判斷pp(me)==True:
-          os.system('cls')
-          技能威力(skill)
-          判斷效果(you)
-          譜尼攻擊()
-        elif skill!='1' and skill!='2' and skill!='3' and skill!='4':
-            print('輸入錯誤')
+        elif now=='3':
+            顯示狀態(me)
             玩家攻擊()
-        else:
-            pp不足=True
+        elif now=='4':
+            技能說明()
             玩家攻擊()
-
-    elif now=='3':
-        顯示狀態(me)
-        玩家攻擊()
-    elif now=='4':
-        技能說明()
-        玩家攻擊()
-    elif now=='5':
-        print('要使用甚麼道具:1:高級體力藥劑',道具數量[0],'/5  2:究極體力藥劑',道具數量[1],'/5  3:初級活力藥劑',道具數量[2],'/15  4:中級活力藥劑',道具數量[3],'/15  5:高級活力藥劑',道具數量[4],'/5',sep='')
-        which=input()
-        道具(which)
-        血量變化(me,which)
-        pp變化(me,which)
-        namepp=True
-        判斷pp是否超過(me)
-        判斷血量是否超過(me)
-        譜尼攻擊()
+        elif now=='5':
+            print('要使用甚麼道具:1:高級體力藥劑',道具數量[0],'/5  2:究極體力藥劑',道具數量[1],'/5  3:初級活力藥劑',道具數量[2],'/15  4:中級活力藥劑',道具數量[3],'/15  5:高級活力藥劑',道具數量[4],'/5',sep='')
+            which=input()
+            道具(which)
+            血量變化(me,which)
+            pp變化(me,which)
+            namepp=True
+            判斷pp是否超過(me)
+            判斷血量是否超過(me)
+            譜尼攻擊()
 
         
-    elif True:
-        print('輸入錯誤')
-        玩家攻擊()
+        elif True:
+            print('輸入錯誤')
+            玩家攻擊()
+    else:
+        血量過低()
+
 def 譜尼pp():
     global you
     if you==2:
@@ -1323,14 +1521,6 @@ def 譜尼傷害(type):
             return int(magdmg(160,518,我方數值(me)[4],我方數值(me)[5])+我方血量(me)/10/(我方數值(me)[4]/100))
         elif type==3:
             return magdmg(140,518,我方數值(me)[4],我方數值(me)[5])
-def 譜尼pp():
-    global you
-    if you==2:
-        return boss2pp
-    elif you==3:
-        return boss3pp
-    elif you==4:
-        return boss4pp
 def 譜尼技能234():
     global you;global bosstype;global noskill
     noskill=False
@@ -1393,63 +1583,214 @@ def 譜尼技能1():
         return bossskill[4]
 
 def 譜尼攻擊():
-    global you;global bosstype;global noskill
+    global you;global bosstype;global noskill;global 迴避;global 疲憊;global 睡眠;global 燒傷;global 寄生
+    global 聖光氣
+    if 燒傷>0:
+        敵方扣血(you)[0]-=原敵方血量(you)/8
+        print('燒傷對譜尼造成了',int(原敵方血量(you)/8),'傷害')
+        燒傷-=1
+    if 寄生>0:
+        敵方扣血(you)[0]-=原敵方血量(you)/8
+        print('寄生對譜尼造成了',int(原敵方血量(you)/8),'傷害')
+        寄生-=1
+        if me==5:
+            我方扣血(me)[0]+=原敵方血量(you)/8
+            if 我方血量(me)>原我方血量(me):
+                我方扣血(me)[0]=原我方血量(me)
     if 敵方血量(you)<=0:
         you+=1
+        迴避=0;疲憊=0;睡眠=0;燒傷=0;寄生=0
+        noskill=False
         敵方登場精靈(譜尼登場())
+    if you==4:
+        敵方扣血(you)[0]+=2000
+        print('譜尼回復了2000血')
+        if 敵方血量(you)>原敵方血量(you):
+            敵方扣血(you)[0]=原敵方血量(you)
+    if you==6:
+        if 敵方血量(you)<1000:
+            敵方扣血(you)[0]=原敵方血量(you)
+            print('譜尼回滿血了')
+
     if you>6:
         print('恭喜你戰勝了譜尼!')
     if you==1:
         use=譜尼技能1()
-        if bosstype==1:
-            damage=譜尼傷害(1)
-            print('譜尼使用了',use,'造成了',damage,'傷害')
-            我方扣血(me)[0]-=damage
-        elif bosstype==2:
-            damage=譜尼傷害(2)
-            print('譜尼使用了',use,'造成了',damage,'傷害')
-            我方扣血(me)[0]-=damage
-        if bosstype==4:
-            print('譜尼使用了',use,'自身充滿了能量')
+        if 疲憊>0 or 睡眠>0:
+            print('譜尼睡著了')
+            疲憊-=1;睡眠-=1
+        elif 迴避>0:
+            迴避-=1
+            if bosstype==1:
+                damage=譜尼傷害(1)
+                print('譜尼使用了',use,'MISS')
+                我方扣血(me)[0]-=0
+            elif bosstype==2:
+                damage=譜尼傷害(2)
+                print('譜尼使用了',use,'MISS')
+                我方扣血(me)[0]-=0
+            if bosstype==4:
+                print('譜尼使用了',use,'自身充滿了能量')
+                聖光氣=2
+        else:
+            if 聖光氣>0 or random.randint(1,100)<=5:
+                聖光氣-=1
+                if bosstype==1:
+                    damage=譜尼傷害(1)
+                    print('譜尼使用了',use,'打出了致命一擊!造成了',damage*2,'傷害')
+                    我方扣血(me)[0]-=damage*2
+                    被爆擊(1)
+                elif bosstype==2:
+                    damage=譜尼傷害(2)
+                    print('譜尼使用了',use,'打出了致命一擊!造成了',damage*2,'傷害')
+                    我方扣血(me)[0]-=damage*2
+                    被爆擊(2)
+                if bosstype==4:
+                    print('譜尼使用了',use,'自身充滿了能量')
+                    聖光氣=2
+            else:
+                if bosstype==1:
+                    damage=譜尼傷害(1)
+                    print('譜尼使用了',use,'造成了',damage,'傷害')
+                    我方扣血(me)[0]-=damage
+                elif bosstype==2:
+                    damage=譜尼傷害(2)
+                    print('譜尼使用了',use,'造成了',damage,'傷害')
+                    我方扣血(me)[0]-=damage
+                if bosstype==4:
+                    print('譜尼使用了',use,'自身充滿了能量')
+                    聖光氣=2
+        
     elif you==5 or you==6:
         use=譜尼技能1()
-        if bosstype==1:
-            damage=譜尼傷害(1)
-            print('譜尼使用了',use,'造成了',damage,'傷害')
-            我方扣血(me)[0]-=damage
-        elif bosstype==2:
-            damage=譜尼傷害(2)
-            print('譜尼使用了',use,'造成了',damage,'傷害')
-            我方扣血(me)[0]-=damage
-        elif bosstype==3:
-            damage=譜尼傷害(3)
-            print('譜尼使用了',use,'造成了',damage,'傷害')
-            我方扣血(me)[0]-=damage
-        if bosstype==4:
-            print('譜尼使用了',use,'自身充滿了能量')
+        if 疲憊>0 or 睡眠>0:
+            print('譜尼睡著了')
+            疲憊-=1;睡眠-=1
+        elif 迴避>0:
+            迴避-=1
+            if bosstype==1:
+                damage=譜尼傷害(1)
+                print('譜尼使用了',use,'MISS')
+                我方扣血(me)[0]-=0
+            elif bosstype==2:
+                damage=譜尼傷害(2)
+                print('譜尼使用了',use,'MISS')
+                我方扣血(me)[0]-=0
+            elif bosstype==3:
+                damage=譜尼傷害(3)
+                print('譜尼使用了',use,'MISS')
+                我方扣血(me)[0]-=0
+            if bosstype==4:
+                print('譜尼使用了',use,'自身充滿了能量')
+                聖光氣=2
+        else:
+            if 聖光氣>0 or random.randint(1,100)<=5:
+                聖光氣-=1
+                if bosstype==1:
+                    damage=譜尼傷害(1)
+                    print('譜尼使用了',use,'打出了致命一擊!造成了',damage*2,'傷害')
+                    我方扣血(me)[0]-=damage*2
+                    被爆擊(1)
+                elif bosstype==2:
+                    damage=譜尼傷害(2)
+                    print('譜尼使用了',use,'打出了致命一擊!造成了',damage*2,'傷害')
+                    我方扣血(me)[0]-=damage*2
+                    被爆擊(2)
+                elif bosstype==3:
+                    damage=譜尼傷害(3)
+                    print('譜尼使用了',use,'打出了致命一擊!造成了',damage*2,'傷害')
+                    我方扣血(me)[0]-=damage*2
+                    被爆擊(2)
+                if bosstype==4:
+                    print('譜尼使用了',use,'自身充滿了能量')
+                    聖光氣=2
+            else:
+                if bosstype==1:
+                    damage=譜尼傷害(1)
+                    print('譜尼使用了',use,'造成了',damage,'傷害')
+                    我方扣血(me)[0]-=damage
+                elif bosstype==2:
+                    damage=譜尼傷害(2)
+                    print('譜尼使用了',use,'造成了',damage,'傷害')
+                    我方扣血(me)[0]-=damage
+                elif bosstype==3:
+                    damage=譜尼傷害(3)
+                    print('譜尼使用了',use,'造成了',damage,'傷害')
+                    我方扣血(me)[0]-=damage
+                if bosstype==4:
+                    print('譜尼使用了',use,'自身充滿了能量')
+                    聖光氣=2
     elif you==2 or you==3 or you==4:
         if 譜尼pp()[0]+譜尼pp()[1]+譜尼pp()[2]+譜尼pp()[3]==0:
             noskill=True
+            print('譜尼沒技能了')
         if noskill==False:
-            use=譜尼技能234()
-            if bosstype==1:
-                damage=譜尼傷害(1)
-                print('譜尼使用了',use,'造成了',damage,'傷害')
-                我方扣血(me)[0]-=damage
-            elif bosstype==2:
-                damage=譜尼傷害(2)
-                print('譜尼使用了',use,'造成了',damage,'傷害')
-                我方扣血(me)[0]-=damage
-            elif bosstype==3:
-                damage=譜尼傷害(3)
-                print('譜尼使用了',use,'造成了',damage,'傷害')
-                我方扣血(me)[0]-=damage
-            if bosstype==4:
-                print('譜尼使用了',use,'自身充滿了能量')
+            if 疲憊>0 or 睡眠>0:
+                print('譜尼睡著了')
+                疲憊-=1;睡眠-=1
+            elif 迴避>0:
+                迴避-=1
+                use=譜尼技能234()
+                if bosstype==1:
+                    damage=譜尼傷害(1)
+                    print('譜尼使用了',use,'MISS')
+                    我方扣血(me)[0]-=0
+                elif bosstype==2:
+                    damage=譜尼傷害(2)
+                    print('譜尼使用了',use,'MISS')
+                    我方扣血(me)[0]-=0
+                elif bosstype==3:
+                    damage=譜尼傷害(3)
+                    print('譜尼使用了',use,'MISS')
+                    我方扣血(me)[0]-=0
+                if bosstype==4:
+                    print('譜尼使用了',use,'自身充滿了能量')
+                    聖光氣=2
+            else:
+                use=譜尼技能234()
+                if 聖光氣>0 or random.randint(1,100)<=5:
+                    聖光氣-=1
+                    if bosstype==1:
+                        damage=譜尼傷害(1)
+                        print('譜尼使用了',use,'打出了致命一擊!造成了',damage*2,'傷害')
+                        我方扣血(me)[0]-=damage*2
+                        被爆擊(1)
+                    elif bosstype==2:
+                        damage=譜尼傷害(2)
+                        print('譜尼使用了',use,'打出了致命一擊!造成了',damage*2,'傷害')
+                        我方扣血(me)[0]-=damage*2
+                        被爆擊(2)
+                    elif bosstype==3:
+                        damage=譜尼傷害(3)
+                        print('譜尼使用了',use,'打出了致命一擊!造成了',damage*2,'傷害')
+                        我方扣血(me)[0]-=damage*2
+                        被爆擊(2)
+                    if bosstype==4:
+                        print('譜尼使用了',use,'自身充滿了能量')
+                        聖光氣=2
+                else:
+                    if bosstype==1:
+                        damage=譜尼傷害(1)
+                        print('譜尼使用了',use,'造成了',damage,'傷害')
+                        我方扣血(me)[0]-=damage
+                    elif bosstype==2:
+                        damage=譜尼傷害(2)
+                        print('譜尼使用了',use,'造成了',damage,'傷害')
+                        我方扣血(me)[0]-=damage
+                    elif bosstype==3:
+                        damage=譜尼傷害(3)
+                        print('譜尼使用了',use,'造成了',damage,'傷害')
+                        我方扣血(me)[0]-=damage
+                    if bosstype==4:
+                        print('譜尼使用了',use,'自身充滿了能量')
+                        聖光氣=2
+
       
 
-
-
+    print('我方回復50生命')
+    我方扣血(me)[0]+=50
+    if 我方血量(me)>原我方血量(me):
+        我方扣血(me)[0]=原我方血量(me)
     玩家攻擊()
     
 import time
@@ -1467,10 +1808,15 @@ global skilltype
 global haskilllv;global loskilllv;global moskilllv;global saskilllv;global caskilllv;global reskilllv
 global hitrate;global stop;global fire;global 寄生;
 global 哈莫雷特;global 羅特利斯;global 魔焰猩猩;global 薩帕克;global 卡利斯;global 雷伊
-global 道具數量;global namepp;global damage;global pp不足;global start;global noskill
+global 道具數量;global namepp;global damage;global pp不足;global start;global noskill;global die
+global 迴避;global 疲憊;global 睡眠;global 燒傷;global 寄生;global 聖光氣
+global haphydef;global hamagdef;global caphydef;global rephydef;global remagdef;
+迴避=0;疲憊=0;睡眠=0;燒傷=0;寄生=0;聖光氣=0
+haphydef=1;hamagdef=1;caphydef=1;rephydef=1;remagdef=1
+die=False
 noskill=False
 me=1
-you=3
+you=1
 haskilllv=loskilllv=moskilllv=saskilllv=caskilllv=reskilllv=1
 hitrate=1
 stop=0
@@ -1537,7 +1883,7 @@ boss6pp=[100000,100000,100000]
 #    time.sleep(1)
 start=True
 玩家攻擊()                  
-#血量低於0要換角色
+#執行clear、改良部分例外事件
 
 
 
