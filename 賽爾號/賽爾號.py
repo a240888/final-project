@@ -1,5 +1,6 @@
 import random
 import os
+import sys
 
 class switch(object):
     def __init__(self, value):
@@ -281,9 +282,15 @@ def 道具(which):
             道具數量[4]-=1
         namepp=False
         increase=15
+    elif which=='6':
+         os.system('cls')
+         玩家攻擊()
+    elif which!='1' and which!='2' and which!='3' and which!='4' and which!='5':
+         print('輸入錯誤')
+         increase=0
+         玩家攻擊()
     elif namepp==True:
          print('道具數量不夠!')
-
          increase=0
          玩家攻擊()
     else :
@@ -302,22 +309,22 @@ def 技能():
      global reskill
      for case in switch(me):
         if case(int(1)):
-            print ('1:龍之意志',哈莫雷特pp[0],'/10  2:迴避',哈莫雷特pp[1],'/15  3:龍王波',哈莫雷特pp[2],'/15  4:龍王滅碎陣',哈莫雷特pp[3],'/5',sep='')
+            print ('1:龍之意志',哈莫雷特pp[0],'/10  2:迴避',哈莫雷特pp[1],'/15  3:龍王波',哈莫雷特pp[2],'/15  4:龍王滅碎陣',哈莫雷特pp[3],'/5  5:返回',sep='')
             break
         if case(int(2)):
-            print ('1:幻化之火',羅特利斯pp[0],'/20  2:火之意志',羅特利斯pp[1],'/15  3:灼燒',羅特利斯pp[2],'/25   4:天火鳳凰',羅特利斯pp[3],'/5',sep='' )
+            print ('1:幻化之火',羅特利斯pp[0],'/20  2:火之意志',羅特利斯pp[1],'/15  3:灼燒',羅特利斯pp[2],'/25   4:天火鳳凰',羅特利斯pp[3],'/5  5:返回',sep='' )
             break
         if case(int(3)):
-            print ('1:覺醒',魔焰猩猩pp[0],'/10  2:絕命火焰',魔焰猩猩pp[1],'/10  3:全力一擊',魔焰猩猩pp[2],'/5   4:火焰漩渦',魔焰猩猩pp[3],'/15',sep='')
+            print ('1:覺醒',魔焰猩猩pp[0],'/10  2:絕命火焰',魔焰猩猩pp[1],'/10  3:全力一擊',魔焰猩猩pp[2],'/5   4:火焰漩渦',魔焰猩猩pp[3],'/15  5:返回',sep='')
             break
         if case(int(4)):
-            print ('1:相位移動',薩帕克pp[0],'/20  2:精神強化',薩帕克pp[1],'/20  3:樂鏡迷蹤',薩帕克pp[2],'/5   4:淨化街',薩帕克pp[3],'/30',sep='')
+            print ('1:相位移動',薩帕克pp[0],'/20  2:精神強化',薩帕克pp[1],'/20  3:樂鏡迷蹤',薩帕克pp[2],'/5   4:淨化街',薩帕克pp[3],'/30  5:返回',sep='')
             break
         if case(int(5)):
-            print ('1:寄生種子',卡利斯pp[0],'/10  2:催眠粉',卡利斯pp[1],'/15  3:硬化',卡利斯pp[2],'/20   4:疾風快刀',卡利斯pp[3],'/10',sep='')
+            print ('1:寄生種子',卡利斯pp[0],'/10  2:催眠粉',卡利斯pp[1],'/15  3:硬化',卡利斯pp[2],'/20   4:疾風快刀',卡利斯pp[3],'/10  5:返回',sep='')
             break
         if case(int(6)):
-            print ('1:雷神天明閃',雷伊pp[0],'/3  2:元氣電光球',雷伊pp[1],'/10  3:瞬雷天閃',雷伊pp[2],'/5   4:閃電鬥氣',雷伊pp[3],'/15',sep='')
+            print ('1:雷神天明閃',雷伊pp[0],'/3  2:元氣電光球',雷伊pp[1],'/10  3:瞬雷天閃',雷伊pp[2],'/5   4:閃電鬥氣',雷伊pp[3],'/15  5:返回',sep='')
             break
         if True:
             print('輸入錯誤')
@@ -558,6 +565,19 @@ def 我方誰在場上(me):
         return ca
     if me ==6:
         return re
+def 敵方誰在場上(you):
+    if you ==1: 
+        return b1
+    if you ==2: 
+        return b2
+    if you ==3: 
+        return b3
+    if you ==4:
+        return b4
+    if you ==5: 
+        return b5
+    if you ==6:
+        return b6
 def 負面狀態(debuff):
     global 迴避;global 疲憊;global 睡眠;global 燒傷;global 寄生;
     if debuff==1:
@@ -1305,10 +1325,12 @@ def 敵方登場精靈(n):
 def 血量過低():
     global me;global you
     if 我方血量(me)<=0:
-        global die
+        global die;global dead
+        dead+=1
+        挑戰失敗()
         die=True
-        print('我方血量:',我方血量(me),'/',原我方血量(me),sep='')
-        print('敵方血量:',int(敵方血量(you)),'/',原敵方血量(you),sep='')
+        print(我方誰在場上(me),' 血量:',我方血量(me),'/',原我方血量(me),sep='')
+        print(敵方誰在場上(you),' 血量:',int(敵方血量(you)),'/',原敵方血量(you),sep='')
         name=input('要換誰上場?(1:哈莫雷特 2:羅特利斯 3:魔焰猩猩 4:薩帕克 5:卡利斯 6:雷伊\n')
         for case in switch(name):
            if case('1'):
@@ -1354,6 +1376,25 @@ def 血量過低():
                break
     else:
         die=False
+def 挑戰失敗():
+    global again
+    if 哈莫雷特[0]<=0 and 羅特利斯[0]<=0 and 魔焰猩猩[0]<=0 and 薩帕克[0]<=0 and 卡利斯[0]<=0 and 雷伊[0]<=0:
+        print('過了這麼多年你始終不敵譜尼......')
+        again=input('想要再挑戰一次嗎?(輸入Yes或[我就爛]): ')
+        if again=='我就爛':
+            print('你真的爛到家了')
+            time.sleep(2)
+            sys.exit()
+        elif again=='yes'or again=='YES'or again=='Yes':
+            print('那就開始吧!')
+            time.sleep(1)
+            os.system('cls')
+            startgame()
+        else:
+            os.system('cls')
+            print('輸入錯誤')
+            挑戰失敗()
+
 
 def 玩家攻擊():
     global skill
@@ -1370,55 +1411,66 @@ def 玩家攻擊():
     if pp不足==True:
         print('pp不足')
         pp不足=False
-    print('我方血量:',我方血量(me),'/',原我方血量(me),sep='')
-    print('敵方血量:',int(敵方血量(you)),'/',原敵方血量(you),sep='')
+    print(我方誰在場上(me),' 血量:',我方血量(me),'/',原我方血量(me),sep='')
+    print(敵方誰在場上(you),' 血量:',int(敵方血量(you)),'/',原敵方血量(you),sep='')
     if die==False:
         print('輪到你進攻了')
         print('1:替換 2:攻擊 3:顯示狀態 4:技能說明 5:使用道具')
         now=str(input())
         if now=='1':
-            name=input('要換誰上場?(1:哈莫雷特 2:羅特利斯 3:魔焰猩猩 4:薩帕克 5:卡利斯 6:雷伊\n')
+            name=input('要換誰上場?(1:哈莫雷特 2:羅特利斯 3:魔焰猩猩 4:薩帕克 5:卡利斯 6:雷伊 7:返回\n')
             for case in switch(name):
                if case('1'):
+                    os.system('cls')
                     友方登場精靈('哈莫雷特')
                     me=1
                     譜尼攻擊()
                     玩家攻擊()
                     break
                if case('2'):
+                    os.system('cls')
                     友方登場精靈('羅特利斯')
                     me=2
                     譜尼攻擊()
                     玩家攻擊()
                     break
                if case('3'):
+                    os.system('cls')
                     友方登場精靈('魔焰猩猩')
                     me=3
                     譜尼攻擊()
                     玩家攻擊()
                     break
                if case('4'):
+                    os.system('cls')
                     me=4
                     友方登場精靈('薩帕克')
                     譜尼攻擊()
                     玩家攻擊()
                     break
                if case('5'):
+                    os.system('cls')
                     友方登場精靈('卡利斯')
                     me=5
                     譜尼攻擊()
                     玩家攻擊()
                     break
                if case('6'):
+                    os.system('cls')
                     友方登場精靈('雷伊')
                     me=6
                     譜尼攻擊()
                     玩家攻擊()
                     break
+               if case('7'):
+                    os.system('cls')
+                    玩家攻擊()
+                    break
                else:
-                   print('輸入錯誤')
-                   玩家攻擊()
-                   break
+                    os.system('cls')
+                    print('輸入錯誤')
+                    玩家攻擊()
+                    break
 
         elif now=='2':
             print('請選擇技能')
@@ -1429,22 +1481,30 @@ def 玩家攻擊():
               技能威力(skill)
               判斷效果(you)
               譜尼攻擊()
+            elif skill=='5':
+                os.system('cls')
+                玩家攻擊()
             elif skill!='1' and skill!='2' and skill!='3' and skill!='4':
+                os.system('cls')
                 print('輸入錯誤')
                 玩家攻擊()
             else:
+                os.system('cls')
                 pp不足=True
                 玩家攻擊()
 
         elif now=='3':
+            os.system('cls')
             顯示狀態(me)
             玩家攻擊()
         elif now=='4':
+            os.system('cls')
             技能說明()
             玩家攻擊()
         elif now=='5':
-            print('要使用甚麼道具:1:高級體力藥劑',道具數量[0],'/5  2:究極體力藥劑',道具數量[1],'/5  3:初級活力藥劑',道具數量[2],'/15  4:中級活力藥劑',道具數量[3],'/15  5:高級活力藥劑',道具數量[4],'/5',sep='')
+            print('要使用甚麼道具:1:高級體力藥劑',道具數量[0],'/5  2:究極體力藥劑',道具數量[1],'/5  3:初級活力藥劑',道具數量[2],'/15  4:中級活力藥劑',道具數量[3],'/15  5:高級活力藥劑',道具數量[4],'/5  6:返回',sep='')
             which=input()
+            os.system('cls')
             道具(which)
             血量變化(me,which)
             pp變化(me,which)
@@ -1455,6 +1515,7 @@ def 玩家攻擊():
 
         
         elif True:
+            os.system('cls')
             print('輸入錯誤')
             玩家攻擊()
     else:
@@ -1585,6 +1646,7 @@ def 譜尼技能1():
 def 譜尼攻擊():
     global you;global bosstype;global noskill;global 迴避;global 疲憊;global 睡眠;global 燒傷;global 寄生
     global 聖光氣
+    time.sleep(0.25)
     if 燒傷>0:
         敵方扣血(you)[0]-=原敵方血量(you)/8
         print('燒傷對譜尼造成了',int(原敵方血量(you)/8),'傷害')
@@ -1599,7 +1661,7 @@ def 譜尼攻擊():
                 我方扣血(me)[0]=原我方血量(me)
     if 敵方血量(you)<=0:
         you+=1
-        迴避=0;疲憊=0;睡眠=0;燒傷=0;寄生=0
+        迴避=0;疲憊=0;睡眠=0;燒傷=0;寄生=0;聖光氣=0
         noskill=False
         敵方登場精靈(譜尼登場())
     if you==4:
@@ -1614,13 +1676,17 @@ def 譜尼攻擊():
 
     if you>6:
         print('恭喜你戰勝了譜尼!')
+        time.sleep(1)
+        sys.exit()
     if you==1:
         use=譜尼技能1()
         if 疲憊>0 or 睡眠>0:
+            聖光氣-=1
             print('譜尼睡著了')
             疲憊-=1;睡眠-=1
         elif 迴避>0:
             迴避-=1
+            聖光氣-=1
             if bosstype==1:
                 damage=譜尼傷害(1)
                 print('譜尼使用了',use,'MISS')
@@ -1664,10 +1730,12 @@ def 譜尼攻擊():
     elif you==5 or you==6:
         use=譜尼技能1()
         if 疲憊>0 or 睡眠>0:
+            聖光氣-=1
             print('譜尼睡著了')
             疲憊-=1;睡眠-=1
         elif 迴避>0:
             迴避-=1
+            聖光氣-=1
             if bosstype==1:
                 damage=譜尼傷害(1)
                 print('譜尼使用了',use,'MISS')
@@ -1726,10 +1794,12 @@ def 譜尼攻擊():
             print('譜尼沒技能了')
         if noskill==False:
             if 疲憊>0 or 睡眠>0:
+                聖光氣-=1
                 print('譜尼睡著了')
                 疲憊-=1;睡眠-=1
             elif 迴避>0:
                 迴避-=1
+                聖光氣-=1
                 use=譜尼技能234()
                 if bosstype==1:
                     damage=譜尼傷害(1)
@@ -1791,99 +1861,116 @@ def 譜尼攻擊():
     我方扣血(me)[0]+=50
     if 我方血量(me)>原我方血量(me):
         我方扣血(me)[0]=原我方血量(me)
+    time.sleep(0.5)
     玩家攻擊()
     
 import time
-#import os
-#os.system('bgm.mp3')
    
     
 
 ########################################################################################
-global me
-global you
-global mypower
-global skill
-global skilltype
-global haskilllv;global loskilllv;global moskilllv;global saskilllv;global caskilllv;global reskilllv
-global hitrate;global stop;global fire;global 寄生;
-global 哈莫雷特;global 羅特利斯;global 魔焰猩猩;global 薩帕克;global 卡利斯;global 雷伊
-global 道具數量;global namepp;global damage;global pp不足;global start;global noskill;global die
-global 迴避;global 疲憊;global 睡眠;global 燒傷;global 寄生;global 聖光氣
-global haphydef;global hamagdef;global caphydef;global rephydef;global remagdef;
-迴避=0;疲憊=0;睡眠=0;燒傷=0;寄生=0;聖光氣=0
-haphydef=1;hamagdef=1;caphydef=1;rephydef=1;remagdef=1
-die=False
-noskill=False
-me=1
-you=1
-haskilllv=loskilllv=moskilllv=saskilllv=caskilllv=reskilllv=1
-hitrate=1
-stop=0
-damage=0
-namepp=True
-pp不足=False
-哈莫雷特=[402,302,225,202,215,0.5,2];原哈莫雷特=[402,302,225,202,215,0.5,2] 
-羅特利斯=[342,236,191,234,197,1.5,0.75];原羅特利斯=[342,236,191,234,197,1.5,0.75]
-魔焰猩猩=[378,282,193,231,193,2,0.5];原魔焰猩猩=[378,282,193,231,193,2,0.5]
-薩帕克=[358,232,191,234,235,0.5,2];原薩帕克=[358,232,191,234,235,0.5,2]
-卡利斯=[308,256,233,180,201,2,0.5];原卡利斯=[308,256,233,180,201,2,0.5]
-雷伊=[343,229,206,221,210,2,0.5];原雷伊=[343,229,206,221,210,2,0.5]
-hskill=[0,'龍之意志','迴避','龍王波','龍王滅碎陣']
-lskill=[0,'幻化之火','火之意志','灼燒','天火鳳凰']
-mskill=[0,'覺醒','絕命火焰','全力一擊','火焰漩渦']
-sskill=[0,'相位移動','精神強化','樂鏡迷蹤','淨化街']
-cskill=[0,'寄生種子','催眠粉','硬化','疾風快刀']
-rskill=[0,'雷神天明閃','元氣電光球','瞬雷天閃','閃電鬥氣']
-bossskill=[0,'旋滅裂空陣','聖靈魔閃光','千裂虛光閃','聖光氣']
-ha='哈莫雷特'
-lo='羅特利斯'
-mo='魔焰猩猩'
-sa='薩帕克'
-ca='卡利斯'
-re='雷伊'
-b1='譜尼一血'
-b2='譜尼二血'
-b3='譜尼三血'
-b4='譜尼四血'
-b5='譜尼五血'
-b6='譜尼六血'
-boss1=[7000,1062,236,518,236];原boss1=[7000,1062,236,518,236]
-boss2=[8000,531,236,518,236];原boss2=[8000,531,236,518,236]
-boss3=[9000,531,236,518,236];原boss3=[9000,531,236,518,236]
-boss4=[10000,531,236,518,236];原boss4=[10000,531,236,518,236]
-boss5=[20000,531,236,518,236];原boss5=[20000,531,236,518,236]
-boss6=[65000,531,236,518,236];原boss6=[65000,531,236,518,236]
-哈莫雷特pp=[10,15,15,5,3,4,1,1];原哈莫雷特pp=[10,15,15,5,3,4,1,1]
-羅特利斯pp=[20,15,25,5,0,3,0,2];原羅特利斯pp=[20,15,25,5,0,3,0,2]
-魔焰猩猩pp=[10,10,5,15,3,1,1,2];原魔焰猩猩pp=[10,10,5,15,3,1,1,2]
-薩帕克pp=[20,20,5,30,4,3,2,3];原薩帕克pp=[20,20,5,30,4,3,2,3]
-卡利斯pp=[10,15,20,10,0,0,3,1];原卡利斯pp=[10,15,20,10,0,0,3,1]
-雷伊pp=[3,10,5,15,1,2,1,3];原雷伊pp=[3,10,5,15,1,2,1,3]
-boss1pp=[100000,100000,100000]
-boss2pp=[10,5,10,10]
-boss3pp=[10,5,10,10]
-boss4pp=[10,5,10,10]
-boss5pp=[100000,100000,100000]
-boss6pp=[100000,100000,100000]
-道具數量=[5,5,15,15,5]
+def startgame():
+    global me
+    global you
+    global mypower
+    global skill
+    global skilltype
+    global haskilllv;global loskilllv;global moskilllv;global saskilllv;global caskilllv;global reskilllv;global bossskill
+    global hitrate;global stop;global fire;global 寄生;
+    global 哈莫雷特;global 羅特利斯;global 魔焰猩猩;global 薩帕克;global 卡利斯;global 雷伊
+    global 道具數量;global namepp;global damage;global pp不足;global start;global noskill;global die;global dead
+    global 迴避;global 疲憊;global 睡眠;global 燒傷;global 寄生;global 聖光氣
+    global haphydef;global hamagdef;global caphydef;global rephydef;global remagdef;
+    global ha;global lo;global mo;global sa;global ca;global re
+    global b1;global b2;global b3;global b4;global b5;global b6;
+    global 原哈莫雷特;global 原羅特利斯;global 原魔焰猩猩;global 原薩帕克;global 原卡利斯;global 原雷伊
+    global boss1;global boss2;global boss3;global boss4;global boss5;global boss6;
+    global 原boss1;global 原boss2;global 原boss3;global 原boss4;global 原boss5;global 原boss6;
+    global 哈莫雷特pp;global 原哈莫雷特pp
+    global 羅特利斯pp;global 原羅特利斯pp
+    global 魔焰猩猩pp;global 原魔焰猩猩pp
+    global 薩帕克pp;global 原薩帕克pp
+    global 卡利斯pp;global 原卡利斯pp
+    global 雷伊pp;global 原雷伊pp
+    global boss1pp;global boss2pp;global boss3pp;global boss4pp;global boss5pp;global boss6pp
+    global 道具數量
+    global hskill;global lskill;global mskill;global sskill;global cskill;global rskill
+    global bossskill
+    迴避=0;疲憊=0;睡眠=0;燒傷=0;寄生=0;聖光氣=0
+    haphydef=1;hamagdef=1;caphydef=1;rephydef=1;remagdef=1
+    die=False;dead=0
+    noskill=False
+    me=1
+    you=1
+    haskilllv=loskilllv=moskilllv=saskilllv=caskilllv=reskilllv=1
+    hitrate=1
+    stop=0
+    damage=0
+    namepp=True
+    pp不足=False
+    哈莫雷特=[402,302,225,202,215,0.5,2];原哈莫雷特=[402,302,225,202,215,0.5,2] 
+    羅特利斯=[342,236,191,234,197,1.5,0.75];原羅特利斯=[342,236,191,234,197,1.5,0.75]
+    魔焰猩猩=[378,282,193,231,193,2,0.5];原魔焰猩猩=[378,282,193,231,193,2,0.5]
+    薩帕克=[358,232,191,234,235,0.5,2];原薩帕克=[358,232,191,234,235,0.5,2]
+    卡利斯=[308,256,233,180,201,2,0.5];原卡利斯=[308,256,233,180,201,2,0.5]
+    雷伊=[343,229,206,221,210,2,0.5];原雷伊=[343,229,206,221,210,2,0.5]
+    hskill=[0,'龍之意志','迴避','龍王波','龍王滅碎陣']
+    lskill=[0,'幻化之火','火之意志','灼燒','天火鳳凰']
+    mskill=[0,'覺醒','絕命火焰','全力一擊','火焰漩渦']
+    sskill=[0,'相位移動','精神強化','樂鏡迷蹤','淨化街']
+    cskill=[0,'寄生種子','催眠粉','硬化','疾風快刀']
+    rskill=[0,'雷神天明閃','元氣電光球','瞬雷天閃','閃電鬥氣']
+    bossskill=[0,'旋滅裂空陣','聖靈魔閃光','千裂虛光閃','聖光氣']
+    ha='哈莫雷特'
+    lo='羅特利斯'
+    mo='魔焰猩猩'
+    sa='薩帕克'
+    ca='卡利斯'
+    re='雷伊'
+    b1='譜尼一命'
+    b2='譜尼二命'
+    b3='譜尼三命'
+    b4='譜尼四命'
+    b5='譜尼五命'
+    b6='譜尼六命'
+    boss1=[7000,1062,236,518,236];原boss1=[7000,1062,236,518,236]
+    boss2=[8000,531,236,518,236];原boss2=[8000,531,236,518,236]
+    boss3=[9000,531,236,518,236];原boss3=[9000,531,236,518,236]
+    boss4=[10000,531,236,518,236];原boss4=[10000,531,236,518,236]
+    boss5=[20000,531,236,518,236];原boss5=[20000,531,236,518,236]
+    boss6=[65000,531,236,518,236];原boss6=[65000,531,236,518,236]
+    哈莫雷特pp=[10,15,15,5,3,4,1,1];原哈莫雷特pp=[10,15,15,5,3,4,1,1]
+    羅特利斯pp=[20,15,25,5,0,3,0,2];原羅特利斯pp=[20,15,25,5,0,3,0,2]
+    魔焰猩猩pp=[10,10,5,15,3,1,1,2];原魔焰猩猩pp=[10,10,5,15,3,1,1,2]
+    薩帕克pp=[20,20,5,30,4,3,2,3];原薩帕克pp=[20,20,5,30,4,3,2,3]
+    卡利斯pp=[10,15,20,10,0,0,3,1];原卡利斯pp=[10,15,20,10,0,0,3,1]
+    雷伊pp=[3,10,5,15,1,2,1,3];原雷伊pp=[3,10,5,15,1,2,1,3]
+    boss1pp=[100000,100000,100000]
+    boss2pp=[10,5,10,10]
+    boss3pp=[10,5,10,10]
+    boss4pp=[10,5,10,10]
+    boss5pp=[100000,100000,100000]
+    boss6pp=[100000,100000,100000]
+    道具數量=[5,5,15,15,5]
 
-########################################################################################
-#print('歡迎來到賽爾號')
-#time.sleep(1)
-#print('準備好面對童年夢魘了嗎?(準備好請輸入yes)')
-#answer=input()
-#while answer!='yes'and answer!='YES'and answer!='Yes':
-#    print('現在呢?')
-#    answer=input()
-#else:
-#    print('那就開始吧!')
-#    time.sleep(1)
-#    print('進入戰鬥......')
-#    time.sleep(1)
-start=True
-玩家攻擊()                  
-#執行clear、改良部分例外事件
+    ########################################################################################
+    print('歡迎來到賽爾號')
+    time.sleep(1)
+    print('準備好面對童年夢魘了嗎?(準備好請輸入yes)')
+    answer=input()
+    while answer!='yes'and answer!='YES'and answer!='Yes':
+        print('懦夫?現在呢?')
+        answer=input()
+    else:
+        print('那就開始吧!')
+        time.sleep(1)
+        print('進入戰鬥......')
+        time.sleep(1)
+        os.system('cls')
+    start=True
+    玩家攻擊()
+os.system('bgm.mp3')
+startgame()
 
 
 
