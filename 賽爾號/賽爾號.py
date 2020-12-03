@@ -1,6 +1,146 @@
 import random
 import os
 import sys
+import pygame
+def stand(background,screen,cha):
+    global second;global cal
+    if me==1:
+        if 4>=second>0:
+                    screen.blit(background, (0, 0))
+                    animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
+                    screen.blit(animation,(50,120))
+                    pygame.display.update()  
+        elif second==0:
+                    screen.blit(background, (0, 0))
+                    animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
+                    screen.blit(animation,(50,120))
+                    pygame.display.update()  
+                    second=4
+                    cal=1
+        elif 8>=second>=5:
+                    screen.blit(background, (0, 0))
+                    animation=pygame.image.load('./picture/%s/%s站立2.png'%(cha,cha))
+                    screen.blit(animation,(50,120))
+                    pygame.display.update()  
+        elif 12>=second>=9:
+                    screen.blit(background, (0, 0))
+                    animation=pygame.image.load('./picture/%s/%s站立3.png'%(cha,cha))
+                    screen.blit(animation,(50,120))
+                    pygame.display.update()
+        elif 16>second>=13:
+                    screen.blit(background, (0, 0))
+                    animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
+                    screen.blit(animation,(50,120))
+                    pygame.display.update()
+        elif second==16:
+                    screen.blit(background, (0, 0))
+                    animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
+                    screen.blit(animation,(50,120))
+                    pygame.display.update()
+                    second=12
+                    cal=-1
+    elif me==2:
+        if 4>=second>=0:
+                    screen.blit(background, (0, 0))
+                    animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
+                    screen.blit(animation,(50-7,120))
+                    pygame.display.update()  
+        elif 8>=second>=5:
+                    screen.blit(background, (0, 0))
+                    animation=pygame.image.load('./picture/%s/%s站立2.png'%(cha,cha))
+                    screen.blit(animation,(50,120))
+                    pygame.display.update()  
+        elif 12>=second>=9:
+                    screen.blit(background, (0, 0))
+                    animation=pygame.image.load('./picture/%s/%s站立3.png'%(cha,cha))
+                    screen.blit(animation,(50,120))
+                    pygame.display.update()
+        elif 16>second>=13:
+                    screen.blit(background, (0, 0))
+                    animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
+                    screen.blit(animation,(50,120))
+                    pygame.display.update()
+        elif second==16:
+                    screen.blit(background, (0, 0))
+                    animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
+                    screen.blit(animation,(50,120))
+                    pygame.display.update()
+                    second=0
+    elif me==3:
+        if 3>=second>=0:
+                    screen.blit(background, (0, 0))
+                    animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
+                    screen.blit(animation,(50,220))
+                    pygame.display.update()  
+        elif 7>=second>=4:
+                    screen.blit(background, (0, 0))
+                    animation=pygame.image.load('./picture/%s/%s站立2.png'%(cha,cha))
+                    screen.blit(animation,(50,220))
+                    pygame.display.update()  
+        elif 11>=second>=8:
+                    screen.blit(background, (0, 0))
+                    animation=pygame.image.load('./picture/%s/%s站立3.png'%(cha,cha))
+                    screen.blit(animation,(50,220))
+                    pygame.display.update()
+        elif 15>=second>=12:
+                    screen.blit(background, (0, 0))
+                    animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
+                    screen.blit(animation,(50,220))
+                    pygame.display.update()
+        elif 19>=second>=16:
+                    screen.blit(background, (0, 0))
+                    animation=pygame.image.load('./picture/%s/%s站立5.png'%(cha,cha))
+                    screen.blit(animation,(50,220))
+                    pygame.display.update()
+        elif 23>=second>=17:
+                    screen.blit(background, (0, 0))
+                    animation=pygame.image.load('./picture/%s/%s站立6.png'%(cha,cha))
+                    screen.blit(animation,(50,220))
+                    pygame.display.update()
+        elif 27>=second>=24:
+                    screen.blit(background, (0, 0))
+                    animation=pygame.image.load('./picture/%s/%s站立7.png'%(cha,cha))
+                    screen.blit(animation,(50,220))
+                    pygame.display.update()
+        elif 31>second>=28:
+                    screen.blit(background, (0, 0))
+                    animation=pygame.image.load('./picture/%s/%s站立8.png'%(cha,cha))
+                    screen.blit(animation,(50,220))
+                    pygame.display.update()
+        elif second==31:
+                    screen.blit(background, (0, 0))
+                    animation=pygame.image.load('./picture/%s/%s站立8.png'%(cha,cha))
+                    screen.blit(animation,(50,220))
+                    pygame.display.update()
+                    second=0
+                    
+                    
+
+
+def main():
+    pygame.init()
+    screen = pygame.display.set_mode((1240, 720))
+    pygame.display.set_caption('賽爾號')
+    screen.fill((255, 255, 255))
+    background = pygame.image.load('./picture/background.jpg')
+    screen.blit(background, (0, 0))
+    pygame.display.update()
+    clock = pygame.time.Clock()
+    idle=True
+    running = True
+    global second;second=0
+    global cal;cal=1
+    global me;me=3
+
+    
+    while running:
+        clock.tick(32) 
+        second+=cal
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+        if idle:
+            stand(background,screen,我方誰在場上(me))
 
 class switch(object):
     def __init__(self, value):
@@ -1674,7 +1814,7 @@ def 譜尼攻擊():
             敵方扣血(you)[0]=原敵方血量(you)
             print('譜尼回滿血了')
 
-    if you>6:
+    if you>6:                                             
         print('恭喜你戰勝了譜尼!')
         time.sleep(1)
         sys.exit()
@@ -1954,6 +2094,7 @@ def startgame():
     道具數量=[5,5,15,15,5]
 
     ########################################################################################
+    '''
     print('歡迎來到賽爾號')
     time.sleep(1)
     print('準備好面對童年夢魘了嗎?(準備好請輸入yes)')
@@ -1969,9 +2110,11 @@ def startgame():
         os.system('cls')
     start=True
     玩家攻擊()
-os.system('bgm.mp3')
-startgame()
+    '''
 
+#os.system('bgm.mp3')
+startgame()
+main()
 
 
 
