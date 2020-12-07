@@ -2,6 +2,41 @@ import random
 import os
 import sys
 import pygame
+def 哈莫雷特技能動畫(screen,cha,background,which):
+    global skilling
+    def 技能(a,b):
+        animation=pygame.image.load('./picture/%s/技能%s-%s.png'%(cha,a,b))
+        screen.blit(animation,(0,140))
+        pygame.display.update()  
+    global second;global cal
+    screen.blit(background, (0, 0))
+    hpbar(screen,cha)
+    skillboard(screen,cha)
+    if which==1:
+        for i in range(1,22):
+            print(second)
+            if 2+2*(i-1)>=second>=0+2*(i-1):
+                print('./picture/%s/技能%s-%s.png'%(cha,1,i))
+                技能(1,i)
+                break
+            if 2+2*20>=second>=0+2*20:
+                print('stop')
+                skilling=False
+                second=0
+               
+            
+def 點按():
+    pygame.mouse.set_system_cursor(pygame.SYSTEM_CURSOR_HAND)
+                                  #pygame.SYSTEM_CURSOR_ARROW
+def 確認(按鍵):
+    global press
+    if 按鍵[0]:
+            press=True
+    if 按鍵[0]==False and press==True:
+            press=False
+            return True
+    else:
+        return False
 def 血量動畫(a):
     global me
     global h1,h2,l1,l2,m1,m2,s1,s2,c1,c2,r1,r2
@@ -55,160 +90,201 @@ def hpbar(screen,cha):
         pygame.draw.rect(screen,ltorange, (120, 23, m*血量動畫(1)[0], 24))
         pygame.draw.rect(screen,orange, (120, 28, m*血量動畫(1)[0], 19))
         pygame.draw.rect(screen,brown, (120+m*血量動畫(1)[0], 23, m*(1-血量動畫(1)[0]), 25))
+def 選擇技能(screen,cha,background):
+    global press
+    global skilling
+    global second,cal
+    位置 = pygame.mouse.get_pos()
+    按鍵 = pygame.mouse.get_pressed()
+    if(355>=int(位置[0])>=180 and 675>=int(位置[1])>=585):
+        點按()
+        if 確認(按鍵):
+            print('1')
+            second=0
+            cal=1
+            skilling=True
+    elif(355+195>=int(位置[0])>=180+195 and 675>=int(位置[1])>=585):
+        點按()
+        if 確認(按鍵):
+            print('2')
+    elif(355+195*2>=int(位置[0])>=180+195*2 and 675>=int(位置[1])>=585):
+        點按()
+        if 確認(按鍵):
+            print('3')
+    elif(355+195*3>=int(位置[0])>=180+195*3 and 675>=int(位置[1])>=585):
+        點按()
+        if 確認(按鍵):
+            print('4')
+    else:
+        pygame.mouse.set_system_cursor(pygame.SYSTEM_CURSOR_ARROW)
+        press=False
+       
+def skillboard(screen,cha):
+    white = (255, 255, 255)
+    技能框=pygame.image.load('./picture/%s/技能.png'%(cha))
+    screen.blit(技能框,(0,0))
+    fontObj = pygame.font.Font('./picture/微軟正黑體.ttf', 16)
+    myfont = pygame.font.SysFont(None, 32)
+    for i in range(0,4):
+        text = fontObj.render('%s/%s'%(我方技能pp(1)[i],我方技能pp(2)[i]), True, white)
+        screen.blit(text, (295+i*195,622))
 
 def stand(background,screen,cha):
-    global second;global cal
+    global second;global cal;global skilling
     screen.blit(background, (0, 0))
     hpbar(screen,cha)
-    if me==1:
-        if 4>=second>0:
-                    animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
-                    screen.blit(animation,(50,120))
-                    pygame.display.update()  
-        elif second==0:
-                    animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
-                    screen.blit(animation,(50,120))
-                    pygame.display.update()  
-                    second=4
-                    cal=1
-        elif 8>=second>=5:
-                    animation=pygame.image.load('./picture/%s/%s站立2.png'%(cha,cha))
-                    screen.blit(animation,(50,120))
-                    pygame.display.update()  
-        elif 12>=second>=9:
-                    animation=pygame.image.load('./picture/%s/%s站立3.png'%(cha,cha))
-                    screen.blit(animation,(50,120))
-                    pygame.display.update()
-        elif 16>second>=13:
-                    animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
-                    screen.blit(animation,(50,120))
-                    pygame.display.update()
-        elif second==16:
-                    animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
-                    screen.blit(animation,(50,120))
-                    pygame.display.update()
-                    second=12
-                    cal=-1
-    elif me==2:
-        if 4>=second>=0:
-                    animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
-                    screen.blit(animation,(50-7,120))
-                    pygame.display.update()  
-        elif 8>=second>=5:
-                    animation=pygame.image.load('./picture/%s/%s站立2.png'%(cha,cha))
-                    screen.blit(animation,(50,120))
-                    pygame.display.update()  
-        elif 12>=second>=9:
-                    animation=pygame.image.load('./picture/%s/%s站立3.png'%(cha,cha))
-                    screen.blit(animation,(50,120))
-                    pygame.display.update()
-        elif 16>second>=13:
-                    animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
-                    screen.blit(animation,(50,120))
-                    pygame.display.update()
-        elif second==16:
-                    animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
-                    screen.blit(animation,(50,120))
-                    pygame.display.update()
-                    second=0
-    elif me==3:
-        if 3>=second>=0:
-                    animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
-                    screen.blit(animation,(50,220))
-                    pygame.display.update()  
-        elif 7>=second>=4:
-                    animation=pygame.image.load('./picture/%s/%s站立2.png'%(cha,cha))
-                    screen.blit(animation,(50,220))
-                    pygame.display.update()  
-        elif 11>=second>=8:
-                    animation=pygame.image.load('./picture/%s/%s站立3.png'%(cha,cha))
-                    screen.blit(animation,(50,220))
-                    pygame.display.update()
-        elif 15>=second>=12:
-                    animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
-                    screen.blit(animation,(50,220))
-                    pygame.display.update()
-        elif 19>=second>=16:
-                    animation=pygame.image.load('./picture/%s/%s站立5.png'%(cha,cha))
-                    screen.blit(animation,(50,220))
-                    pygame.display.update()
-        elif 23>=second>=17:
-                    animation=pygame.image.load('./picture/%s/%s站立6.png'%(cha,cha))
-                    screen.blit(animation,(50,220))
-                    pygame.display.update()
-        elif 27>=second>=24:
-                    animation=pygame.image.load('./picture/%s/%s站立7.png'%(cha,cha))
-                    screen.blit(animation,(50,220))
-                    pygame.display.update()
-        elif 31>second>=28:
-                    animation=pygame.image.load('./picture/%s/%s站立8.png'%(cha,cha))
-                    screen.blit(animation,(50,220))
-                    pygame.display.update()
-        elif second==31:
-                    animation=pygame.image.load('./picture/%s/%s站立8.png'%(cha,cha))
-                    screen.blit(animation,(50,220))
-                    pygame.display.update()
-                    second=0
-    elif me==4:
-        animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
-        screen.blit(animation,(170,220))
-        pygame.display.update()
-        second=0
-    elif me==5:
-        if 2>=second>=0:
-                    animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
-                    screen.blit(animation,(50,250))
-                    pygame.display.update()  
-        elif 4>=second>=3:
-                    animation=pygame.image.load('./picture/%s/%s站立2.png'%(cha,cha))
-                    screen.blit(animation,(50,250))
-                    pygame.display.update()  
-        elif 6>=second>=5:
-                    animation=pygame.image.load('./picture/%s/%s站立3.png'%(cha,cha))
-                    screen.blit(animation,(50,250))
-                    pygame.display.update()
-        elif 8>second>=7:
-                    animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
-                    screen.blit(animation,(50,250))
-                    pygame.display.update()
-        elif second==8:
-                    animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
-                    screen.blit(animation,(50,250))
-                    pygame.display.update()
-                    second=0
-    elif me==6:
-        if 4>=second>0:
-                    animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
-                    screen.blit(animation,(50,250))
-                    pygame.display.update()  
-        elif second==0:
-                    animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
-                    screen.blit(animation,(50,250))
-                    pygame.display.update()  
-                    second=4
-                    cal=1
-        elif 8>=second>=5:
-                    animation=pygame.image.load('./picture/%s/%s站立2.png'%(cha,cha))
-                    screen.blit(animation,(50,260))
-                    pygame.display.update()  
-        elif 12>=second>=9:
-                    animation=pygame.image.load('./picture/%s/%s站立3.png'%(cha,cha))
-                    screen.blit(animation,(50,270))
-                    pygame.display.update()
-        elif 16>=second>=13:
-                    animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
-                    screen.blit(animation,(50,260))
-                    pygame.display.update()
-        elif 20>second>=17:
-                    animation=pygame.image.load('./picture/%s/%s站立5.png'%(cha,cha))
-                    screen.blit(animation,(50,250))
-                    pygame.display.update()
-        elif second==20:
-                    animation=pygame.image.load('./picture/%s/%s站立5.png'%(cha,cha))
-                    screen.blit(animation,(50,250))
-                    pygame.display.update()
-                    second=16
-                    cal=-1
+    skillboard(screen,cha)
+    選擇技能(screen,cha,background)
+    if skilling==False:
+        if me==1:
+            if 4>=second>0:
+                        animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
+                        screen.blit(animation,(50,120))
+                        pygame.display.update()  
+            elif second==0:
+                        animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
+                        screen.blit(animation,(50,120))
+                        pygame.display.update()  
+                        second=4
+                        cal=1
+            elif 8>=second>=5:
+                        animation=pygame.image.load('./picture/%s/%s站立2.png'%(cha,cha))
+                        screen.blit(animation,(50,120))
+                        pygame.display.update()  
+            elif 12>=second>=9:
+                        animation=pygame.image.load('./picture/%s/%s站立3.png'%(cha,cha))
+                        screen.blit(animation,(50,120))
+                        pygame.display.update()
+            elif 16>second>=13:
+                        animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
+                        screen.blit(animation,(50,120))
+                        pygame.display.update()
+            elif second==16:
+                        animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
+                        screen.blit(animation,(50,120))
+                        pygame.display.update()
+                        second=12
+                        cal=-1
+        elif me==2:
+            if 4>=second>=0:
+                        animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
+                        screen.blit(animation,(50-7,120))
+                        pygame.display.update()  
+            elif 8>=second>=5:
+                        animation=pygame.image.load('./picture/%s/%s站立2.png'%(cha,cha))
+                        screen.blit(animation,(50,120))
+                        pygame.display.update()  
+            elif 12>=second>=9:
+                        animation=pygame.image.load('./picture/%s/%s站立3.png'%(cha,cha))
+                        screen.blit(animation,(50,120))
+                        pygame.display.update()
+            elif 16>second>=13:
+                        animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
+                        screen.blit(animation,(50,120))
+                        pygame.display.update()
+            elif second==16:
+                        animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
+                        screen.blit(animation,(50,120))
+                        pygame.display.update()
+                        second=0
+        elif me==3:
+            if 3>=second>=0:
+                        animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
+                        screen.blit(animation,(50,200))
+                        pygame.display.update()  
+            elif 7>=second>=4:
+                        animation=pygame.image.load('./picture/%s/%s站立2.png'%(cha,cha))
+                        screen.blit(animation,(50,200))
+                        pygame.display.update()  
+            elif 11>=second>=8:
+                        animation=pygame.image.load('./picture/%s/%s站立3.png'%(cha,cha))
+                        screen.blit(animation,(50,200))
+                        pygame.display.update()
+            elif 15>=second>=12:
+                        animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
+                        screen.blit(animation,(50,200))
+                        pygame.display.update()
+            elif 19>=second>=16:
+                        animation=pygame.image.load('./picture/%s/%s站立5.png'%(cha,cha))
+                        screen.blit(animation,(50,200))
+                        pygame.display.update()
+            elif 23>=second>=17:
+                        animation=pygame.image.load('./picture/%s/%s站立6.png'%(cha,cha))
+                        screen.blit(animation,(50,200))
+                        pygame.display.update()
+            elif 27>=second>=24:
+                        animation=pygame.image.load('./picture/%s/%s站立7.png'%(cha,cha))
+                        screen.blit(animation,(50,200))
+                        pygame.display.update()
+            elif 31>second>=28:
+                        animation=pygame.image.load('./picture/%s/%s站立8.png'%(cha,cha))
+                        screen.blit(animation,(50,200))
+                        pygame.display.update()
+            elif second==31:
+                        animation=pygame.image.load('./picture/%s/%s站立8.png'%(cha,cha))
+                        screen.blit(animation,(50,200))
+                        pygame.display.update()
+                        second=0
+        elif me==4:
+            animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
+            screen.blit(animation,(170,220))
+            pygame.display.update()
+            second=0
+        elif me==5:
+            if 2>=second>=0:
+                        animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
+                        screen.blit(animation,(50,250))
+                        pygame.display.update()  
+            elif 4>=second>=3:
+                        animation=pygame.image.load('./picture/%s/%s站立2.png'%(cha,cha))
+                        screen.blit(animation,(50,250))
+                        pygame.display.update()  
+            elif 6>=second>=5:
+                        animation=pygame.image.load('./picture/%s/%s站立3.png'%(cha,cha))
+                        screen.blit(animation,(50,250))
+                        pygame.display.update()
+            elif 8>second>=7:
+                        animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
+                        screen.blit(animation,(50,250))
+                        pygame.display.update()
+            elif second==8:
+                        animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
+                        screen.blit(animation,(50,250))
+                        pygame.display.update()
+                        second=0
+        elif me==6:
+            if 4>=second>0:
+                        animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
+                        screen.blit(animation,(50,200))
+                        pygame.display.update()  
+            elif second==0:
+                        animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
+                        screen.blit(animation,(50,200))
+                        pygame.display.update()  
+                        second=4
+                        cal=1
+            elif 8>=second>=5:
+                        animation=pygame.image.load('./picture/%s/%s站立2.png'%(cha,cha))
+                        screen.blit(animation,(50,210))
+                        pygame.display.update()  
+            elif 12>=second>=9:
+                        animation=pygame.image.load('./picture/%s/%s站立3.png'%(cha,cha))
+                        screen.blit(animation,(50,220))
+                        pygame.display.update()
+            elif 16>=second>=13:
+                        animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
+                        screen.blit(animation,(50,210))
+                        pygame.display.update()
+            elif 20>second>=17:
+                        animation=pygame.image.load('./picture/%s/%s站立5.png'%(cha,cha))
+                        screen.blit(animation,(50,200))
+                        pygame.display.update()
+            elif second==20:
+                        animation=pygame.image.load('./picture/%s/%s站立5.png'%(cha,cha))
+                        screen.blit(animation,(50,200))
+                        pygame.display.update()
+                        second=16
+                        cal=-1
 
 
                     
@@ -228,7 +304,7 @@ def main():
     running = True
     global second;second=0
     global cal;cal=1
-    global me;me=3
+    global me;me=1
 
 
     
@@ -238,7 +314,9 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-        if idle:
+        if skilling:
+            哈莫雷特技能動畫(screen,我方誰在場上(me),background,1)
+        elif idle:
             stand(background,screen,我方誰在場上(me))
 
 class switch(object):
@@ -791,6 +869,34 @@ def 技能威力(skill):
                     break            
             
             break
+def 我方技能pp(type):
+    global me
+    if type==1:
+        if me ==1: 
+            return 哈莫雷特pp
+        if me ==2: 
+            return 羅特利斯pp
+        if me ==3: 
+            return 魔焰猩猩pp
+        if me ==4:
+            return 薩帕克pp
+        if me ==5: 
+            return 卡利斯pp
+        if me ==6:
+            return 雷伊pp
+    elif type==2:
+        if me ==1: 
+            return 原哈莫雷特pp
+        if me ==2: 
+            return 原羅特利斯pp
+        if me ==3: 
+            return 原魔焰猩猩pp
+        if me ==4:
+            return 原薩帕克pp
+        if me ==5: 
+            return 原卡利斯pp
+        if me ==6:
+            return 原雷伊pp
 def 我方誰在場上(me):
     if me ==1: 
         return ha
@@ -2157,6 +2263,7 @@ def startgame():
     global hskill;global lskill;global mskill;global sskill;global cskill;global rskill
     global h1,h2,l1,l2,m1,m2,s1,s2,c1,c2,r1,r2
     global bossskill
+    global press;press=False;global skilling;skilling=False
     迴避=0;疲憊=0;睡眠=0;燒傷=0;寄生=0;聖光氣=0
     haphydef=1;hamagdef=1;caphydef=1;rephydef=1;remagdef=1
     die=False;dead=0
@@ -2172,7 +2279,7 @@ def startgame():
     h1=[1];l1=[1];m1=[1];s1=[1];c1=[1];r1=[1]
 
 
-    哈莫雷特=[50,302,225,202,215,0.5,2];原哈莫雷特=[402,302,225,202,215,0.5,2] 
+    哈莫雷特=[402,302,225,202,215,0.5,2];原哈莫雷特=[402,302,225,202,215,0.5,2] 
     羅特利斯=[342,236,191,234,197,1.5,0.75];原羅特利斯=[342,236,191,234,197,1.5,0.75]
     魔焰猩猩=[378,282,193,231,193,2,0.5];原魔焰猩猩=[378,282,193,231,193,2,0.5]
     薩帕克=[358,232,191,234,235,0.5,2];原薩帕克=[358,232,191,234,235,0.5,2]
