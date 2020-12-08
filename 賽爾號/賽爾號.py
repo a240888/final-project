@@ -14,12 +14,21 @@ def 哈莫雷特技能動畫(screen,cha,background,which):
     skillboard(screen,cha)
     if which==1:
         for i in range(1,22):
-            print(second)
             if 2+2*(i-1)>=second>=0+2*(i-1):
-                print('./picture/%s/技能%s-%s.png'%(cha,1,i))
-                技能(1,i)
+                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
+                技能(which,i)
                 break
             if 2+2*20>=second>=0+2*20:
+                print('stop')
+                skilling=False
+                second=0
+    elif which==4:
+        for i in range(1,58): 
+            if 2+2*(i-1)>=second>=0+2*(i-1):
+                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
+                技能(which,i)
+                break
+            if 2+2*56>=second>=0+2*56:
                 print('stop')
                 skilling=False
                 second=0
@@ -92,7 +101,7 @@ def hpbar(screen,cha):
         pygame.draw.rect(screen,brown, (120+m*血量動畫(1)[0], 23, m*(1-血量動畫(1)[0]), 25))
 def 選擇技能(screen,cha,background):
     global press
-    global skilling
+    global skilling,use
     global second,cal
     位置 = pygame.mouse.get_pos()
     按鍵 = pygame.mouse.get_pressed()
@@ -102,6 +111,7 @@ def 選擇技能(screen,cha,background):
             print('1')
             second=0
             cal=1
+            use=1
             skilling=True
     elif(355+195>=int(位置[0])>=180+195 and 675>=int(位置[1])>=585):
         點按()
@@ -115,6 +125,10 @@ def 選擇技能(screen,cha,background):
         點按()
         if 確認(按鍵):
             print('4')
+            second=0
+            cal=1
+            use=4
+            skilling=True
     else:
         pygame.mouse.set_system_cursor(pygame.SYSTEM_CURSOR_ARROW)
         press=False
@@ -305,7 +319,7 @@ def main():
     global second;second=0
     global cal;cal=1
     global me;me=1
-
+    global use
 
     
     while running:
@@ -315,7 +329,7 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
         if skilling:
-            哈莫雷特技能動畫(screen,我方誰在場上(me),background,1)
+            哈莫雷特技能動畫(screen,我方誰在場上(me),background,use)
         elif idle:
             stand(background,screen,我方誰在場上(me))
 
@@ -2264,6 +2278,7 @@ def startgame():
     global h1,h2,l1,l2,m1,m2,s1,s2,c1,c2,r1,r2
     global bossskill
     global press;press=False;global skilling;skilling=False
+    global use;use=0
     迴避=0;疲憊=0;睡眠=0;燒傷=0;寄生=0;聖光氣=0
     haphydef=1;hamagdef=1;caphydef=1;rephydef=1;remagdef=1
     die=False;dead=0
