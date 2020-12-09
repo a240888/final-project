@@ -4,9 +4,9 @@ import sys
 import pygame
 def 哈莫雷特技能動畫(screen,cha,background,which):
     global skilling
-    def 技能(a,b):
+    def 技能(a,b,x,y):
         animation=pygame.image.load('./picture/%s/技能%s-%s.png'%(cha,a,b))
-        screen.blit(animation,(0,140))
+        screen.blit(animation,(x,y))
         pygame.display.update()  
     global second;global cal
     screen.blit(background, (0, 0))
@@ -16,19 +16,39 @@ def 哈莫雷特技能動畫(screen,cha,background,which):
         for i in range(1,22):
             if 2+2*(i-1)>=second>=0+2*(i-1):
                 print('./picture/%s/技能%s-%s.png'%(cha,which,i))
-                技能(which,i)
+                技能(which,i,10,140)
                 break
-            if 2+2*20>=second>=0+2*20:
+            if 2+2*21>=second>=0+2*21:
+                print('stop')
+                skilling=False
+                second=0
+    elif which==2:
+        for i in range(1,23): 
+            if 2+2*(i-1)>=second>=0+2*(i-1):
+                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
+                技能(which,i,55,130)
+                break
+            if 2+2*22>=second>=0+2*22:
+                print('stop')
+                skilling=False
+                second=0
+    elif which==3:
+        for i in range(1,33): 
+            if 2+2*(i-1)>=second>=0+2*(i-1):
+                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
+                技能(which,i,55,120)
+                break
+            if 2+2*32>=second>=0+2*32:
                 print('stop')
                 skilling=False
                 second=0
     elif which==4:
-        for i in range(1,58): 
+        for i in range(1,59): 
             if 2+2*(i-1)>=second>=0+2*(i-1):
                 print('./picture/%s/技能%s-%s.png'%(cha,which,i))
-                技能(which,i)
+                技能(which,i,0,140)
                 break
-            if 2+2*56>=second>=0+2*56:
+            if 2+2*58>=second>=0+2*58:
                 print('stop')
                 skilling=False
                 second=0
@@ -46,6 +66,20 @@ def 確認(按鍵):
             return True
     else:
         return False
+def 技能動畫():
+    global me
+    if me==1:
+        return 哈莫雷特技能動畫
+    elif me==2:
+        return 羅特利斯技能動畫
+    elif me==3:
+        return 魔焰猩猩技能動畫
+    elif me==4:
+        return 薩帕克技能動畫
+    elif me==5:
+        return 卡利斯技能動畫
+    elif me==6:
+        return 雷伊技能動畫
 def 血量動畫(a):
     global me
     global h1,h2,l1,l2,m1,m2,s1,s2,c1,c2,r1,r2
@@ -117,10 +151,18 @@ def 選擇技能(screen,cha,background):
         點按()
         if 確認(按鍵):
             print('2')
+            second=0
+            cal=1
+            use=2
+            skilling=True
     elif(355+195*2>=int(位置[0])>=180+195*2 and 675>=int(位置[1])>=585):
         點按()
         if 確認(按鍵):
             print('3')
+            second=0
+            cal=1
+            use=3
+            skilling=True
     elif(355+195*3>=int(位置[0])>=180+195*3 and 675>=int(位置[1])>=585):
         點按()
         if 確認(按鍵):
@@ -329,7 +371,8 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
         if skilling:
-            哈莫雷特技能動畫(screen,我方誰在場上(me),background,use)
+            pygame.mouse.set_system_cursor(pygame.SYSTEM_CURSOR_ARROW)
+            技能動畫()(screen,我方誰在場上(me),background,use)
         elif idle:
             stand(background,screen,我方誰在場上(me))
 
