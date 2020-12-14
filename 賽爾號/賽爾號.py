@@ -51,8 +51,7 @@ def 哈莫雷特技能動畫(screen,cha,background,which):
             if 2+2*58>=second>=0+2*58:
                 print('stop')
                 skilling=False
-                second=0
-               
+                second=0              
 def 羅特利斯技能動畫(screen,cha,background,which):
     global skilling
     def 技能(a,b,x,y):
@@ -134,26 +133,175 @@ def 魔焰猩猩技能動畫(screen,cha,background,which):
                 skilling=False
                 second=0
     elif which==3:
+        for i in range(1,40): 
+            if 2+2*(i-1)>=second>=0+2*(i-1):
+                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
+                技能(which,i,10,100)
+                break
+            if 2+2*39>=second>=0+2*39:
+                print('stop')
+                skilling=False
+                second=0
+    elif which==4:
+        for i in range(1,27): 
+            if 2+2*(i-1)>=second>=0+2*(i-1):
+                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
+                技能(which,i,20,100)
+                break
+            if 2+2*26>=second>=0+2*26:
+                print('stop')
+                skilling=False
+                second=0
+def 薩帕克技能動畫(screen,cha,background,which):
+    global skilling
+    def 技能(a,b,x,y):
+        animation=pygame.image.load('./picture/%s/技能%s-%s.png'%(cha,a,b))
+        screen.blit(animation,(x,y))
+        pygame.display.update()  
+    global second;global cal
+    screen.blit(background, (0, 0))
+    hpbar(screen,cha)
+    skillboard(screen,cha)
+    if which==1:
+        for i in range(1,37):
+            if 2+2*(i-1)>=second>=0+2*(i-1):
+                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
+                技能(which,i,20,60)
+                break
+            if 2+2*36>=second>=0+2*36:
+                print('stop')
+                skilling=False
+                second=0
+    elif which==2:
+        for i in range(1,37): 
+            if 2+2*(i-1)>=second>=0+2*(i-1):
+                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
+                技能(which,i,20,60)
+                break
+            if 2+2*36>=second>=0+2*36:
+                print('stop')
+                skilling=False
+                second=0
+    elif which==3:
+        for i in range(1,27): 
+            if 2+2*(i-1)>=second>=0+2*(i-1):
+                print('./picture/%s/技能%s-%s.png'%(cha,4,i))
+                技能(4,i,20,60)
+                break
+            if 2+2*26>=second>=0+2*26:
+                print('stop')
+                skilling=False
+                second=0
+    elif which==4:
+        for i in range(1,27): 
+            if 2+2*(i-1)>=second>=0+2*(i-1):
+                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
+                技能(which,i,20,60)
+                break
+            if 2+2*26>=second>=0+2*26:
+                print('stop')
+                skilling=False
+                second=0
+def 卡利斯技能動畫(screen,cha,background,which):
+    global skilling
+    def 技能(a,b,x,y):
+        animation=pygame.image.load('./picture/%s/技能%s-%s.png'%(cha,a,b))
+        screen.blit(animation,(x,y))
+        pygame.display.update()  
+    global second;global cal
+    screen.blit(background, (0, 0))
+    hpbar(screen,cha)
+    skillboard(screen,cha)
+    if which==1:
+        for i in range(1,26):
+            if 2+2*(i-1)>=second>=0+2*(i-1):
+                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
+                技能(which,i,20,100)
+                break
+            if 2+2*25>=second>=0+2*25:
+                print('stop')
+                skilling=False
+                second=0
+    elif which==2:
         for i in range(1,19): 
             if 2+2*(i-1)>=second>=0+2*(i-1):
                 print('./picture/%s/技能%s-%s.png'%(cha,which,i))
-                技能(which,i,0,90)
+                技能(which,i,20,100)
                 break
             if 2+2*18>=second>=0+2*18:
                 print('stop')
                 skilling=False
                 second=0
-    elif which==4:
-        for i in range(1,25): 
+    elif which==3:
+        for i in range(1,40): 
             if 2+2*(i-1)>=second>=0+2*(i-1):
                 print('./picture/%s/技能%s-%s.png'%(cha,which,i))
-                技能(which,i,0,80)
+                技能(which,i,10,100)
                 break
-            if 2+2*24>=second>=0+2*24:
+            if 2+2*39>=second>=0+2*39:
                 print('stop')
                 skilling=False
                 second=0
-            
+    elif which==4:
+        for i in range(1,27): 
+            if 2+2*(i-1)>=second>=0+2*(i-1):
+                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
+                技能(which,i,20,100)
+                break
+            if 2+2*26>=second>=0+2*26:
+                print('stop')
+                skilling=False
+                second=0
+def 雷伊技能動畫(screen,cha,background,which):
+    global skilling
+    def 技能(a,b,x,y):
+        animation=pygame.image.load('./picture/%s/技能%s-%s.png'%(cha,a,b))
+        screen.blit(animation,(x,y))
+        pygame.display.update()  
+    global second;global cal
+    screen.blit(background, (0, 0))
+    hpbar(screen,cha)
+    skillboard(screen,cha)
+    if which==1:
+        for i in range(1,26):
+            if 2+2*(i-1)>=second>=0+2*(i-1):
+                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
+                技能(which,i,20,100)
+                break
+            if 2+2*25>=second>=0+2*25:
+                print('stop')
+                skilling=False
+                second=0
+    elif which==2:
+        for i in range(1,19): 
+            if 2+2*(i-1)>=second>=0+2*(i-1):
+                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
+                技能(which,i,20,100)
+                break
+            if 2+2*18>=second>=0+2*18:
+                print('stop')
+                skilling=False
+                second=0
+    elif which==3:
+        for i in range(1,40): 
+            if 2+2*(i-1)>=second>=0+2*(i-1):
+                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
+                技能(which,i,10,100)
+                break
+            if 2+2*39>=second>=0+2*39:
+                print('stop')
+                skilling=False
+                second=0
+    elif which==4:
+        for i in range(1,27): 
+            if 2+2*(i-1)>=second>=0+2*(i-1):
+                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
+                技能(which,i,20,100)
+                break
+            if 2+2*26>=second>=0+2*26:
+                print('stop')
+                skilling=False
+                second=0
 def 點按():
     pygame.mouse.set_system_cursor(pygame.SYSTEM_CURSOR_HAND)
                                   #pygame.SYSTEM_CURSOR_ARROW
@@ -382,10 +530,34 @@ def stand(background,screen,cha):
                         pygame.display.update()
                         second=0
         elif me==4:
-            animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
-            screen.blit(animation,(170,220))
-            pygame.display.update()
-            second=0
+            if 2>=second>0:
+                        animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
+                        screen.blit(animation,(20,50))
+                        pygame.display.update()  
+            elif second==0:
+                        animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
+                        screen.blit(animation,(20,50))
+                        pygame.display.update()  
+                        second=3
+                        cal=1
+            elif 4>=second>=3:
+                        animation=pygame.image.load('./picture/%s/%s站立2.png'%(cha,cha))
+                        screen.blit(animation,(20,50))
+                        pygame.display.update()  
+            elif 6>=second>=5:
+                        animation=pygame.image.load('./picture/%s/%s站立3.png'%(cha,cha))
+                        screen.blit(animation,(20,50))
+                        pygame.display.update()
+            elif 8>second>=7:
+                        animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
+                        screen.blit(animation,(20,50))
+                        pygame.display.update()
+            elif second==8:
+                        animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
+                        screen.blit(animation,(20,50))
+                        pygame.display.update()
+                        second=6
+                        cal=-1
         elif me==5:
             if 2>=second>=0:
                         animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
@@ -460,7 +632,7 @@ def main():
     running = True
     global second;second=0
     global cal;cal=1
-    global me;me=3
+    global me;me=4
     global use
 
     
