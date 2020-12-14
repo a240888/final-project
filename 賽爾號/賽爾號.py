@@ -103,6 +103,56 @@ def 羅特利斯技能動畫(screen,cha,background,which):
                 print('stop')
                 skilling=False
                 second=0
+def 魔焰猩猩技能動畫(screen,cha,background,which):
+    global skilling
+    def 技能(a,b,x,y):
+        animation=pygame.image.load('./picture/%s/技能%s-%s.png'%(cha,a,b))
+        screen.blit(animation,(x,y))
+        pygame.display.update()  
+    global second;global cal
+    screen.blit(background, (0, 0))
+    hpbar(screen,cha)
+    skillboard(screen,cha)
+    if which==1:
+        for i in range(1,26):
+            if 2+2*(i-1)>=second>=0+2*(i-1):
+                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
+                技能(which,i,20,100)
+                break
+            if 2+2*25>=second>=0+2*25:
+                print('stop')
+                skilling=False
+                second=0
+    elif which==2:
+        for i in range(1,19): 
+            if 2+2*(i-1)>=second>=0+2*(i-1):
+                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
+                技能(which,i,20,100)
+                break
+            if 2+2*18>=second>=0+2*18:
+                print('stop')
+                skilling=False
+                second=0
+    elif which==3:
+        for i in range(1,19): 
+            if 2+2*(i-1)>=second>=0+2*(i-1):
+                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
+                技能(which,i,0,90)
+                break
+            if 2+2*18>=second>=0+2*18:
+                print('stop')
+                skilling=False
+                second=0
+    elif which==4:
+        for i in range(1,25): 
+            if 2+2*(i-1)>=second>=0+2*(i-1):
+                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
+                技能(which,i,0,80)
+                break
+            if 2+2*24>=second>=0+2*24:
+                print('stop')
+                skilling=False
+                second=0
             
 def 點按():
     pygame.mouse.set_system_cursor(pygame.SYSTEM_CURSOR_HAND)
@@ -410,7 +460,7 @@ def main():
     running = True
     global second;second=0
     global cal;cal=1
-    global me;me=2
+    global me;me=3
     global use
 
     
