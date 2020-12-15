@@ -213,42 +213,42 @@ def 卡利斯技能動畫(screen,cha,background,which):
     hpbar(screen,cha)
     skillboard(screen,cha)
     if which==1:
-        for i in range(1,26):
+        for i in range(1,22):
             if 2+2*(i-1)>=second>=0+2*(i-1):
                 print('./picture/%s/技能%s-%s.png'%(cha,which,i))
-                技能(which,i,20,100)
+                技能(which,i,15,75)
                 break
-            if 2+2*25>=second>=0+2*25:
+            if 2+2*21>=second>=0+2*21:
                 print('stop')
                 skilling=False
                 second=0
     elif which==2:
-        for i in range(1,19): 
+        for i in range(1,15): 
             if 2+2*(i-1)>=second>=0+2*(i-1):
                 print('./picture/%s/技能%s-%s.png'%(cha,which,i))
-                技能(which,i,20,100)
+                技能(which,i,15,75)
                 break
-            if 2+2*18>=second>=0+2*18:
+            if 2+2*14>=second>=0+2*14:
                 print('stop')
                 skilling=False
                 second=0
     elif which==3:
-        for i in range(1,40): 
+        for i in range(1,21): 
             if 2+2*(i-1)>=second>=0+2*(i-1):
                 print('./picture/%s/技能%s-%s.png'%(cha,which,i))
-                技能(which,i,10,100)
+                技能(which,i,15,75)
                 break
-            if 2+2*39>=second>=0+2*39:
+            if 2+2*20>=second>=0+2*20:
                 print('stop')
                 skilling=False
                 second=0
     elif which==4:
-        for i in range(1,27): 
+        for i in range(1,22): 
             if 2+2*(i-1)>=second>=0+2*(i-1):
                 print('./picture/%s/技能%s-%s.png'%(cha,which,i))
-                技能(which,i,20,100)
+                技能(which,i,15,75)
                 break
-            if 2+2*26>=second>=0+2*26:
+            if 2+2*21>=second>=0+2*21:
                 print('stop')
                 skilling=False
                 second=0
@@ -263,12 +263,12 @@ def 雷伊技能動畫(screen,cha,background,which):
     hpbar(screen,cha)
     skillboard(screen,cha)
     if which==1:
-        for i in range(1,26):
+        for i in range(1,36):
             if 2+2*(i-1)>=second>=0+2*(i-1):
                 print('./picture/%s/技能%s-%s.png'%(cha,which,i))
                 技能(which,i,20,100)
                 break
-            if 2+2*25>=second>=0+2*25:
+            if 2+2*35>=second>=0+2*35:
                 print('stop')
                 skilling=False
                 second=0
@@ -632,7 +632,7 @@ def main():
     running = True
     global second;second=0
     global cal;cal=1
-    global me;me=4
+    global me;me=6
     global use
 
     
