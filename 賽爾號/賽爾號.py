@@ -15,41 +15,33 @@ def 哈莫雷特技能動畫(screen,cha,background,which):
     if which==1:
         for i in range(1,22):
             if 2+2*(i-1)>=second>=0+2*(i-1):
-                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
                 技能(which,i,10,140)
                 break
             if 2+2*21>=second>=0+2*21:
-                print('stop')
                 skilling=False
                 second=0
     elif which==2:
         for i in range(1,23): 
             if 2+2*(i-1)>=second>=0+2*(i-1):
-                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
                 技能(which,i,55,130)
                 break
             if 2+2*22>=second>=0+2*22:
-                print('stop')
                 skilling=False
                 second=0
     elif which==3:
         for i in range(1,33): 
             if 2+2*(i-1)>=second>=0+2*(i-1):
-                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
                 技能(which,i,55,120)
                 break
             if 2+2*32>=second>=0+2*32:
-                print('stop')
                 skilling=False
                 second=0
     elif which==4:
         for i in range(1,59): 
             if 2+2*(i-1)>=second>=0+2*(i-1):
-                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
                 技能(which,i,0,140)
                 break
             if 2+2*58>=second>=0+2*58:
-                print('stop')
                 skilling=False
                 second=0              
 def 羅特利斯技能動畫(screen,cha,background,which):
@@ -65,41 +57,33 @@ def 羅特利斯技能動畫(screen,cha,background,which):
     if which==1:
         for i in range(1,17):
             if 2+2*(i-1)>=second>=0+2*(i-1):
-                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
                 技能(which,i,10,90)
                 break
             if 2+2*16>=second>=0+2*16:
-                print('stop')
                 skilling=False
                 second=0
     elif which==2:
         for i in range(1,22): 
             if 2+2*(i-1)>=second>=0+2*(i-1):
-                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
                 技能(which,i,0,90)
                 break
             if 2+2*21>=second>=0+2*21:
-                print('stop')
                 skilling=False
                 second=0
     elif which==3:
         for i in range(1,19): 
             if 2+2*(i-1)>=second>=0+2*(i-1):
-                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
                 技能(which,i,0,90)
                 break
             if 2+2*18>=second>=0+2*18:
-                print('stop')
                 skilling=False
                 second=0
     elif which==4:
         for i in range(1,25): 
             if 2+2*(i-1)>=second>=0+2*(i-1):
-                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
                 技能(which,i,0,80)
                 break
             if 2+2*24>=second>=0+2*24:
-                print('stop')
                 skilling=False
                 second=0
 def 魔焰猩猩技能動畫(screen,cha,background,which):
@@ -115,41 +99,33 @@ def 魔焰猩猩技能動畫(screen,cha,background,which):
     if which==1:
         for i in range(1,26):
             if 2+2*(i-1)>=second>=0+2*(i-1):
-                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
                 技能(which,i,20,100)
                 break
             if 2+2*25>=second>=0+2*25:
-                print('stop')
                 skilling=False
                 second=0
     elif which==2:
         for i in range(1,19): 
             if 2+2*(i-1)>=second>=0+2*(i-1):
-                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
                 技能(which,i,20,100)
                 break
             if 2+2*18>=second>=0+2*18:
-                print('stop')
                 skilling=False
                 second=0
     elif which==3:
         for i in range(1,40): 
             if 2+2*(i-1)>=second>=0+2*(i-1):
-                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
                 技能(which,i,10,100)
                 break
             if 2+2*39>=second>=0+2*39:
-                print('stop')
                 skilling=False
                 second=0
     elif which==4:
         for i in range(1,27): 
             if 2+2*(i-1)>=second>=0+2*(i-1):
-                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
                 技能(which,i,20,100)
                 break
             if 2+2*26>=second>=0+2*26:
-                print('stop')
                 skilling=False
                 second=0
 def 薩帕克技能動畫(screen,cha,background,which):
@@ -165,41 +141,33 @@ def 薩帕克技能動畫(screen,cha,background,which):
     if which==1:
         for i in range(1,37):
             if 2+2*(i-1)>=second>=0+2*(i-1):
-                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
                 技能(which,i,20,60)
                 break
             if 2+2*36>=second>=0+2*36:
-                print('stop')
                 skilling=False
                 second=0
     elif which==2:
         for i in range(1,37): 
             if 2+2*(i-1)>=second>=0+2*(i-1):
-                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
                 技能(which,i,20,60)
                 break
             if 2+2*36>=second>=0+2*36:
-                print('stop')
                 skilling=False
                 second=0
     elif which==3:
         for i in range(1,27): 
             if 2+2*(i-1)>=second>=0+2*(i-1):
-                print('./picture/%s/技能%s-%s.png'%(cha,4,i))
                 技能(4,i,20,60)
                 break
             if 2+2*26>=second>=0+2*26:
-                print('stop')
                 skilling=False
                 second=0
     elif which==4:
         for i in range(1,27): 
             if 2+2*(i-1)>=second>=0+2*(i-1):
-                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
                 技能(which,i,20,60)
                 break
             if 2+2*26>=second>=0+2*26:
-                print('stop')
                 skilling=False
                 second=0
 def 卡利斯技能動畫(screen,cha,background,which):
@@ -215,41 +183,33 @@ def 卡利斯技能動畫(screen,cha,background,which):
     if which==1:
         for i in range(1,22):
             if 2+2*(i-1)>=second>=0+2*(i-1):
-                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
                 技能(which,i,15,75)
                 break
             if 2+2*21>=second>=0+2*21:
-                print('stop')
                 skilling=False
                 second=0
     elif which==2:
         for i in range(1,15): 
             if 2+2*(i-1)>=second>=0+2*(i-1):
-                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
                 技能(which,i,15,75)
                 break
             if 2+2*14>=second>=0+2*14:
-                print('stop')
                 skilling=False
                 second=0
     elif which==3:
         for i in range(1,21): 
             if 2+2*(i-1)>=second>=0+2*(i-1):
-                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
                 技能(which,i,15,75)
                 break
             if 2+2*20>=second>=0+2*20:
-                print('stop')
                 skilling=False
                 second=0
     elif which==4:
         for i in range(1,22): 
             if 2+2*(i-1)>=second>=0+2*(i-1):
-                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
                 技能(which,i,15,75)
                 break
             if 2+2*21>=second>=0+2*21:
-                print('stop')
                 skilling=False
                 second=0
 def 雷伊技能動畫(screen,cha,background,which):
@@ -265,41 +225,33 @@ def 雷伊技能動畫(screen,cha,background,which):
     if which==1:
         for i in range(1,36):
             if 2+2*(i-1)>=second>=0+2*(i-1):
-                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
-                技能(which,i,20,100)
+                技能(which,i,20,80)
                 break
             if 2+2*35>=second>=0+2*35:
-                print('stop')
                 skilling=False
                 second=0
     elif which==2:
-        for i in range(1,19): 
+        for i in range(1,11): 
             if 2+2*(i-1)>=second>=0+2*(i-1):
-                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
-                技能(which,i,20,100)
+                技能(which,i,20,80)
                 break
-            if 2+2*18>=second>=0+2*18:
-                print('stop')
+            if 2+2*10>=second>=0+2*10:
                 skilling=False
                 second=0
     elif which==3:
-        for i in range(1,40): 
+        for i in range(1,15): 
             if 2+2*(i-1)>=second>=0+2*(i-1):
-                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
-                技能(which,i,10,100)
+                技能(which,i,20,80)
                 break
-            if 2+2*39>=second>=0+2*39:
-                print('stop')
+            if 2+2*14>=second>=0+2*14:
                 skilling=False
                 second=0
     elif which==4:
-        for i in range(1,27): 
+        for i in range(1,15): 
             if 2+2*(i-1)>=second>=0+2*(i-1):
-                print('./picture/%s/技能%s-%s.png'%(cha,which,i))
-                技能(which,i,20,100)
+                技能(which,i,20,60)
                 break
-            if 2+2*26>=second>=0+2*26:
-                print('stop')
+            if 2+2*14>=second>=0+2*14:
                 skilling=False
                 second=0
 def 點按():
@@ -381,44 +333,102 @@ def hpbar(screen,cha):
         pygame.draw.rect(screen,ltorange, (120, 23, m*血量動畫(1)[0], 24))
         pygame.draw.rect(screen,orange, (120, 28, m*血量動畫(1)[0], 19))
         pygame.draw.rect(screen,brown, (120+m*血量動畫(1)[0], 23, m*(1-血量動畫(1)[0]), 25))
-def 選擇技能(screen,cha,background):
-    global press
-    global skilling,use
-    global second,cal
+def 要幹嘛():
+    global now
     位置 = pygame.mouse.get_pos()
     按鍵 = pygame.mouse.get_pressed()
-    if(355>=int(位置[0])>=180 and 675>=int(位置[1])>=585):
+    if((1185>=int(位置[0])>=1090 and 563>=int(位置[1])>=531)or(1185>=int(位置[0])>=1136 and 605>=int(位置[1])>=563)):
         點按()
         if 確認(按鍵):
+            now='1'
             print('1')
             second=0
             cal=1
             use=1
             skilling=True
-    elif(355+195>=int(位置[0])>=180+195 and 675>=int(位置[1])>=585):
+    elif((1016>=int(位置[0])>=975 and 650>=int(位置[1])>=613)or(1072>=int(位置[0])>=975 and 687>=int(位置[1])>=650)):
         點按()
         if 確認(按鍵):
+            now='2'
             print('2')
             second=0
             cal=1
             use=2
             skilling=True
-    elif(355+195*2>=int(位置[0])>=180+195*2 and 675>=int(位置[1])>=585):
+    elif(1110>=int(位置[0])>=1050 and 645>=int(位置[1])>=580):
         點按()
         if 確認(按鍵):
+            now='3'
             print('3')
             second=0
             cal=1
             use=3
             skilling=True
+    else:
+        pygame.mouse.set_system_cursor(pygame.SYSTEM_CURSOR_ARROW)
+        press=False
+    
+def 選擇技能(screen,cha,background):
+    global press
+    global skilling,use
+    global second,cal,me
+    global skill
+    位置 = pygame.mouse.get_pos()
+    按鍵 = pygame.mouse.get_pressed()
+    if(355>=int(位置[0])>=180 and 675>=int(位置[1])>=585):
+        skill='1'
+        if 判斷pp(me)==True:
+            點按()
+            if 確認(按鍵):
+                skill='1'
+                print('1')
+                second=0
+                cal=1
+                use=1
+                skilling=True
+                玩家攻擊()
+    elif(355+195>=int(位置[0])>=180+195 and 675>=int(位置[1])>=585):
+        skill='2'
+        if 判斷pp(me)==True:
+            點按()
+            if 確認(按鍵):
+                skill='2'
+                print('2')
+                second=0
+                cal=1
+                use=2
+                skilling=True
+                玩家攻擊()
+    elif(355+195*2>=int(位置[0])>=180+195*2 and 675>=int(位置[1])>=585):
+        skill='3'
+        if 判斷pp(me)==True:
+            點按()
+            if 確認(按鍵):
+                skill='3'
+                print('3')
+                second=0
+                cal=1
+                use=3
+                skilling=True
+                玩家攻擊()
     elif(355+195*3>=int(位置[0])>=180+195*3 and 675>=int(位置[1])>=585):
-        點按()
-        if 確認(按鍵):
-            print('4')
-            second=0
-            cal=1
-            use=4
-            skilling=True
+        skill='4'
+        if 判斷pp(me)==True:
+            點按()
+            if 確認(按鍵):
+                skill='4'
+                print('4')
+                second=0
+                cal=1
+                use=4
+                skilling=True
+                玩家攻擊()
+    elif((1185>=int(位置[0])>=1090 and 563>=int(位置[1])>=531)or(1185>=int(位置[0])>=1136 and 605>=int(位置[1])>=563)):
+        pass
+    elif((1016>=int(位置[0])>=975 and 650>=int(位置[1])>=613)or(1072>=int(位置[0])>=975 and 687>=int(位置[1])>=650)):
+        pass
+    elif(1110>=int(位置[0])>=1050 and 645>=int(位置[1])>=580):
+        pass
     else:
         pygame.mouse.set_system_cursor(pygame.SYSTEM_CURSOR_ARROW)
         press=False
@@ -438,7 +448,9 @@ def stand(background,screen,cha):
     screen.blit(background, (0, 0))
     hpbar(screen,cha)
     skillboard(screen,cha)
-    選擇技能(screen,cha,background)
+    要幹嘛()
+    if now=='3':
+        選擇技能(screen,cha,background)
     if skilling==False:
         if me==1:
             if 4>=second>0:
@@ -583,33 +595,33 @@ def stand(background,screen,cha):
         elif me==6:
             if 4>=second>0:
                         animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
-                        screen.blit(animation,(50,200))
+                        screen.blit(animation,(50,180))
                         pygame.display.update()  
             elif second==0:
                         animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
-                        screen.blit(animation,(50,200))
+                        screen.blit(animation,(50,180))
                         pygame.display.update()  
                         second=4
                         cal=1
             elif 8>=second>=5:
                         animation=pygame.image.load('./picture/%s/%s站立2.png'%(cha,cha))
-                        screen.blit(animation,(50,210))
+                        screen.blit(animation,(50,190))
                         pygame.display.update()  
             elif 12>=second>=9:
                         animation=pygame.image.load('./picture/%s/%s站立3.png'%(cha,cha))
-                        screen.blit(animation,(50,220))
+                        screen.blit(animation,(50,200))
                         pygame.display.update()
             elif 16>=second>=13:
                         animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
-                        screen.blit(animation,(50,210))
+                        screen.blit(animation,(50,190))
                         pygame.display.update()
             elif 20>second>=17:
                         animation=pygame.image.load('./picture/%s/%s站立5.png'%(cha,cha))
-                        screen.blit(animation,(50,200))
+                        screen.blit(animation,(50,180))
                         pygame.display.update()
             elif second==20:
                         animation=pygame.image.load('./picture/%s/%s站立5.png'%(cha,cha))
-                        screen.blit(animation,(50,200))
+                        screen.blit(animation,(50,180))
                         pygame.display.update()
                         second=16
                         cal=-1
@@ -632,7 +644,7 @@ def main():
     running = True
     global second;second=0
     global cal;cal=1
-    global me;me=6
+    global me;me=1
     global use
 
     
@@ -2111,7 +2123,6 @@ def 玩家攻擊():
     if die==False:
         print('輪到你進攻了')
         print('1:替換 2:攻擊 3:顯示狀態 4:技能說明 5:使用道具')
-        now=str(input())
         if now=='1':
             name=input('要換誰上場?(1:哈莫雷特 2:羅特利斯 3:魔焰猩猩 4:薩帕克 5:卡利斯 6:雷伊 7:返回\n')
             for case in switch(name):
@@ -2167,15 +2178,15 @@ def 玩家攻擊():
                     玩家攻擊()
                     break
 
-        elif now=='2':
+        elif now=='3':
             print('請選擇技能')
             技能()
-            skill=str(input())
+            #skill=str(input())
             if 判斷pp(me)==True:
-              os.system('cls')
+              #os.system('cls')
               技能威力(skill)
               判斷效果(you)
-              譜尼攻擊()
+              #譜尼攻擊()
             elif skill=='5':
                 os.system('cls')
                 玩家攻擊()
@@ -2188,10 +2199,10 @@ def 玩家攻擊():
                 pp不足=True
                 玩家攻擊()
 
-        elif now=='3':
-            os.system('cls')
-            顯示狀態(me)
-            玩家攻擊()
+        #elif now=='3':
+            #os.system('cls')
+            #顯示狀態(me)
+            #玩家攻擊()
         elif now=='4':
             os.system('cls')
             技能說明()
@@ -2594,10 +2605,12 @@ def startgame():
     global bossskill
     global press;press=False;global skilling;skilling=False
     global use;use=0
+    global now
     迴避=0;疲憊=0;睡眠=0;燒傷=0;寄生=0;聖光氣=0
     haphydef=1;hamagdef=1;caphydef=1;rephydef=1;remagdef=1
     die=False;dead=0
     noskill=False
+    now='3'
     me=1
     you=1
     haskilllv=loskilllv=moskilllv=saskilllv=caskilllv=reskilllv=1
@@ -2669,9 +2682,11 @@ def startgame():
         print('進入戰鬥......')
         time.sleep(1)
         os.system('cls')
+        '''
     start=True
-    玩家攻擊()
-    '''
+   
+    #玩家攻擊()
+    
 
     
 #os.system('bgm.mp3')
