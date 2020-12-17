@@ -266,6 +266,52 @@ def 確認(按鍵):
             return True
     else:
         return False
+def hpitem(screen):
+    dark=(0,0,0)
+    choose=pygame.image.load('./picture/回血.png')
+    screen.blit(choose,(0,0))
+    fontObj = pygame.font.Font('./picture/微軟正黑體.ttf', 18)
+    myfont = pygame.font.SysFont(None, 32)
+    for i in range(0,2):
+        text = fontObj.render('%s'%(道具數量[i]), True, dark)
+        screen.blit(text, (270+i*93,645))
+
+def ppitem(screen):
+    dark=(0,0,0)
+    choose=pygame.image.load('./picture/回pp.png')
+    screen.blit(choose,(0,0))
+    fontObj = pygame.font.Font('./picture/微軟正黑體.ttf', 18)
+    myfont = pygame.font.SysFont(None, 32)
+    for i in range(2,5):
+        text = fontObj.render('%s'%(道具數量[i]), True, dark)
+        screen.blit(text, (265+(i-2)*93,645))
+def chooseitem():
+    global itempage
+    位置 = pygame.mouse.get_pos()
+    按鍵 = pygame.mouse.get_pressed()
+    if itempage==1:  
+        if((280>=int(位置[0])>=205 and 675>=int(位置[1])>=595)):
+            點按()
+            if 確認(按鍵):
+                print('1')
+        elif((385>=int(位置[0])>=295 and 675>=int(位置[1])>=595)):
+            點按()
+            if 確認(按鍵):
+                print('2')
+        elif(210>=int(位置[0])>=140 and 570>=int(位置[1])>=540):
+            pass
+        elif(285>=int(位置[0])>=215 and 570>=int(位置[1])>=540):
+            pass
+        elif((1185>=int(位置[0])>=1090 and 563>=int(位置[1])>=531)or(1185>=int(位置[0])>=1136 and 605>=int(位置[1])>=563)):
+            pass
+        elif((1016>=int(位置[0])>=975 and 650>=int(位置[1])>=613)or(1072>=int(位置[0])>=975 and 687>=int(位置[1])>=650)):
+            pass
+        elif(1110>=int(位置[0])>=1050 and 645>=int(位置[1])>=580):
+            pass
+        else:
+            pygame.mouse.set_system_cursor(pygame.SYSTEM_CURSOR_ARROW)
+            press=False
+ 
 def 技能動畫():
     global me
     if me==1:
@@ -321,19 +367,27 @@ def hpbar(screen,cha):
     screen.blit(血條,(0,0))
     我方血量比例(me)
     m=295
-    if(血量動畫(1)[0]>血量動畫(2)[0]):
+    if(format(血量動畫(1)[0], '.2f')>format(血量動畫(2)[0], '.2f')):
         if (我方血量(me)>0):
             pygame.draw.rect(screen,ltorange, (120, 23, m*血量動畫(1)[0], 24))
             pygame.draw.rect(screen,orange, (120, 28, m*血量動畫(1)[0], 19))
             pygame.draw.rect(screen,brown, (120+m*血量動畫(1)[0], 23, m*(1-血量動畫(1)[0]), 25))
-            血量動畫(1)[0]-=0.02
+            血量動畫(1)[0]-=0.01
+        else:
+            pygame.draw.rect(screen,brown, (120, 23, m, 25))
+    elif(format(血量動畫(1)[0], '.2f')<format(血量動畫(2)[0], '.2f')):
+        if (我方血量(me)>0):
+            pygame.draw.rect(screen,ltorange, (120, 23, m*血量動畫(1)[0], 24))
+            pygame.draw.rect(screen,orange, (120, 28, m*血量動畫(1)[0], 19))
+            pygame.draw.rect(screen,brown, (120+m*血量動畫(1)[0], 23, m*(1-血量動畫(1)[0]), 25))
+            血量動畫(1)[0]+=0.01
         else:
             pygame.draw.rect(screen,brown, (120, 23, m, 25))
     else:
         pygame.draw.rect(screen,ltorange, (120, 23, m*血量動畫(1)[0], 24))
         pygame.draw.rect(screen,orange, (120, 28, m*血量動畫(1)[0], 19))
         pygame.draw.rect(screen,brown, (120+m*血量動畫(1)[0], 23, m*(1-血量動畫(1)[0]), 25))
-def 要幹嘛():
+def 要幹嘛(screen):
     global now
     位置 = pygame.mouse.get_pos()
     按鍵 = pygame.mouse.get_pressed()
@@ -342,19 +396,12 @@ def 要幹嘛():
         if 確認(按鍵):
             now='1'
             print('1')
-            second=0
-            cal=1
-            use=1
-            skilling=True
+            hpitem(screen)
     elif((1016>=int(位置[0])>=975 and 650>=int(位置[1])>=613)or(1072>=int(位置[0])>=975 and 687>=int(位置[1])>=650)):
         點按()
         if 確認(按鍵):
             now='2'
-            print('2')
-            second=0
-            cal=1
-            use=2
-            skilling=True
+            print('2')     
     elif(1110>=int(位置[0])>=1050 and 645>=int(位置[1])>=580):
         點按()
         if 確認(按鍵):
@@ -364,15 +411,55 @@ def 要幹嘛():
             cal=1
             use=3
             skilling=True
+    elif((280>=int(位置[0])>=205 and 675>=int(位置[1])>=595)):
+        pass
+    elif((385>=int(位置[0])>=295 and 675>=int(位置[1])>=595)):
+        pass
+    elif(355>=int(位置[0])>=180 and 675>=int(位置[1])>=585):
+        pass
+    elif(355+195>=int(位置[0])>=180+195 and 675>=int(位置[1])>=585):
+        pass
+    elif(355+195*2>=int(位置[0])>=180+195*2 and 675>=int(位置[1])>=585):
+        pass
+    elif(355+195*3>=int(位置[0])>=180+195*3 and 675>=int(位置[1])>=585):
+        pass
     else:
         pygame.mouse.set_system_cursor(pygame.SYSTEM_CURSOR_ARROW)
         press=False
-    
+def 選擇道具欄(screen):
+    global press;global itempage
+    位置 = pygame.mouse.get_pos()
+    按鍵 = pygame.mouse.get_pressed()
+    if(210>=int(位置[0])>=140 and 570>=int(位置[1])>=540):
+        點按()
+        if 確認(按鍵):
+            itempage=1
+    elif(285>=int(位置[0])>=215 and 570>=int(位置[1])>=540):
+        點按()
+        if 確認(按鍵):
+            itempage=2
+    elif((1185>=int(位置[0])>=1090 and 563>=int(位置[1])>=531)or(1185>=int(位置[0])>=1136 and 605>=int(位置[1])>=563)):
+       pass
+    elif((1016>=int(位置[0])>=975 and 650>=int(位置[1])>=613)or(1072>=int(位置[0])>=975 and 687>=int(位置[1])>=650)):
+        pass
+    elif(1110>=int(位置[0])>=1050 and 645>=int(位置[1])>=580):
+        pass
+    elif((280>=int(位置[0])>=205 and 675>=int(位置[1])>=595)):
+        pass
+    elif((385>=int(位置[0])>=295 and 675>=int(位置[1])>=595)):
+        pass
+    else:
+        pygame.mouse.set_system_cursor(pygame.SYSTEM_CURSOR_ARROW)
+        press=False
+
+            
+
+
 def 選擇技能(screen,cha,background):
     global press
     global skilling,use
     global second,cal,me
-    global skill
+    global skill,bossatk
     位置 = pygame.mouse.get_pos()
     按鍵 = pygame.mouse.get_pressed()
     if(355>=int(位置[0])>=180 and 675>=int(位置[1])>=585):
@@ -387,6 +474,7 @@ def 選擇技能(screen,cha,background):
                 use=1
                 skilling=True
                 玩家攻擊()
+                bossatk=True
     elif(355+195>=int(位置[0])>=180+195 and 675>=int(位置[1])>=585):
         skill='2'
         if 判斷pp(me)==True:
@@ -399,6 +487,7 @@ def 選擇技能(screen,cha,background):
                 use=2
                 skilling=True
                 玩家攻擊()
+                bossatk=True
     elif(355+195*2>=int(位置[0])>=180+195*2 and 675>=int(位置[1])>=585):
         skill='3'
         if 判斷pp(me)==True:
@@ -411,6 +500,7 @@ def 選擇技能(screen,cha,background):
                 use=3
                 skilling=True
                 玩家攻擊()
+                bossatk=True
     elif(355+195*3>=int(位置[0])>=180+195*3 and 675>=int(位置[1])>=585):
         skill='4'
         if 判斷pp(me)==True:
@@ -423,6 +513,7 @@ def 選擇技能(screen,cha,background):
                 use=4
                 skilling=True
                 玩家攻擊()
+                bossatk=True
     elif((1185>=int(位置[0])>=1090 and 563>=int(位置[1])>=531)or(1185>=int(位置[0])>=1136 and 605>=int(位置[1])>=563)):
         pass
     elif((1016>=int(位置[0])>=975 and 650>=int(位置[1])>=613)or(1072>=int(位置[0])>=975 and 687>=int(位置[1])>=650)):
@@ -445,10 +536,22 @@ def skillboard(screen,cha):
 
 def stand(background,screen,cha):
     global second;global cal;global skilling
+    global bossatk;global item;global itempage
     screen.blit(background, (0, 0))
     hpbar(screen,cha)
-    skillboard(screen,cha)
-    要幹嘛()
+    要幹嘛(screen)
+    if now=='3':
+        skillboard(screen,cha)
+    位置 = pygame.mouse.get_pos()
+    #print(位置)
+    if now=='1':
+        選擇道具欄(screen)
+        if itempage==1:
+            hpitem(screen)
+            chooseitem()
+        elif itempage==2:
+            ppitem(screen)
+            chooseitem()
     if now=='3':
         選擇技能(screen,cha,background)
     if skilling==False:
@@ -644,8 +747,8 @@ def main():
     running = True
     global second;second=0
     global cal;cal=1
-    global me;me=1
-    global use
+    global me;me=6
+    global use,bossatk
 
     
     while running:
@@ -657,6 +760,10 @@ def main():
         if skilling:
             pygame.mouse.set_system_cursor(pygame.SYSTEM_CURSOR_ARROW)
             技能動畫()(screen,我方誰在場上(me),background,use)
+        elif bossatk:
+            print(bossatk)
+            譜尼攻擊()
+            bossatk=False
         elif idle:
             stand(background,screen,我方誰在場上(me))
 
@@ -912,13 +1019,13 @@ def 道具(which):
     global 道具數量;global namepp;global increase
     if which=='1' and 道具數量[0]>0:
         if namepp==True:
-            print('使用了高級體力藥劑,回復150生命')
+            print('使用了超級體力藥劑,回復150生命')
             道具數量[0]-=1
         namepp=False
         increase=150
     elif which=='2' and 道具數量[1]>0:
         if namepp==True:
-            print('使用了究集體力藥劑,回復200生命')
+            print('使用了上等體力藥劑,回復200生命')
             道具數量[1]-=1
         namepp=False
         increase=200
@@ -936,10 +1043,10 @@ def 道具(which):
         increase=10
     elif which=='5' and 道具數量[4]>0:
         if namepp==True:
-            print('使用了高級活力藥劑,PP增加了15')
+            print('使用了高級活力藥劑,PP增加了20')
             道具數量[4]-=1
         namepp=False
-        increase=15
+        increase=20
     elif which=='6':
          os.system('cls')
          玩家攻擊()
@@ -2352,7 +2459,6 @@ def 譜尼技能1():
 def 譜尼攻擊():
     global you;global bosstype;global noskill;global 迴避;global 疲憊;global 睡眠;global 燒傷;global 寄生
     global 聖光氣
-    time.sleep(0.25)
     if 燒傷>0:
         敵方扣血(you)[0]-=原敵方血量(you)/8
         print('燒傷對譜尼造成了',int(原敵方血量(you)/8),'傷害')
@@ -2567,8 +2673,7 @@ def 譜尼攻擊():
     我方扣血(me)[0]+=50
     if 我方血量(me)>原我方血量(me):
         我方扣血(me)[0]=原我方血量(me)
-    time.sleep(0.5)
-    玩家攻擊()
+    #玩家攻擊()
     
 import time
    
@@ -2605,9 +2710,11 @@ def startgame():
     global bossskill
     global press;press=False;global skilling;skilling=False
     global use;use=0
-    global now
+    global now,bossatk,itempage
     迴避=0;疲憊=0;睡眠=0;燒傷=0;寄生=0;聖光氣=0
     haphydef=1;hamagdef=1;caphydef=1;rephydef=1;remagdef=1
+    itempage=1
+    bossatk=False
     die=False;dead=0
     noskill=False
     now='3'
