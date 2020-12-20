@@ -262,10 +262,219 @@ def 確認(按鍵):
     if 按鍵[0]:
             press=True
     if 按鍵[0]==False and press==True:
-            press=False
-            return True
+        press=False
+        return True
     else:
         return False
+def sure(按鍵):
+    global pre
+    if 按鍵[0]:
+        pre=True
+    if 按鍵[0]==False and pre==True:
+        pre=False
+        return True
+    else:
+        return False
+def makesure(screen,i):
+    global name,bossatk,took
+    global pre
+    global now
+    位置 = pygame.mouse.get_pos()
+    按鍵 = pygame.mouse.get_pressed()
+    d=128
+    if((285+d*i>=int(位置[0])>=210+d*i and 690>=int(位置[1])>=675)):
+        點按()
+        if sure(按鍵):
+            name=i+1
+            print(name)
+            玩家攻擊()
+            now='3'
+            took=False
+    elif((290>=int(位置[0])>=200 and 675>=int(位置[1])>=570)):
+        pass
+    elif((290+d*1>=int(位置[0])>=200+d*1 and 675>=int(位置[1])>=570)):
+        pass
+    elif((290+d*2>=int(位置[0])>=200+d*2 and 675>=int(位置[1])>=570)):
+        pass
+    elif((290+d*3>=int(位置[0])>=200+d*3 and 675>=int(位置[1])>=570)):
+        pass
+    elif((290+d*4>=int(位置[0])>=200+d*4 and 675>=int(位置[1])>=570)):
+        pass
+    elif((290+d*5>=int(位置[0])>=200+d*5 and 675>=int(位置[1])>=570)):
+        pass
+    elif((1185>=int(位置[0])>=1090 and 563>=int(位置[1])>=531)or(1185>=int(位置[0])>=1136 and 605>=int(位置[1])>=563)):
+        pass
+    elif((1016>=int(位置[0])>=975 and 650>=int(位置[1])>=613)or(1072>=int(位置[0])>=975 and 687>=int(位置[1])>=650)):
+        pass
+    elif(1110>=int(位置[0])>=1050 and 645>=int(位置[1])>=580):
+        pass
+    else:
+        pygame.mouse.set_system_cursor(pygame.SYSTEM_CURSOR_ARROW)
+        press=False
+
+    
+def choosecha(screen):
+    global nowcha,took
+    位置 = pygame.mouse.get_pos()
+    按鍵 = pygame.mouse.get_pressed()
+    d=128
+    if((290>=int(位置[0])>=200 and 675>=int(位置[1])>=570)):
+        點按()
+        if 確認(按鍵):
+            nowcha=1
+            choosed(screen)
+            took=True
+    elif((290+d*1>=int(位置[0])>=200+d*1 and 675>=int(位置[1])>=570)):
+        點按()
+        if 確認(按鍵):
+            nowcha=2
+            choosed(screen)
+            took=True
+    elif((290+d*2>=int(位置[0])>=200+d*2 and 675>=int(位置[1])>=570)):
+        點按()
+        if 確認(按鍵):
+            nowcha=3
+            choosed(screen)
+            took=True
+    elif((290+d*3>=int(位置[0])>=200+d*3 and 675>=int(位置[1])>=570)):
+        點按()
+        if 確認(按鍵):
+            nowcha=4
+            choosed(screen)
+            took=True
+    elif((290+d*4>=int(位置[0])>=200+d*4 and 675>=int(位置[1])>=570)):
+        點按()
+        if 確認(按鍵):
+            nowcha=5
+            choosed(screen)
+            took=True
+    elif((290+d*5>=int(位置[0])>=200+d*5 and 675>=int(位置[1])>=570)):
+        點按()
+        if 確認(按鍵):
+            nowcha=6
+            choosed(screen)
+            took=True
+    elif((285>=int(位置[0])>=210 and 690>=int(位置[1])>=675)):
+        pass
+    elif((285+d*1>=int(位置[0])>=210+d*1 and 690>=int(位置[1])>=675)):
+        pass
+    elif((285+d*2>=int(位置[0])>=210+d*2 and 690>=int(位置[1])>=675)):
+        pass
+    elif((285+d*3>=int(位置[0])>=210+d*3 and 690>=int(位置[1])>=675)):
+        pass
+    elif((285+d*4>=int(位置[0])>=210+d*4 and 690>=int(位置[1])>=675)):
+        pass
+    elif((285+d*5>=int(位置[0])>=210+d*5 and 690>=int(位置[1])>=675)):
+        pass
+    elif((1185>=int(位置[0])>=1090 and 563>=int(位置[1])>=531)or(1185>=int(位置[0])>=1136 and 605>=int(位置[1])>=563)):
+        pass
+    elif((1016>=int(位置[0])>=975 and 650>=int(位置[1])>=613)or(1072>=int(位置[0])>=975 and 687>=int(位置[1])>=650)):
+        pass
+    elif(1110>=int(位置[0])>=1050 and 645>=int(位置[1])>=580):
+        pass
+    else:
+        pygame.mouse.set_system_cursor(pygame.SYSTEM_CURSOR_ARROW)
+    if took:
+        choosed(screen)
+def choosed(screen):
+    global nowcha
+    if nowcha==1:
+        change=pygame.image.load('./picture/精靈1.png')
+        screen.blit(change,(0,0))
+        for i in range(1,7):
+            if i!=1:
+                changehp(screen,i,655)
+        changehp(screen,1,630)
+        if 我方血量(1)>0:
+            makesure(screen,0)
+    elif nowcha==2:
+        change=pygame.image.load('./picture/精靈2.png')
+        screen.blit(change,(0,0))
+        for i in range(1,7):
+            if i!=2:
+                changehp(screen,i,655)
+        changehp(screen,2,630)
+        if 我方血量(2)>0:
+            makesure(screen,1)
+    elif nowcha==3:
+        change=pygame.image.load('./picture/精靈3.png')
+        screen.blit(change,(0,0))
+        for i in range(1,7):
+            if i!=3:
+                changehp(screen,i,655)
+        changehp(screen,3,630)
+        if 我方血量(3)>0:
+            makesure(screen,2)
+    elif nowcha==4:
+        change=pygame.image.load('./picture/精靈4.png')
+        screen.blit(change,(0,0))
+        for i in range(1,7):
+            if i!=4:
+                changehp(screen,i,655)
+        changehp(screen,4,630)
+        if 我方血量(4)>0:
+            makesure(screen,3)
+    elif nowcha==5:
+        change=pygame.image.load('./picture/精靈5.png')
+        screen.blit(change,(0,0))
+        for i in range(1,7):
+            if i!=5:
+                changehp(screen,i,655)
+        changehp(screen,5,625)
+        if 我方血量(5)>0:
+            makesure(screen,4)
+    elif nowcha==6:
+        change=pygame.image.load('./picture/精靈6.png')
+        screen.blit(change,(0,0))
+        for i in range(1,7):
+            if i!=6:
+                changehp(screen,i,655)
+        changehp(screen,6,625)
+        if 我方血量(6)>0:
+            makesure(screen,5)
+def changehp(screen,me,h):
+    brown = (  80,   42,   34)
+    white = (255, 255, 255)
+    orange   = (255,   77,   0)
+    ltorange = (255, 176,   0)
+    blue  = (  0,   0, 255)
+    我方血量比例(me)
+    m=85
+    d=128
+    x=me-1
+    if(format(血量動畫(1,me)[0], '.2f')>format(血量動畫(2,me)[0], '.2f')):
+        if (我方血量(me)>0):
+            pygame.draw.rect(screen,ltorange, (210+d*x, h, m*血量動畫(1,me)[0], 10))
+            pygame.draw.rect(screen,orange, (210+d*x, h+5, m*血量動畫(1,me)[0], 5))
+            pygame.draw.rect(screen,brown, (210+m*血量動畫(1,me)[0]+d*x, h, m*(1-血量動畫(1,me)[0]), 11))
+            血量動畫(1,me)[0]-=0.01
+        else:
+            pygame.draw.rect(screen,brown, (210+d*x, h, m, 11))
+    elif(format(血量動畫(1,me)[0], '.2f')<format(血量動畫(2,me)[0], '.2f')):
+        if (我方血量(me)>0):
+            pygame.draw.rect(screen,ltorange, (210+d*x, h, m*血量動畫(1,me)[0], 10))
+            pygame.draw.rect(screen,orange, (210+d*x, h+5, m*血量動畫(1,me)[0], 5))
+            pygame.draw.rect(screen,brown, (210+m*血量動畫(1,me)[0]+d*x, h, m*(1-血量動畫(1,me)[0]), 11))
+            血量動畫(1,me)[0]+=0.01
+        else:
+            pygame.draw.rect(screen,brown, (210+d*x, h, m, 11))
+    else:
+        pygame.draw.rect(screen,ltorange, (210+d*x, h, m*血量動畫(1,me)[0], 10))
+        pygame.draw.rect(screen,orange, (210+d*x, h+5, m*血量動畫(1,me)[0], 5))
+        pygame.draw.rect(screen,brown, (210+m*血量動畫(1,me)[0]+d*x, h, m*(1-血量動畫(1,me)[0]), 11))
+    fontObj = pygame.font.Font('./picture/微軟正黑體.ttf', 10)
+    myfont = pygame.font.SysFont(None, 32)
+    text = fontObj.render('%s/%s'%(我方血量(me),原我方血量(me)), True, (0,0,0))
+    screen.blit(text, (230+d*x,h-2))
+def change(screen):
+    global took
+    if took==False:
+        change=pygame.image.load('./picture/精靈0.png')
+        screen.blit(change,(0,0))
+        for i in range(1,7):
+            changehp(screen,i,655)
+    choosecha(screen)
+
 def hpitem(screen):
     dark=(0,0,0)
     choose=pygame.image.load('./picture/回血.png')
@@ -286,18 +495,65 @@ def ppitem(screen):
         text = fontObj.render('%s'%(道具數量[i]), True, dark)
         screen.blit(text, (265+(i-2)*93,645))
 def chooseitem():
-    global itempage
+    global itempage,which,bossatk,press
+    global 道具數量
     位置 = pygame.mouse.get_pos()
     按鍵 = pygame.mouse.get_pressed()
     if itempage==1:  
         if((280>=int(位置[0])>=205 and 675>=int(位置[1])>=595)):
             點按()
             if 確認(按鍵):
-                print('1')
+                if 道具數量[0]>0:
+                    print('1')
+                    which='1'
+                    玩家攻擊()
+                    bossatk=True
         elif((385>=int(位置[0])>=295 and 675>=int(位置[1])>=595)):
             點按()
             if 確認(按鍵):
-                print('2')
+                if 道具數量[1]>0:
+                    print('2')
+                    which='2'
+                    玩家攻擊()
+                    bossatk=True
+        elif(210>=int(位置[0])>=140 and 570>=int(位置[1])>=540):
+            pass
+        elif(285>=int(位置[0])>=215 and 570>=int(位置[1])>=540):
+            pass
+        elif((1185>=int(位置[0])>=1090 and 563>=int(位置[1])>=531)or(1185>=int(位置[0])>=1136 and 605>=int(位置[1])>=563)):
+            pass
+        elif((1016>=int(位置[0])>=975 and 650>=int(位置[1])>=613)or(1072>=int(位置[0])>=975 and 687>=int(位置[1])>=650)):
+            pass
+        elif(1110>=int(位置[0])>=1050 and 645>=int(位置[1])>=580):
+            pass
+        else:
+            pygame.mouse.set_system_cursor(pygame.SYSTEM_CURSOR_ARROW)
+            press=False
+    elif itempage==2:
+        if((280>=int(位置[0])>=205 and 675>=int(位置[1])>=595)):
+            點按()
+            if 確認(按鍵):
+                if 道具數量[2]>0:
+                    print('3')
+                    which='3'
+                    玩家攻擊()
+                    bossatk=True
+        elif((375>=int(位置[0])>=295 and 675>=int(位置[1])>=595)):
+            點按()
+            if 確認(按鍵):
+                if 道具數量[3]>0:
+                    print('4')
+                    which='4'
+                    玩家攻擊()
+                    bossatk=True
+        elif((465>=int(位置[0])>=390 and 675>=int(位置[1])>=595)):
+            點按()
+            if 確認(按鍵):
+                if 道具數量[4]>0:
+                    print('5')
+                    which='5'
+                    玩家攻擊()
+                    bossatk=True
         elif(210>=int(位置[0])>=140 and 570>=int(位置[1])>=540):
             pass
         elif(285>=int(位置[0])>=215 and 570>=int(位置[1])>=540):
@@ -326,8 +582,7 @@ def 技能動畫():
         return 卡利斯技能動畫
     elif me==6:
         return 雷伊技能動畫
-def 血量動畫(a):
-    global me
+def 血量動畫(a,me):
     global h1,h2,l1,l2,m1,m2,s1,s2,c1,c2,r1,r2
     if a==1:
         if me==1:
@@ -367,36 +622,42 @@ def hpbar(screen,cha):
     screen.blit(血條,(0,0))
     我方血量比例(me)
     m=295
-    if(format(血量動畫(1)[0], '.2f')>format(血量動畫(2)[0], '.2f')):
+    if 我方血量(me)<0:
+        我方扣血(me)[0]=0
+    if(format(血量動畫(1,me)[0], '.2f')>format(血量動畫(2,me)[0], '.2f')):
         if (我方血量(me)>0):
-            pygame.draw.rect(screen,ltorange, (120, 23, m*血量動畫(1)[0], 24))
-            pygame.draw.rect(screen,orange, (120, 28, m*血量動畫(1)[0], 19))
-            pygame.draw.rect(screen,brown, (120+m*血量動畫(1)[0], 23, m*(1-血量動畫(1)[0]), 25))
-            血量動畫(1)[0]-=0.01
+            pygame.draw.rect(screen,ltorange, (120, 23, m*血量動畫(1,me)[0], 24))
+            pygame.draw.rect(screen,orange, (120, 28, m*血量動畫(1,me)[0], 19))
+            pygame.draw.rect(screen,brown, (120+m*血量動畫(1,me)[0], 23, m*(1-血量動畫(1,me)[0]), 25))
+            血量動畫(1,me)[0]-=0.01
         else:
             pygame.draw.rect(screen,brown, (120, 23, m, 25))
-    elif(format(血量動畫(1)[0], '.2f')<format(血量動畫(2)[0], '.2f')):
+    elif(format(血量動畫(1,me)[0], '.2f')<format(血量動畫(2,me)[0], '.2f')):
         if (我方血量(me)>0):
-            pygame.draw.rect(screen,ltorange, (120, 23, m*血量動畫(1)[0], 24))
-            pygame.draw.rect(screen,orange, (120, 28, m*血量動畫(1)[0], 19))
-            pygame.draw.rect(screen,brown, (120+m*血量動畫(1)[0], 23, m*(1-血量動畫(1)[0]), 25))
-            血量動畫(1)[0]+=0.01
+            pygame.draw.rect(screen,ltorange, (120, 23, m*血量動畫(1,me)[0], 24))
+            pygame.draw.rect(screen,orange, (120, 28, m*血量動畫(1,me)[0], 19))
+            pygame.draw.rect(screen,brown, (120+m*血量動畫(1,me)[0], 23, m*(1-血量動畫(1,me)[0]), 25))
+            血量動畫(1,me)[0]+=0.01
         else:
             pygame.draw.rect(screen,brown, (120, 23, m, 25))
     else:
-        pygame.draw.rect(screen,ltorange, (120, 23, m*血量動畫(1)[0], 24))
-        pygame.draw.rect(screen,orange, (120, 28, m*血量動畫(1)[0], 19))
-        pygame.draw.rect(screen,brown, (120+m*血量動畫(1)[0], 23, m*(1-血量動畫(1)[0]), 25))
+        pygame.draw.rect(screen,ltorange, (120, 23, m*血量動畫(1,me)[0], 24))
+        pygame.draw.rect(screen,orange, (120, 28, m*血量動畫(1,me)[0], 19))
+        pygame.draw.rect(screen,brown, (120+m*血量動畫(1,me)[0], 23, m*(1-血量動畫(1,me)[0]), 25))
+    fontObj = pygame.font.Font('./picture/微軟正黑體.ttf', 25)
+    myfont = pygame.font.SysFont(None, 32)
+    text = fontObj.render('%s/%s'%(我方血量(me),原我方血量(me)), True, (255,255,255))
+    screen.blit(text, (320,-5))
 def 要幹嘛(screen):
-    global now
+    global now,press
     位置 = pygame.mouse.get_pos()
     按鍵 = pygame.mouse.get_pressed()
+    d=128
     if((1185>=int(位置[0])>=1090 and 563>=int(位置[1])>=531)or(1185>=int(位置[0])>=1136 and 605>=int(位置[1])>=563)):
         點按()
         if 確認(按鍵):
             now='1'
             print('1')
-            hpitem(screen)
     elif((1016>=int(位置[0])>=975 and 650>=int(位置[1])>=613)or(1072>=int(位置[0])>=975 and 687>=int(位置[1])>=650)):
         點按()
         if 確認(按鍵):
@@ -423,11 +684,42 @@ def 要幹嘛(screen):
         pass
     elif(355+195*3>=int(位置[0])>=180+195*3 and 675>=int(位置[1])>=585):
         pass
+    elif((465>=int(位置[0])>=390 and 675>=int(位置[1])>=595)):
+        pass
+    elif((285>=int(位置[0])>=210 and 690>=int(位置[1])>=675)):
+        pass
+    elif((285+d*1>=int(位置[0])>=210+d*1 and 690>=int(位置[1])>=675)):
+        pass
+    elif((285+d*2>=int(位置[0])>=210+d*2 and 690>=int(位置[1])>=675)):
+        pass
+    elif((285+d*3>=int(位置[0])>=210+d*3 and 690>=int(位置[1])>=675)):
+        pass
+    elif((285+d*4>=int(位置[0])>=210+d*4 and 690>=int(位置[1])>=675)):
+        pass
+    elif((285+d*5>=int(位置[0])>=210+d*5 and 690>=int(位置[1])>=675)):
+        pass
+    elif((290>=int(位置[0])>=200 and 690>=int(位置[1])>=570)):
+        pass
+    elif((290+d*1>=int(位置[0])>=200+d*1 and 690>=int(位置[1])>=570)):
+        pass
+    elif((290+d*2>=int(位置[0])>=200+d*2 and 690>=int(位置[1])>=570)):
+        pass
+    elif((290+d*3>=int(位置[0])>=200+d*3 and 690>=int(位置[1])>=570)):
+        pass
+    elif((290+d*4>=int(位置[0])>=200+d*4 and 690>=int(位置[1])>=570)):
+        pass
+    elif((290+d*5>=int(位置[0])>=200+d*5 and 690>=int(位置[1])>=570)):
+        pass
+    elif(210>=int(位置[0])>=140 and 570>=int(位置[1])>=540):
+        pass
+    elif(285>=int(位置[0])>=215 and 570>=int(位置[1])>=540):
+        pass
     else:
         pygame.mouse.set_system_cursor(pygame.SYSTEM_CURSOR_ARROW)
         press=False
+
 def 選擇道具欄(screen):
-    global press;global itempage
+    global press;global itempage,which
     位置 = pygame.mouse.get_pos()
     按鍵 = pygame.mouse.get_pressed()
     if(210>=int(位置[0])>=140 and 570>=int(位置[1])>=540):
@@ -447,6 +739,8 @@ def 選擇道具欄(screen):
     elif((280>=int(位置[0])>=205 and 675>=int(位置[1])>=595)):
         pass
     elif((385>=int(位置[0])>=295 and 675>=int(位置[1])>=595)):
+        pass
+    elif((465>=int(位置[0])>=390 and 675>=int(位置[1])>=595)):
         pass
     else:
         pygame.mouse.set_system_cursor(pygame.SYSTEM_CURSOR_ARROW)
@@ -535,16 +829,21 @@ def skillboard(screen,cha):
         screen.blit(text, (295+i*195,622))
 
 def stand(background,screen,cha):
-    global second;global cal;global skilling
-    global bossatk;global item;global itempage
+    global second;global cal;global skilling,me
+    global bossatk;global item;global itempage,now
     screen.blit(background, (0, 0))
     hpbar(screen,cha)
     要幹嘛(screen)
+    if 我方血量(me)<=0:
+        now='2'
     if now=='3':
         skillboard(screen,cha)
     位置 = pygame.mouse.get_pos()
     #print(位置)
+    if now=='2':
+        change(screen)
     if now=='1':
+        hpitem(screen)
         選擇道具欄(screen)
         if itempage==1:
             hpitem(screen)
@@ -557,118 +856,124 @@ def stand(background,screen,cha):
     if skilling==False:
         if me==1:
             if 4>=second>0:
-                        animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
+                        animation=pygame.image.load('./picture/哈莫雷特/哈莫雷特站立1.png')
                         screen.blit(animation,(50,120))
                         pygame.display.update()  
-            elif second==0:
-                        animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
+            elif second<=0:
+                        animation=pygame.image.load('./picture/哈莫雷特/哈莫雷特站立1.png')
                         screen.blit(animation,(50,120))
                         pygame.display.update()  
                         second=4
                         cal=1
             elif 8>=second>=5:
-                        animation=pygame.image.load('./picture/%s/%s站立2.png'%(cha,cha))
+                        animation=pygame.image.load('./picture/哈莫雷特/哈莫雷特站立2.png')
                         screen.blit(animation,(50,120))
                         pygame.display.update()  
             elif 12>=second>=9:
-                        animation=pygame.image.load('./picture/%s/%s站立3.png'%(cha,cha))
+                        animation=pygame.image.load('./picture/哈莫雷特/哈莫雷特站立3.png')
                         screen.blit(animation,(50,120))
                         pygame.display.update()
             elif 16>second>=13:
-                        animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
+                        animation=pygame.image.load('./picture/哈莫雷特/哈莫雷特站立4.png')
                         screen.blit(animation,(50,120))
                         pygame.display.update()
-            elif second==16:
-                        animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
+            elif second>=16:
+                        animation=pygame.image.load('./picture/哈莫雷特/哈莫雷特站立4.png')
                         screen.blit(animation,(50,120))
                         pygame.display.update()
                         second=12
                         cal=-1
         elif me==2:
             if 4>=second>=0:
-                        animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
+                        animation=pygame.image.load('./picture/羅特利斯/羅特利斯站立1.png')
                         screen.blit(animation,(50-7,120))
                         pygame.display.update()  
             elif 8>=second>=5:
-                        animation=pygame.image.load('./picture/%s/%s站立2.png'%(cha,cha))
+                        animation=pygame.image.load('./picture/羅特利斯/羅特利斯站立2.png')
                         screen.blit(animation,(50,120))
                         pygame.display.update()  
             elif 12>=second>=9:
-                        animation=pygame.image.load('./picture/%s/%s站立3.png'%(cha,cha))
+                        animation=pygame.image.load('./picture/羅特利斯/羅特利斯站立3.png')
                         screen.blit(animation,(50,120))
                         pygame.display.update()
             elif 16>second>=13:
-                        animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
+                        animation=pygame.image.load('./picture/羅特利斯/羅特利斯站立4.png')
                         screen.blit(animation,(50,120))
                         pygame.display.update()
-            elif second==16:
-                        animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
+            elif second>=16:
+                        animation=pygame.image.load('./picture/羅特利斯/羅特利斯站立4.png')
                         screen.blit(animation,(50,120))
                         pygame.display.update()
+                        second=0
+            elif second<0:
+                        cal=1
                         second=0
         elif me==3:
             if 3>=second>=0:
-                        animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
+                        animation=pygame.image.load('./picture/魔焰猩猩/魔焰猩猩站立1.png')
                         screen.blit(animation,(50,200))
                         pygame.display.update()  
             elif 7>=second>=4:
-                        animation=pygame.image.load('./picture/%s/%s站立2.png'%(cha,cha))
+                        animation=pygame.image.load('./picture/魔焰猩猩/魔焰猩猩站立2.png')
                         screen.blit(animation,(50,200))
                         pygame.display.update()  
             elif 11>=second>=8:
-                        animation=pygame.image.load('./picture/%s/%s站立3.png'%(cha,cha))
+                        animation=pygame.image.load('./picture/魔焰猩猩/魔焰猩猩站立3.png')
                         screen.blit(animation,(50,200))
                         pygame.display.update()
             elif 15>=second>=12:
-                        animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
+                        animation=pygame.image.load('./picture/魔焰猩猩/魔焰猩猩站立4.png')
                         screen.blit(animation,(50,200))
                         pygame.display.update()
             elif 19>=second>=16:
-                        animation=pygame.image.load('./picture/%s/%s站立5.png'%(cha,cha))
+                        animation=pygame.image.load('./picture/魔焰猩猩/魔焰猩猩站立5.png')
                         screen.blit(animation,(50,200))
                         pygame.display.update()
             elif 23>=second>=17:
-                        animation=pygame.image.load('./picture/%s/%s站立6.png'%(cha,cha))
+                        animation=pygame.image.load('./picture/魔焰猩猩/魔焰猩猩站立6.png')
                         screen.blit(animation,(50,200))
                         pygame.display.update()
             elif 27>=second>=24:
-                        animation=pygame.image.load('./picture/%s/%s站立7.png'%(cha,cha))
+                        animation=pygame.image.load('./picture/魔焰猩猩/魔焰猩猩站立7.png')
                         screen.blit(animation,(50,200))
                         pygame.display.update()
             elif 31>second>=28:
-                        animation=pygame.image.load('./picture/%s/%s站立8.png'%(cha,cha))
+                        animation=pygame.image.load('./picture/魔焰猩猩/魔焰猩猩站立8.png')
                         screen.blit(animation,(50,200))
                         pygame.display.update()
-            elif second==31:
-                        animation=pygame.image.load('./picture/%s/%s站立8.png'%(cha,cha))
+            elif second>=31:
+                        animation=pygame.image.load('./picture/魔焰猩猩/魔焰猩猩站立8.png')
                         screen.blit(animation,(50,200))
                         pygame.display.update()
                         second=0
+            elif second<0:
+                        cal=1
+                        second=0
         elif me==4:
             if 2>=second>0:
-                        animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
+                        animation=pygame.image.load('./picture/薩帕克/薩帕克站立1.png')
                         screen.blit(animation,(20,50))
                         pygame.display.update()  
-            elif second==0:
-                        animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
+            elif second<=0:
+                        animation=pygame.image.load('./picture/薩帕克/薩帕克站立1.png')
                         screen.blit(animation,(20,50))
                         pygame.display.update()  
                         second=3
                         cal=1
             elif 4>=second>=3:
-                        animation=pygame.image.load('./picture/%s/%s站立2.png'%(cha,cha))
+                        animation=pygame.image.load('./picture/薩帕克/薩帕克站立2.png')
                         screen.blit(animation,(20,50))
                         pygame.display.update()  
             elif 6>=second>=5:
-                        animation=pygame.image.load('./picture/%s/%s站立3.png'%(cha,cha))
+                        animation=pygame.image.load('./picture/薩帕克/薩帕克站立3.png')
                         screen.blit(animation,(20,50))
                         pygame.display.update()
             elif 8>second>=7:
-                        animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
+                        animation=pygame.image.load('./picture/薩帕克/薩帕克站立4.png')
                         screen.blit(animation,(20,50))
                         pygame.display.update()
-            elif second==8:
-                        animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
+            elif second>=8:
+                        animation=pygame.image.load('./picture/薩帕克/薩帕克站立4.png')
                         screen.blit(animation,(20,50))
                         pygame.display.update()
                         second=6
@@ -690,17 +995,20 @@ def stand(background,screen,cha):
                         animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
                         screen.blit(animation,(50,250))
                         pygame.display.update()
-            elif second==8:
+            elif second>=8:
                         animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
                         screen.blit(animation,(50,250))
                         pygame.display.update()
+                        second=0
+            elif second<0:
+                        cal=1
                         second=0
         elif me==6:
             if 4>=second>0:
                         animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
                         screen.blit(animation,(50,180))
                         pygame.display.update()  
-            elif second==0:
+            elif second<=0:
                         animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
                         screen.blit(animation,(50,180))
                         pygame.display.update()  
@@ -723,6 +1031,7 @@ def stand(background,screen,cha):
                         screen.blit(animation,(50,180))
                         pygame.display.update()
             elif second==20:
+                if me>=6:
                         animation=pygame.image.load('./picture/%s/%s站立5.png'%(cha,cha))
                         screen.blit(animation,(50,180))
                         pygame.display.update()
@@ -747,7 +1056,7 @@ def main():
     running = True
     global second;second=0
     global cal;cal=1
-    global me;me=6
+    global me;me=1
     global use,bossatk
 
     
@@ -765,6 +1074,7 @@ def main():
             譜尼攻擊()
             bossatk=False
         elif idle:
+            #print(我方誰在場上(me))
             stand(background,screen,我方誰在場上(me))
 
 class switch(object):
@@ -1043,7 +1353,7 @@ def 道具(which):
         increase=10
     elif which=='5' and 道具數量[4]>0:
         if namepp==True:
-            print('使用了高級活力藥劑,PP增加了20')
+            print('使用了高級活力藥劑,PP增加了25')
             道具數量[4]-=1
         namepp=False
         increase=20
@@ -2145,6 +2455,7 @@ def 血量過低():
         die=True
         print(我方誰在場上(me),' 血量:',我方血量(me),'/',原我方血量(me),sep='')
         print(敵方誰在場上(you),' 血量:',int(敵方血量(you)),'/',原敵方血量(you),sep='')
+        '''
         name=input('要換誰上場?(1:哈莫雷特 2:羅特利斯 3:魔焰猩猩 4:薩帕克 5:卡利斯 6:雷伊\n')
         for case in switch(name):
            if case('1'):
@@ -2188,6 +2499,7 @@ def 血量過低():
                print('輸入錯誤')
                血量過低()
                break
+        '''
     else:
         die=False
 def 挑戰失敗():
@@ -2215,9 +2527,8 @@ def 玩家攻擊():
     global me
     global skilltype
     global name
-    global namepp
+    global namepp,which
     global pp不足;global ha;global b1;global start;global die
-    血量過低()
     if start==True:
         友方登場精靈(ha)
         敵方登場精靈(b1)
@@ -2227,64 +2538,28 @@ def 玩家攻擊():
         pp不足=False
     print(我方誰在場上(me),' 血量:',我方血量(me),'/',原我方血量(me),sep='')
     print(敵方誰在場上(you),' 血量:',int(敵方血量(you)),'/',原敵方血量(you),sep='')
-    if die==False:
+    血量過低()
+    if True:
         print('輪到你進攻了')
-        print('1:替換 2:攻擊 3:顯示狀態 4:技能說明 5:使用道具')
-        if now=='1':
-            name=input('要換誰上場?(1:哈莫雷特 2:羅特利斯 3:魔焰猩猩 4:薩帕克 5:卡利斯 6:雷伊 7:返回\n')
-            for case in switch(name):
-               if case('1'):
-                    os.system('cls')
-                    友方登場精靈('哈莫雷特')
-                    me=1
-                    譜尼攻擊()
-                    玩家攻擊()
-                    break
-               if case('2'):
-                    os.system('cls')
-                    友方登場精靈('羅特利斯')
-                    me=2
-                    譜尼攻擊()
-                    玩家攻擊()
-                    break
-               if case('3'):
-                    os.system('cls')
-                    友方登場精靈('魔焰猩猩')
-                    me=3
-                    譜尼攻擊()
-                    玩家攻擊()
-                    break
-               if case('4'):
-                    os.system('cls')
-                    me=4
-                    友方登場精靈('薩帕克')
-                    譜尼攻擊()
-                    玩家攻擊()
-                    break
-               if case('5'):
-                    os.system('cls')
-                    友方登場精靈('卡利斯')
-                    me=5
-                    譜尼攻擊()
-                    玩家攻擊()
-                    break
-               if case('6'):
-                    os.system('cls')
-                    友方登場精靈('雷伊')
-                    me=6
-                    譜尼攻擊()
-                    玩家攻擊()
-                    break
-               if case('7'):
-                    os.system('cls')
-                    玩家攻擊()
-                    break
-               else:
-                    os.system('cls')
-                    print('輸入錯誤')
-                    玩家攻擊()
-                    break
-
+        if now=='2':
+            if name==1:
+                友方登場精靈('哈莫雷特')
+                me=1
+            if name==2:
+                友方登場精靈('羅特利斯')
+                me=2
+            if name==3:
+                友方登場精靈('魔焰猩猩')
+                me=3
+            if name==4:
+                me=4
+                友方登場精靈('薩帕克')
+            if name==5:
+                友方登場精靈('卡利斯')
+                me=5
+            if name==6:
+                友方登場精靈('雷伊')
+                me=6          
         elif now=='3':
             print('請選擇技能')
             技能()
@@ -2314,9 +2589,8 @@ def 玩家攻擊():
             os.system('cls')
             技能說明()
             玩家攻擊()
-        elif now=='5':
+        elif now=='1':
             print('要使用甚麼道具:1:高級體力藥劑',道具數量[0],'/5  2:究極體力藥劑',道具數量[1],'/5  3:初級活力藥劑',道具數量[2],'/15  4:中級活力藥劑',道具數量[3],'/15  5:高級活力藥劑',道具數量[4],'/5  6:返回',sep='')
-            which=input()
             os.system('cls')
             道具(which)
             血量變化(me,which)
@@ -2324,15 +2598,15 @@ def 玩家攻擊():
             namepp=True
             判斷pp是否超過(me)
             判斷血量是否超過(me)
-            譜尼攻擊()
+            #譜尼攻擊()
 
         
         elif True:
             os.system('cls')
             print('輸入錯誤')
             玩家攻擊()
-    else:
-        血量過低()
+    #else:
+        #血量過低()
 
 def 譜尼pp():
     global you
@@ -2708,11 +2982,18 @@ def startgame():
     global hskill;global lskill;global mskill;global sskill;global cskill;global rskill
     global h1,h2,l1,l2,m1,m2,s1,s2,c1,c2,r1,r2
     global bossskill
-    global press;press=False;global skilling;skilling=False
+    global press;
+    global skilling;skilling=False
     global use;use=0
-    global now,bossatk,itempage
+    global now,bossatk,itempage,which,nowcha,took,name,pre
+    pre=False
     迴避=0;疲憊=0;睡眠=0;燒傷=0;寄生=0;聖光氣=0
     haphydef=1;hamagdef=1;caphydef=1;rephydef=1;remagdef=1
+    which=0
+    press=False
+    name='0'
+    took=False
+    nowcha=0
     itempage=1
     bossatk=False
     die=False;dead=0
