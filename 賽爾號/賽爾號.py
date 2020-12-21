@@ -3,7 +3,7 @@ import os
 import sys
 import pygame
 def 哈莫雷特技能動畫(screen,cha,background,which):
-    global skilling
+    global skilling,me
     def 技能(a,b,x,y):
         animation=pygame.image.load('./picture/%s/技能%s-%s.png'%(cha,a,b))
         screen.blit(animation,(x,y))
@@ -11,7 +11,10 @@ def 哈莫雷特技能動畫(screen,cha,background,which):
     global second;global cal
     screen.blit(background, (0, 0))
     hpbar(screen,cha)
+    bosshpbar(screen)
     skillboard(screen,cha)
+    狀態列(screen,me)
+    bossidle(screen)
     if which==1:
         for i in range(1,22):
             if 2+2*(i-1)>=second>=0+2*(i-1):
@@ -23,7 +26,7 @@ def 哈莫雷特技能動畫(screen,cha,background,which):
     elif which==2:
         for i in range(1,23): 
             if 2+2*(i-1)>=second>=0+2*(i-1):
-                技能(which,i,55,130)
+                技能(which,i,55,145)
                 break
             if 2+2*22>=second>=0+2*22:
                 skilling=False
@@ -53,7 +56,10 @@ def 羅特利斯技能動畫(screen,cha,background,which):
     global second;global cal
     screen.blit(background, (0, 0))
     hpbar(screen,cha)
+    bosshpbar(screen)
     skillboard(screen,cha)
+    狀態列(screen,me)
+    bossidle(screen)
     if which==1:
         for i in range(1,17):
             if 2+2*(i-1)>=second>=0+2*(i-1):
@@ -95,7 +101,10 @@ def 魔焰猩猩技能動畫(screen,cha,background,which):
     global second;global cal
     screen.blit(background, (0, 0))
     hpbar(screen,cha)
+    bosshpbar(screen)
     skillboard(screen,cha)
+    狀態列(screen,me)
+    bossidle(screen)
     if which==1:
         for i in range(1,26):
             if 2+2*(i-1)>=second>=0+2*(i-1):
@@ -137,7 +146,10 @@ def 薩帕克技能動畫(screen,cha,background,which):
     global second;global cal
     screen.blit(background, (0, 0))
     hpbar(screen,cha)
+    bosshpbar(screen)
     skillboard(screen,cha)
+    狀態列(screen,me)
+    bossidle(screen)
     if which==1:
         for i in range(1,37):
             if 2+2*(i-1)>=second>=0+2*(i-1):
@@ -179,7 +191,10 @@ def 卡利斯技能動畫(screen,cha,background,which):
     global second;global cal
     screen.blit(background, (0, 0))
     hpbar(screen,cha)
+    bosshpbar(screen)
     skillboard(screen,cha)
+    狀態列(screen,me)
+    bossidle(screen)
     if which==1:
         for i in range(1,22):
             if 2+2*(i-1)>=second>=0+2*(i-1):
@@ -221,7 +236,10 @@ def 雷伊技能動畫(screen,cha,background,which):
     global second;global cal
     screen.blit(background, (0, 0))
     hpbar(screen,cha)
+    bosshpbar(screen)
     skillboard(screen,cha)
+    狀態列(screen,me)
+    bossidle(screen)
     if which==1:
         for i in range(1,36):
             if 2+2*(i-1)>=second>=0+2*(i-1):
@@ -380,7 +398,7 @@ def choosed(screen):
     global nowcha
     if nowcha==1:
         change=pygame.image.load('./picture/精靈1.png')
-        screen.blit(change,(0,0))
+        screen.blit(change,(0,503))
         for i in range(1,7):
             if i!=1:
                 changehp(screen,i,655)
@@ -389,7 +407,7 @@ def choosed(screen):
             makesure(screen,0)
     elif nowcha==2:
         change=pygame.image.load('./picture/精靈2.png')
-        screen.blit(change,(0,0))
+        screen.blit(change,(0,503))
         for i in range(1,7):
             if i!=2:
                 changehp(screen,i,655)
@@ -398,7 +416,7 @@ def choosed(screen):
             makesure(screen,1)
     elif nowcha==3:
         change=pygame.image.load('./picture/精靈3.png')
-        screen.blit(change,(0,0))
+        screen.blit(change,(0,503))
         for i in range(1,7):
             if i!=3:
                 changehp(screen,i,655)
@@ -407,7 +425,7 @@ def choosed(screen):
             makesure(screen,2)
     elif nowcha==4:
         change=pygame.image.load('./picture/精靈4.png')
-        screen.blit(change,(0,0))
+        screen.blit(change,(0,503))
         for i in range(1,7):
             if i!=4:
                 changehp(screen,i,655)
@@ -416,7 +434,7 @@ def choosed(screen):
             makesure(screen,3)
     elif nowcha==5:
         change=pygame.image.load('./picture/精靈5.png')
-        screen.blit(change,(0,0))
+        screen.blit(change,(0,503))
         for i in range(1,7):
             if i!=5:
                 changehp(screen,i,655)
@@ -425,7 +443,7 @@ def choosed(screen):
             makesure(screen,4)
     elif nowcha==6:
         change=pygame.image.load('./picture/精靈6.png')
-        screen.blit(change,(0,0))
+        screen.blit(change,(0,503))
         for i in range(1,7):
             if i!=6:
                 changehp(screen,i,655)
@@ -470,7 +488,7 @@ def change(screen):
     global took
     if took==False:
         change=pygame.image.load('./picture/精靈0.png')
-        screen.blit(change,(0,0))
+        screen.blit(change,(0,503))
         for i in range(1,7):
             changehp(screen,i,655)
     choosecha(screen)
@@ -478,7 +496,7 @@ def change(screen):
 def hpitem(screen):
     dark=(0,0,0)
     choose=pygame.image.load('./picture/回血.png')
-    screen.blit(choose,(0,0))
+    screen.blit(choose,(0,503))
     fontObj = pygame.font.Font('./picture/微軟正黑體.ttf', 18)
     myfont = pygame.font.SysFont(None, 32)
     for i in range(0,2):
@@ -488,7 +506,7 @@ def hpitem(screen):
 def ppitem(screen):
     dark=(0,0,0)
     choose=pygame.image.load('./picture/回pp.png')
-    screen.blit(choose,(0,0))
+    screen.blit(choose,(0,512))
     fontObj = pygame.font.Font('./picture/微軟正黑體.ttf', 18)
     myfont = pygame.font.SysFont(None, 32)
     for i in range(2,5):
@@ -496,7 +514,7 @@ def ppitem(screen):
         screen.blit(text, (265+(i-2)*93,645))
 def chooseitem():
     global itempage,which,bossatk,press
-    global 道具數量
+    global 道具數量,譜尼atk
     位置 = pygame.mouse.get_pos()
     按鍵 = pygame.mouse.get_pressed()
     if itempage==1:  
@@ -507,6 +525,7 @@ def chooseitem():
                     print('1')
                     which='1'
                     玩家攻擊()
+                    譜尼atk=True
                     bossatk=True
         elif((385>=int(位置[0])>=295 and 675>=int(位置[1])>=595)):
             點按()
@@ -515,6 +534,7 @@ def chooseitem():
                     print('2')
                     which='2'
                     玩家攻擊()
+                    譜尼atk=True
                     bossatk=True
         elif(210>=int(位置[0])>=140 and 570>=int(位置[1])>=540):
             pass
@@ -537,6 +557,7 @@ def chooseitem():
                     print('3')
                     which='3'
                     玩家攻擊()
+                    譜尼atk=True
                     bossatk=True
         elif((375>=int(位置[0])>=295 and 675>=int(位置[1])>=595)):
             點按()
@@ -545,6 +566,7 @@ def chooseitem():
                     print('4')
                     which='4'
                     玩家攻擊()
+                    譜尼atk=True
                     bossatk=True
         elif((465>=int(位置[0])>=390 and 675>=int(位置[1])>=595)):
             點按()
@@ -553,6 +575,7 @@ def chooseitem():
                     print('5')
                     which='5'
                     玩家攻擊()
+                    譜尼atk=True
                     bossatk=True
         elif(210>=int(位置[0])>=140 and 570>=int(位置[1])>=540):
             pass
@@ -610,6 +633,34 @@ def 血量動畫(a,me):
             return c2
         elif me==6:
             return r2
+def 敵方血量動畫(a,you):
+    global b1h1,b1h2,b2h1,b2h2,b3h1,b3h2,b4h1,b4h2,b5h1,b5h2,b6h1,b6h2
+    if a==1:
+        if you==1:
+            return b1h1
+        elif you==2:
+            return b2h1
+        elif you==3:
+            return b3h1
+        elif you==4:
+            return b4h1
+        elif you==5:
+            return b5h1
+        elif you==6:
+            return b6h1
+    elif a==2:
+        if you==1:
+            return b1h2
+        elif you==2:
+            return b2h2
+        elif you==3:
+            return b3h2
+        elif you==4:
+            return b4h2
+        elif you==5:
+            return b5h2
+        elif you==6:
+            return b6h2
 def hpbar(screen,cha):
     global me
     global h1,h2,l1,l2,m1,m2,s1,s2,c1,c2,r1,r2
@@ -648,6 +699,68 @@ def hpbar(screen,cha):
     myfont = pygame.font.SysFont(None, 32)
     text = fontObj.render('%s/%s'%(我方血量(me),原我方血量(me)), True, (255,255,255))
     screen.blit(text, (320,-5))
+def 狀態列(screen,me):
+    global haskilllv;global loskilllv;global moskilllv;global saskilllv;global reskilllv;global caskilllv
+    global haphydef;global hamagdef;global caphydef;global rephydef;global remagdef;
+    if me==1:
+        i=0
+        if haskilllv>1:
+            skilllv=pygame.image.load('./picture/物攻.png')
+            screen.blit(skilllv,(0+i*33,100))
+            i+=1
+        if haphydef>1:
+            skilllv=pygame.image.load('./picture/物防.png')
+            screen.blit(skilllv,(0+i*33,100))
+            i+=1
+        if haskilllv>1:
+            skilllv=pygame.image.load('./picture/特攻.png')
+            screen.blit(skilllv,(0+i*33,100))
+            i+=1
+        if hamagdef>1:
+            skilllv=pygame.image.load('./picture/特防.png')
+            screen.blit(skilllv,(0+i*33,100))
+            i+=1
+    elif me==2:
+        i=0
+        if loskilllv>1:
+            skilllv=pygame.image.load('./picture/特攻.png')
+            screen.blit(skilllv,(0+i*33,100))
+            i+=1
+    elif me==3:
+        i=0
+        if moskilllv>1:
+            skilllv=pygame.image.load('./picture/物攻.png')
+            screen.blit(skilllv,(0+i*33,100))
+            i+=1
+            skilllv=pygame.image.load('./picture/特攻.png')
+            screen.blit(skilllv,(0+i*33,100))
+            i+=1
+    if me==4:
+        i=0
+        if saskilllv>1:
+            skilllv=pygame.image.load('./picture/特攻.png')
+            screen.blit(skilllv,(0+i*33,100))
+            i+=1
+    if me==5:
+        i=0
+        if caskilllv>1:
+            skilllv=pygame.image.load('./picture/物攻.png')
+            screen.blit(skilllv,(0+i*33,100))
+            i+=1
+        if caphydef>1:
+            skilllv=pygame.image.load('./picture/物防.png')
+            screen.blit(skilllv,(0+i*33,100))
+            i+=1
+    elif me==6:
+        i=0
+        if rephydef>1:
+            skilllv=pygame.image.load('./picture/物防.png')
+            screen.blit(skilllv,(0+i*33,100))
+            i+=1
+        if remagdef>1:
+            skilllv=pygame.image.load('./picture/特防.png')
+            screen.blit(skilllv,(0+i*33,100))
+            i+=1
 def 要幹嘛(screen):
     global now,press
     位置 = pygame.mouse.get_pos()
@@ -753,7 +866,7 @@ def 選擇技能(screen,cha,background):
     global press
     global skilling,use
     global second,cal,me
-    global skill,bossatk
+    global skill,bossatk,譜尼atk
     位置 = pygame.mouse.get_pos()
     按鍵 = pygame.mouse.get_pressed()
     if(355>=int(位置[0])>=180 and 675>=int(位置[1])>=585):
@@ -768,6 +881,7 @@ def 選擇技能(screen,cha,background):
                 use=1
                 skilling=True
                 玩家攻擊()
+                譜尼atk=True
                 bossatk=True
     elif(355+195>=int(位置[0])>=180+195 and 675>=int(位置[1])>=585):
         skill='2'
@@ -781,6 +895,7 @@ def 選擇技能(screen,cha,background):
                 use=2
                 skilling=True
                 玩家攻擊()
+                譜尼atk=True
                 bossatk=True
     elif(355+195*2>=int(位置[0])>=180+195*2 and 675>=int(位置[1])>=585):
         skill='3'
@@ -794,6 +909,7 @@ def 選擇技能(screen,cha,background):
                 use=3
                 skilling=True
                 玩家攻擊()
+                譜尼atk=True
                 bossatk=True
     elif(355+195*3>=int(位置[0])>=180+195*3 and 675>=int(位置[1])>=585):
         skill='4'
@@ -807,6 +923,7 @@ def 選擇技能(screen,cha,background):
                 use=4
                 skilling=True
                 玩家攻擊()
+                譜尼atk=True
                 bossatk=True
     elif((1185>=int(位置[0])>=1090 and 563>=int(位置[1])>=531)or(1185>=int(位置[0])>=1136 and 605>=int(位置[1])>=563)):
         pass
@@ -821,18 +938,124 @@ def 選擇技能(screen,cha,background):
 def skillboard(screen,cha):
     white = (255, 255, 255)
     技能框=pygame.image.load('./picture/%s/技能.png'%(cha))
-    screen.blit(技能框,(0,0))
+    screen.blit(技能框,(0,503))
     fontObj = pygame.font.Font('./picture/微軟正黑體.ttf', 16)
     myfont = pygame.font.SysFont(None, 32)
     for i in range(0,4):
         text = fontObj.render('%s/%s'%(我方技能pp(1)[i],我方技能pp(2)[i]), True, white)
         screen.blit(text, (295+i*195,622))
+def bosshpbar(screen):
+    global you
+    global b1h1,b1h2,b2h1,b2h2,b3h1,b3h2,b4h1,b4h2,b5h1,b5h2,b6h1,b6h2
+    brown = (  80,   42,   34)
+    white = (255, 255, 255)
+    orange   = (255,   77,   0)
+    ltorange = (255, 176,   0)
+    blue  = (  0,   0, 255)
+    血條=pygame.image.load('./picture/譜尼/譜尼.png')
+    screen.blit(血條,(775,0))
+    敵方血量比例(you)
+    m=295
+    x=782
+    y=300
+    if 敵方血量(you)<0:
+        敵方扣血(you)[0]=0
+    if(format(敵方血量動畫(1,you)[0], '.2f')>format(敵方血量動畫(2,you)[0], '.2f')):
+        if (敵方血量(you)>0):
+            pygame.draw.rect(screen,ltorange, (x+y*(1-敵方血量動畫(1,you)[0]), 23, m*敵方血量動畫(1,you)[0], 24))
+            pygame.draw.rect(screen,orange, (x+y*(1-敵方血量動畫(1,you)[0]), 28, m*敵方血量動畫(1,you)[0], 19))
+            pygame.draw.rect(screen,brown, (x, 23, m*(1-敵方血量動畫(1,you)[0]), 25))
+            敵方血量動畫(1,you)[0]-=0.01
+        else:
+            pygame.draw.rect(screen,brown, (x, 23, m, 25))
+    elif(format(敵方血量動畫(1,you)[0], '.2f')<format(敵方血量動畫(2,you)[0], '.2f')):
+        if (敵方血量(you)>0):
+            pygame.draw.rect(screen,ltorange, (x+y*(1-敵方血量動畫(1,you)[0]), 23, m*敵方血量動畫(1,you)[0], 24))
+            pygame.draw.rect(screen,orange, (x+y*(1-敵方血量動畫(1,you)[0]), 28, m*敵方血量動畫(1,you)[0], 19))
+            pygame.draw.rect(screen,brown, (x, 23, m*(1-敵方血量動畫(1,you)[0]), 25))
+            敵方血量動畫(1,you)[0]+=0.01
+        else:
+            pygame.draw.rect(screen,brown, (x, 23, m, 25))
+    else:
+        pygame.draw.rect(screen,ltorange, (x+y*(1-敵方血量動畫(1,you)[0]), 23, m*敵方血量動畫(1,you)[0], 24))
+        pygame.draw.rect(screen,orange, (x+y*(1-敵方血量動畫(1,you)[0]), 28, m*敵方血量動畫(1,you)[0], 19))
+        pygame.draw.rect(screen,brown, (x, 23, m*(1-敵方血量動畫(1,you)[0]), 25))
+    fontObj = pygame.font.Font('./picture/微軟正黑體.ttf', 25)
+    myfont = pygame.font.SysFont(None, 32)
+    text = fontObj.render('%s/%s'%(敵方血量(you),原敵方血量(you)), True, (255,255,255))
+    screen.blit(text, (700,-5))
+def bossidle(screen):
+    global bosssecond
+    global bosscal
+    a=760;b=140
+    if 3>=bosssecond>=0:
+                   animation=pygame.image.load('./picture/譜尼/譜尼站立1.png')
+                   screen.blit(animation,(a,b))
+    elif 7>=bosssecond>=4:
+                   animation=pygame.image.load('./picture/譜尼/譜尼站立2.png')
+                   screen.blit(animation,(a,b))
+    elif 11>=bosssecond>=8:
+                   animation=pygame.image.load('./picture/譜尼/譜尼站立3.png')
+                   screen.blit(animation,(a,b))
+    elif 15>=bosssecond>=12:
+                   animation=pygame.image.load('./picture/譜尼/譜尼站立4.png')
+                   screen.blit(animation,(a,b))
+    elif 19>=bosssecond>=16:
+                   animation=pygame.image.load('./picture/譜尼/譜尼站立5.png')
+                   screen.blit(animation,(a,b))
+    elif 23>=bosssecond>=17:
+                   animation=pygame.image.load('./picture/譜尼/譜尼站立6.png')
+                   screen.blit(animation,(a,b))
+    elif 27>=bosssecond>=24:
+                   animation=pygame.image.load('./picture/譜尼/譜尼站立7.png')
+                   screen.blit(animation,(a,b)) 
+    elif 31>bosssecond>=28:
+                   animation=pygame.image.load('./picture/譜尼/譜尼站立8.png')
+                   screen.blit(animation,(a,b))
+    elif bosssecond>=31:
+                   animation=pygame.image.load('./picture/譜尼/譜尼站立8.png')
+                   screen.blit(animation,(a,b))
+                   bosssecond=0
+    elif bosssecond<0:
+                   bosscal=1
+                   bosssecond=0
+def bossanimation(screen,background,cha):
+    global bossskill,bossuse,bossskilling
+    global skilling,me,bosssecond,bosscal,bossatk
+    screen.blit(background, (0, 0))
+    attacked(background,screen,cha)
+    hpbar(screen,cha)
+    bosshpbar(screen)
+    狀態列(screen,me)
+    skillboard(screen,cha)
+    def 技能(a,b,x,y):
+        animation=pygame.image.load('./picture/譜尼/%s%s.png'%(a,b))
+        screen.blit(animation,(x,y))
+        pygame.display.update()  
+    if bossuse==bossskill[4]:
+        for i in range(1,31):
+            if 2+2*(i-1)>=bosssecond>=0+2*(i-1):
+                技能('聖光氣',i,600,100)
+                break
+            if 2+2*30>=bosssecond>=0+2*30:
+                bosssecond=0
+                bossatk=False
+    elif bossuse==bossskill[1]:
+        bossatk=False
+    elif bossuse==bossskill[2]:
+        bossatk=False
+    elif bossuse==bossskill[3]:
+        bossatk=False
+
+
 
 def stand(background,screen,cha):
     global second;global cal;global skilling,me
     global bossatk;global item;global itempage,now
     screen.blit(background, (0, 0))
     hpbar(screen,cha)
+    bosshpbar(screen)
+    狀態列(screen,me)
     要幹嘛(screen)
     if 我方血量(me)<=0:
         now='2'
@@ -854,6 +1077,7 @@ def stand(background,screen,cha):
     if now=='3':
         選擇技能(screen,cha,background)
     if skilling==False:
+        bossidle(screen)
         if me==1:
             if 4>=second>0:
                         animation=pygame.image.load('./picture/哈莫雷特/哈莫雷特站立1.png')
@@ -1037,7 +1261,155 @@ def stand(background,screen,cha):
                         pygame.display.update()
                         second=16
                         cal=-1
-
+def attacked(background,screen,cha):
+    global second;global cal;global skilling,me
+    global bossatk;global item;global itempage,now
+    if True:
+        if me==1:
+            if 4>=second>0:
+                        animation=pygame.image.load('./picture/哈莫雷特/哈莫雷特站立1.png')
+                        screen.blit(animation,(50,120))
+            elif second<=0:
+                        animation=pygame.image.load('./picture/哈莫雷特/哈莫雷特站立1.png')
+                        screen.blit(animation,(50,120))
+                        second=4
+                        cal=1
+            elif 8>=second>=5:
+                        animation=pygame.image.load('./picture/哈莫雷特/哈莫雷特站立2.png')
+                        screen.blit(animation,(50,120))
+            elif 12>=second>=9:
+                        animation=pygame.image.load('./picture/哈莫雷特/哈莫雷特站立3.png')
+                        screen.blit(animation,(50,120))
+            elif 16>second>=13:
+                        animation=pygame.image.load('./picture/哈莫雷特/哈莫雷特站立4.png')
+                        screen.blit(animation,(50,120))
+            elif second>=16:
+                        animation=pygame.image.load('./picture/哈莫雷特/哈莫雷特站立4.png')
+                        screen.blit(animation,(50,120))
+                        second=12
+                        cal=-1
+        elif me==2:
+            if 4>=second>=0:
+                        animation=pygame.image.load('./picture/羅特利斯/羅特利斯站立1.png')
+                        screen.blit(animation,(50-7,120))  
+            elif 8>=second>=5:
+                        animation=pygame.image.load('./picture/羅特利斯/羅特利斯站立2.png')
+                        screen.blit(animation,(50,120))
+            elif 12>=second>=9:
+                        animation=pygame.image.load('./picture/羅特利斯/羅特利斯站立3.png')
+                        screen.blit(animation,(50,120))
+            elif 16>second>=13:
+                        animation=pygame.image.load('./picture/羅特利斯/羅特利斯站立4.png')
+                        screen.blit(animation,(50,120))
+            elif second>=16:
+                        animation=pygame.image.load('./picture/羅特利斯/羅特利斯站立4.png')
+                        screen.blit(animation,(50,120))
+                        second=0
+            elif second<0:
+                        cal=1
+                        second=0
+        elif me==3:
+            if 3>=second>=0:
+                        animation=pygame.image.load('./picture/魔焰猩猩/魔焰猩猩站立1.png')
+                        screen.blit(animation,(50,200))
+            elif 7>=second>=4:
+                        animation=pygame.image.load('./picture/魔焰猩猩/魔焰猩猩站立2.png')
+                        screen.blit(animation,(50,200))
+            elif 11>=second>=8:
+                        animation=pygame.image.load('./picture/魔焰猩猩/魔焰猩猩站立3.png')
+                        screen.blit(animation,(50,200))
+            elif 15>=second>=12:
+                        animation=pygame.image.load('./picture/魔焰猩猩/魔焰猩猩站立4.png')
+                        screen.blit(animation,(50,200))
+            elif 19>=second>=16:
+                        animation=pygame.image.load('./picture/魔焰猩猩/魔焰猩猩站立5.png')
+                        screen.blit(animation,(50,200))
+            elif 23>=second>=17:
+                        animation=pygame.image.load('./picture/魔焰猩猩/魔焰猩猩站立6.png')
+                        screen.blit(animation,(50,200))
+            elif 27>=second>=24:
+                        animation=pygame.image.load('./picture/魔焰猩猩/魔焰猩猩站立7.png')
+                        screen.blit(animation,(50,200))
+            elif 31>second>=28:
+                        animation=pygame.image.load('./picture/魔焰猩猩/魔焰猩猩站立8.png')
+                        screen.blit(animation,(50,200))
+            elif second>=31:
+                        animation=pygame.image.load('./picture/魔焰猩猩/魔焰猩猩站立8.png')
+                        screen.blit(animation,(50,200))
+                        second=0
+            elif second<0:
+                        cal=1
+                        second=0
+        elif me==4:
+            if 2>=second>0:
+                        animation=pygame.image.load('./picture/薩帕克/薩帕克站立1.png')
+                        screen.blit(animation,(20,50))
+            elif second<=0:
+                        animation=pygame.image.load('./picture/薩帕克/薩帕克站立1.png')
+                        screen.blit(animation,(20,50))
+                        second=3
+                        cal=1
+            elif 4>=second>=3:
+                        animation=pygame.image.load('./picture/薩帕克/薩帕克站立2.png')
+                        screen.blit(animation,(20,50)) 
+            elif 6>=second>=5:
+                        animation=pygame.image.load('./picture/薩帕克/薩帕克站立3.png')
+                        screen.blit(animation,(20,50))
+            elif 8>second>=7:
+                        animation=pygame.image.load('./picture/薩帕克/薩帕克站立4.png')
+                        screen.blit(animation,(20,50))
+            elif second>=8:
+                        animation=pygame.image.load('./picture/薩帕克/薩帕克站立4.png')
+                        screen.blit(animation,(20,50))
+                        second=6
+                        cal=-1
+        elif me==5:
+            if 2>=second>=0:
+                        animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
+                        screen.blit(animation,(50,250))
+            elif 4>=second>=3:
+                        animation=pygame.image.load('./picture/%s/%s站立2.png'%(cha,cha))
+                        screen.blit(animation,(50,250))
+            elif 6>=second>=5:
+                        animation=pygame.image.load('./picture/%s/%s站立3.png'%(cha,cha))
+                        screen.blit(animation,(50,250))
+            elif 8>second>=7:
+                        animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
+                        screen.blit(animation,(50,250))
+            elif second>=8:
+                        animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
+                        screen.blit(animation,(50,250))
+                        second=0
+            elif second<0:
+                        cal=1
+                        second=0
+        elif me==6:
+            if 4>=second>0:
+                        animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
+                        screen.blit(animation,(50,180))
+            elif second<=0:
+                        animation=pygame.image.load('./picture/%s/%s站立1.png'%(cha,cha))
+                        screen.blit(animation,(50,180))
+                        second=4
+                        cal=1
+            elif 8>=second>=5:
+                        animation=pygame.image.load('./picture/%s/%s站立2.png'%(cha,cha))
+                        screen.blit(animation,(50,190))
+            elif 12>=second>=9:
+                        animation=pygame.image.load('./picture/%s/%s站立3.png'%(cha,cha))
+                        screen.blit(animation,(50,200))
+            elif 16>=second>=13:
+                        animation=pygame.image.load('./picture/%s/%s站立4.png'%(cha,cha))
+                        screen.blit(animation,(50,190))
+            elif 20>second>=17:
+                        animation=pygame.image.load('./picture/%s/%s站立5.png'%(cha,cha))
+                        screen.blit(animation,(50,180))
+            elif second==20:
+                if me>=6:
+                        animation=pygame.image.load('./picture/%s/%s站立5.png'%(cha,cha))
+                        screen.blit(animation,(50,180))
+                        second=16
+                        cal=-1
 
                     
                     
@@ -1045,7 +1417,7 @@ def stand(background,screen,cha):
 
 def main():
     pygame.init()
-    screen = pygame.display.set_mode((1240, 720))
+    screen = pygame.display.set_mode((1200, 695))
     pygame.display.set_caption('賽爾號')
     screen.fill((255, 255, 255))
     background = pygame.image.load('./picture/background.jpg')
@@ -1055,14 +1427,17 @@ def main():
     idle=True
     running = True
     global second;second=0
+    global bosssecond;bosssecond=0
     global cal;cal=1
+    global bosscal;bosscal=1
     global me;me=1
     global use,bossatk
 
     
     while running:
-        clock.tick(32) 
+        clock.tick(26) 
         second+=cal
+        bosssecond+=bosscal
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -1070,9 +1445,9 @@ def main():
             pygame.mouse.set_system_cursor(pygame.SYSTEM_CURSOR_ARROW)
             技能動畫()(screen,我方誰在場上(me),background,use)
         elif bossatk:
-            print(bossatk)
-            譜尼攻擊()
-            bossatk=False
+            if 譜尼atk:
+                譜尼攻擊()
+            bossanimation(screen,background,我方誰在場上(me))
         elif idle:
             #print(我方誰在場上(me))
             stand(background,screen,我方誰在場上(me))
@@ -1764,6 +2139,27 @@ def 我方血量比例(me):
         if me==6:
             r2=[0]
             r2[0]=雷伊[0]/原雷伊[0]
+def 敵方血量比例(you):
+        global boss1;global boss2;global boss3;global boss4;global boss5;global boss6
+        global b1h1,b1h2,b2h1,b2h2,b3h1,b3h2,b4h1,b4h2,b5h1,b5h2,b6h1,b6h2
+        if you==1:
+            b1h2=[0]
+            b1h2[0]=boss1[0]/原boss1[0]
+        if you==2:
+            b2h2=[0]
+            b2h2[0]=boss2[0]/原boss2[0]
+        if you==3:
+            b3h2=[0]
+            b3h2[0]=boss3[0]/原boss3[0]
+        if you==4:
+            b4h2=[0]
+            b4h2[0]=boss4[0]/原boss4[0]
+        if you==5:
+            b5h2=[0]
+            b5h2[0]=boss5[0]/原boss5[0]
+        if you==6:
+            b6h2=[0]
+            b6h2[0]=boss6[0]/原boss6[0]
 def 我方血量(me):
      global 哈莫雷特;global 羅特利斯;global 魔焰猩猩;global 薩帕克;global 卡利斯;global 雷伊
      for case in switch(me):
@@ -2732,7 +3128,9 @@ def 譜尼技能1():
 
 def 譜尼攻擊():
     global you;global bosstype;global noskill;global 迴避;global 疲憊;global 睡眠;global 燒傷;global 寄生
-    global 聖光氣
+    global 聖光氣;global bossuse;global 譜尼atk,bosssecond
+    bosssecond=0
+    譜尼atk=False
     if 燒傷>0:
         敵方扣血(you)[0]-=原敵方血量(you)/8
         print('燒傷對譜尼造成了',int(原敵方血量(you)/8),'傷害')
@@ -2765,7 +3163,7 @@ def 譜尼攻擊():
         time.sleep(1)
         sys.exit()
     if you==1:
-        use=譜尼技能1()
+        bossuse=譜尼技能1()
         if 疲憊>0 or 睡眠>0:
             聖光氣-=1
             print('譜尼睡著了')
@@ -2775,46 +3173,46 @@ def 譜尼攻擊():
             聖光氣-=1
             if bosstype==1:
                 damage=譜尼傷害(1)
-                print('譜尼使用了',use,'MISS')
+                print('譜尼使用了',bossuse,'MISS')
                 我方扣血(me)[0]-=0
             elif bosstype==2:
                 damage=譜尼傷害(2)
-                print('譜尼使用了',use,'MISS')
+                print('譜尼使用了',bossuse,'MISS')
                 我方扣血(me)[0]-=0
             if bosstype==4:
-                print('譜尼使用了',use,'自身充滿了能量')
+                print('譜尼使用了',bossuse,'自身充滿了能量')
                 聖光氣=2
         else:
             if 聖光氣>0 or random.randint(1,100)<=5:
                 聖光氣-=1
                 if bosstype==1:
                     damage=譜尼傷害(1)
-                    print('譜尼使用了',use,'打出了致命一擊!造成了',damage*2,'傷害')
+                    print('譜尼使用了',bossuse,'打出了致命一擊!造成了',damage*2,'傷害')
                     我方扣血(me)[0]-=damage*2
                     被爆擊(1)
                 elif bosstype==2:
                     damage=譜尼傷害(2)
-                    print('譜尼使用了',use,'打出了致命一擊!造成了',damage*2,'傷害')
+                    print('譜尼使用了',bossuse,'打出了致命一擊!造成了',damage*2,'傷害')
                     我方扣血(me)[0]-=damage*2
                     被爆擊(2)
                 if bosstype==4:
-                    print('譜尼使用了',use,'自身充滿了能量')
+                    print('譜尼使用了',bossuse,'自身充滿了能量')
                     聖光氣=2
             else:
                 if bosstype==1:
                     damage=譜尼傷害(1)
-                    print('譜尼使用了',use,'造成了',damage,'傷害')
+                    print('譜尼使用了',bossuse,'造成了',damage,'傷害')
                     我方扣血(me)[0]-=damage
                 elif bosstype==2:
                     damage=譜尼傷害(2)
-                    print('譜尼使用了',use,'造成了',damage,'傷害')
+                    print('譜尼使用了',bossuse,'造成了',damage,'傷害')
                     我方扣血(me)[0]-=damage
                 if bosstype==4:
-                    print('譜尼使用了',use,'自身充滿了能量')
+                    print('譜尼使用了',bossuse,'自身充滿了能量')
                     聖光氣=2
         
     elif you==5 or you==6:
-        use=譜尼技能1()
+        bossuse=譜尼技能1()
         if 疲憊>0 or 睡眠>0:
             聖光氣-=1
             print('譜尼睡著了')
@@ -2824,55 +3222,55 @@ def 譜尼攻擊():
             聖光氣-=1
             if bosstype==1:
                 damage=譜尼傷害(1)
-                print('譜尼使用了',use,'MISS')
+                print('譜尼使用了',bossuse,'MISS')
                 我方扣血(me)[0]-=0
             elif bosstype==2:
                 damage=譜尼傷害(2)
-                print('譜尼使用了',use,'MISS')
+                print('譜尼使用了',bossuse,'MISS')
                 我方扣血(me)[0]-=0
             elif bosstype==3:
                 damage=譜尼傷害(3)
-                print('譜尼使用了',use,'MISS')
+                print('譜尼使用了',bossuse,'MISS')
                 我方扣血(me)[0]-=0
             if bosstype==4:
-                print('譜尼使用了',use,'自身充滿了能量')
+                print('譜尼使用了',bossuse,'自身充滿了能量')
                 聖光氣=2
         else:
             if 聖光氣>0 or random.randint(1,100)<=5:
                 聖光氣-=1
                 if bosstype==1:
                     damage=譜尼傷害(1)
-                    print('譜尼使用了',use,'打出了致命一擊!造成了',damage*2,'傷害')
+                    print('譜尼使用了',bossuse,'打出了致命一擊!造成了',damage*2,'傷害')
                     我方扣血(me)[0]-=damage*2
                     被爆擊(1)
                 elif bosstype==2:
                     damage=譜尼傷害(2)
-                    print('譜尼使用了',use,'打出了致命一擊!造成了',damage*2,'傷害')
+                    print('譜尼使用了',bossuse,'打出了致命一擊!造成了',damage*2,'傷害')
                     我方扣血(me)[0]-=damage*2
                     被爆擊(2)
                 elif bosstype==3:
                     damage=譜尼傷害(3)
-                    print('譜尼使用了',use,'打出了致命一擊!造成了',damage*2,'傷害')
+                    print('譜尼使用了',bossuse,'打出了致命一擊!造成了',damage*2,'傷害')
                     我方扣血(me)[0]-=damage*2
                     被爆擊(2)
                 if bosstype==4:
-                    print('譜尼使用了',use,'自身充滿了能量')
+                    print('譜尼使用了',bossuse,'自身充滿了能量')
                     聖光氣=2
             else:
                 if bosstype==1:
                     damage=譜尼傷害(1)
-                    print('譜尼使用了',use,'造成了',damage,'傷害')
+                    print('譜尼使用了',bossuse,'造成了',damage,'傷害')
                     我方扣血(me)[0]-=damage
                 elif bosstype==2:
                     damage=譜尼傷害(2)
-                    print('譜尼使用了',use,'造成了',damage,'傷害')
+                    print('譜尼使用了',bossuse,'造成了',damage,'傷害')
                     我方扣血(me)[0]-=damage
                 elif bosstype==3:
                     damage=譜尼傷害(3)
-                    print('譜尼使用了',use,'造成了',damage,'傷害')
+                    print('譜尼使用了',bossuse,'造成了',damage,'傷害')
                     我方扣血(me)[0]-=damage
                 if bosstype==4:
-                    print('譜尼使用了',use,'自身充滿了能量')
+                    print('譜尼使用了',bossuse,'自身充滿了能量')
                     聖光氣=2
     elif you==2 or you==3 or you==4:
         if 譜尼pp()[0]+譜尼pp()[1]+譜尼pp()[2]+譜尼pp()[3]==0:
@@ -2886,59 +3284,59 @@ def 譜尼攻擊():
             elif 迴避>0:
                 迴避-=1
                 聖光氣-=1
-                use=譜尼技能234()
+                bossuse=譜尼技能234()
                 if bosstype==1:
                     damage=譜尼傷害(1)
-                    print('譜尼使用了',use,'MISS')
+                    print('譜尼使用了',bossuse,'MISS')
                     我方扣血(me)[0]-=0
                 elif bosstype==2:
                     damage=譜尼傷害(2)
-                    print('譜尼使用了',use,'MISS')
+                    print('譜尼使用了',bossuse,'MISS')
                     我方扣血(me)[0]-=0
                 elif bosstype==3:
                     damage=譜尼傷害(3)
-                    print('譜尼使用了',use,'MISS')
+                    print('譜尼使用了',bossuse,'MISS')
                     我方扣血(me)[0]-=0
                 if bosstype==4:
-                    print('譜尼使用了',use,'自身充滿了能量')
+                    print('譜尼使用了',bossuse,'自身充滿了能量')
                     聖光氣=2
             else:
-                use=譜尼技能234()
+                bossuse=譜尼技能234()
                 if 聖光氣>0 or random.randint(1,100)<=5:
                     聖光氣-=1
                     if bosstype==1:
                         damage=譜尼傷害(1)
-                        print('譜尼使用了',use,'打出了致命一擊!造成了',damage*2,'傷害')
+                        print('譜尼使用了',bossuse,'打出了致命一擊!造成了',damage*2,'傷害')
                         我方扣血(me)[0]-=damage*2
                         被爆擊(1)
                     elif bosstype==2:
                         damage=譜尼傷害(2)
-                        print('譜尼使用了',use,'打出了致命一擊!造成了',damage*2,'傷害')
+                        print('譜尼使用了',bossuse,'打出了致命一擊!造成了',damage*2,'傷害')
                         我方扣血(me)[0]-=damage*2
                         被爆擊(2)
                     elif bosstype==3:
                         damage=譜尼傷害(3)
-                        print('譜尼使用了',use,'打出了致命一擊!造成了',damage*2,'傷害')
+                        print('譜尼使用了',bossuse,'打出了致命一擊!造成了',damage*2,'傷害')
                         我方扣血(me)[0]-=damage*2
                         被爆擊(2)
                     if bosstype==4:
-                        print('譜尼使用了',use,'自身充滿了能量')
+                        print('譜尼使用了',bossuse,'自身充滿了能量')
                         聖光氣=2
                 else:
                     if bosstype==1:
                         damage=譜尼傷害(1)
-                        print('譜尼使用了',use,'造成了',damage,'傷害')
+                        print('譜尼使用了',bossuse,'造成了',damage,'傷害')
                         我方扣血(me)[0]-=damage
                     elif bosstype==2:
                         damage=譜尼傷害(2)
-                        print('譜尼使用了',use,'造成了',damage,'傷害')
+                        print('譜尼使用了',bossuse,'造成了',damage,'傷害')
                         我方扣血(me)[0]-=damage
                     elif bosstype==3:
                         damage=譜尼傷害(3)
-                        print('譜尼使用了',use,'造成了',damage,'傷害')
+                        print('譜尼使用了',bossuse,'造成了',damage,'傷害')
                         我方扣血(me)[0]-=damage
                     if bosstype==4:
-                        print('譜尼使用了',use,'自身充滿了能量')
+                        print('譜尼使用了',bossuse,'自身充滿了能量')
                         聖光氣=2
 
       
@@ -2981,10 +3379,14 @@ def startgame():
     global 道具數量
     global hskill;global lskill;global mskill;global sskill;global cskill;global rskill
     global h1,h2,l1,l2,m1,m2,s1,s2,c1,c2,r1,r2
+    global b1h1,b1h2,b2h1,b2h2,b3h1,b3h2,b4h1,b4h2,b5h1,b5h2,b6h1,b6h2
     global bossskill
     global press;
     global skilling;skilling=False
+    global bossskilling;bossskilling=False
     global use;use=0
+    global bossuse;bossuse='0'
+    global 譜尼atk;譜尼atk=False
     global now,bossatk,itempage,which,nowcha,took,name,pre
     pre=False
     迴避=0;疲憊=0;睡眠=0;燒傷=0;寄生=0;聖光氣=0
@@ -3008,6 +3410,7 @@ def startgame():
     namepp=True
     pp不足=False
     h1=[1];l1=[1];m1=[1];s1=[1];c1=[1];r1=[1]
+    b1h1=[1];b2h1=[1];b3h1=[1];b4h1=[1];b5h1=[1];b6h1=[1]
 
 
     哈莫雷特=[402,302,225,202,215,0.5,2];原哈莫雷特=[402,302,225,202,215,0.5,2] 
@@ -3077,7 +3480,10 @@ def startgame():
     
 
     
-#os.system('bgm.mp3')
+filename='bgm.mp3'
+pygame.mixer.init()
+pygame.mixer.music.load(filename)
+pygame.mixer.music.play(1)
 startgame()
 main()
 
