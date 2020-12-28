@@ -294,7 +294,7 @@ def sure(按鍵):
     else:
         return False
 def makesure(screen,i):
-    global name,bossatk,took
+    global name,bossatk,took,boom
     global pre
     global now
     位置 = pygame.mouse.get_pos()
@@ -307,6 +307,7 @@ def makesure(screen,i):
             玩家攻擊()
             now='3'
             took=False
+            boom=False
     elif((290>=int(位置[0])>=200 and 675>=int(位置[1])>=570)):
         pass
     elif((290+d*1>=int(位置[0])>=200+d*1 and 675>=int(位置[1])>=570)):
@@ -1292,20 +1293,22 @@ def bossidle(screen):
                    bosscal=1
                    bosssecond=0
 def bossanimation(screen,background,cha):
-    global bossskill,bossuse,bossskilling
-    global skilling,me,bosssecond,bosscal,bossatk,gotattack
+    global bossskill,bossuse,bossskilling,now,noskill
+    global skilling,me,bosssecond,bosscal,bossatk,gotattack,boom
     global 疲憊;global 睡眠;global 燒傷;global 寄生
+    global 原疲憊;global 原睡眠;global 原燒傷;global 原寄生
     screen.blit(background, (0, 0))
     i=0
-    if 疲憊>0 or 睡眠>0:
+    now='3'
+    if 原疲憊>0 or 原睡眠>0:
             skilllv=pygame.image.load('./picture/睡眠.png')
             screen.blit(skilllv,(1000+i*33,100))
             i+=1
-    if 燒傷>0:
+    if 原燒傷>0:
             skilllv=pygame.image.load('./picture/灼傷.png')
             screen.blit(skilllv,(1000+i*33,100))
             i+=1
-    if 寄生>0:
+    if 原寄生>0:
             skilllv=pygame.image.load('./picture/寄生.png')
             screen.blit(skilllv,(1000+i*33,100))
             i+=1
@@ -1316,6 +1319,7 @@ def bossanimation(screen,background,cha):
     screen.blit(text, (720,100))
     text = fontObj.render('-%s'%(敵血量計算(you)-敵方血量(you)), True, (255,255,100))
     screen.blit(text, (720,96))
+
     attacked(background,screen,cha)
     hpbar(screen,cha)
     bosshpbar(screen)
@@ -1325,7 +1329,11 @@ def bossanimation(screen,background,cha):
         animation=pygame.image.load('./picture/譜尼/%s%s.png'%(a,b))
         screen.blit(animation,(x,y))
         pygame.display.update()  
-    if bossuse==bossskill[4]:
+    if 原疲憊>0 or 原睡眠>0 or noskill:
+        bosssecond=0                
+        bossatk=False
+        gotattack=False
+    elif bossuse==bossskill[4]:
         for i in range(1,31):
             if 2+2*(i-1)>=bosssecond>=0+2*(i-1):
                 技能('聖光氣',i,600,100)
@@ -1365,9 +1373,9 @@ def bossanimation(screen,background,cha):
 
 
 def stand(background,screen,cha):
-    global second;global cal;global skilling,me
+    global second;global cal;global skilling,me,you
     global bossatk;global item;global itempage,now
-    global gotattack
+    global gotattack,boom
     screen.blit(background, (0, 0))
     if gotattack:
         if (血量計算(me)-我方血量(me))>=0:
@@ -1384,6 +1392,10 @@ def stand(background,screen,cha):
             screen.blit(text, (420,100))
             text = fontObj.render('+%s'%(-1*(血量計算(me)-我方血量(me))), True, (150,227,0))
             screen.blit(text, (420,97))
+    if boom:
+        fontObj = pygame.font.Font('./picture/微軟正黑體.ttf', 45)
+        text = fontObj.render('爆擊!', True, (255,0,0))
+        screen.blit(text, (320,100))
     挑戰失敗(screen)
     hpbar(screen,cha)
     bosshpbar(screen)
@@ -1391,6 +1403,7 @@ def stand(background,screen,cha):
     要幹嘛(screen)
     if 我方血量(me)<=0:
         now='2'
+        boom=False
     if now=='3':
         skillboard(screen,cha)
     位置 = pygame.mouse.get_pos()
@@ -1764,21 +1777,32 @@ def main():
     global cal;cal=1
     global bosscal;bosscal=1
     global me;me=1
-    global you;you=1
-    global use,bossatk
+    global you,boss6;you=1
+    global use,bossatk,lose,boom,win
+    global 疲憊;global 睡眠;global 燒傷;global 寄生
+    global 原疲憊;global 原睡眠;global 原燒傷;global 原寄生
 
     
     while running:
         clock.tick(26) 
         second+=cal
-        bosssecond+=bosscal
+        bosssecond+=bosscal        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-        if skilling:
+                pygame.quit()
+                sys.exit()
+
+        if lose:
+            挑戰失敗(screen)
+        elif skilling:
+            boom=False
             pygame.mouse.set_system_cursor(pygame.SYSTEM_CURSOR_ARROW)
             技能動畫()(screen,我方誰在場上(me),background,use)
+        elif boss6[0]<=0:
+            挑戰成功(screen)
         elif bossatk:
+            原疲憊=疲憊;原睡眠=睡眠;原燒傷=燒傷;原寄生=寄生
             if 譜尼atk:
                 譜尼攻擊()           
             bossanimation(screen,background,我方誰在場上(me))
@@ -3304,14 +3328,29 @@ def 血量過低():
         die=False
 def 挑戰失敗(screen):
     if 哈莫雷特[0]<=0 and 羅特利斯[0]<=0 and 魔焰猩猩[0]<=0 and 薩帕克[0]<=0 and 卡利斯[0]<=0 and 雷伊[0]<=0:
-            fontObj = pygame.font.Font('./picture/微軟正黑體.ttf', 30)
-            text = fontObj.render('挑戰失敗...不要氣餒', True, (255,255,255))
-            i=0
-            number='挑戰失敗...不要氣餒'
-            for a in number:
-                i+=1
-            screen.blit(text, (500,200))
-            sys.exit()
+            #fontObj = pygame.font.Font('./picture/微軟正黑體.ttf', 30)
+            #text = fontObj.render('挑戰失敗...不要氣餒', True, (255,255,255))
+            #i=0
+            #number='挑戰失敗...不要氣餒'
+            #for a in number:
+            #    i+=1
+            #screen.blit(text, (450,200))
+            global lose
+            if lose:
+                screen.fill((0, 0, 0))
+                失敗=pygame.image.load('./picture/戰鬥失敗.png')
+                screen.blit(失敗,(0,0))
+                pygame.display.update()  
+            lose=True
+def 挑戰成功(screen):
+    screen.fill((0, 0, 0))
+    勝利=pygame.image.load('./picture/戰鬥勝利.png')
+    screen.blit(勝利,(0,0))
+    pygame.display.update()  
+
+
+            
+
 
 
 
@@ -3465,29 +3504,29 @@ def 譜尼傷害(type):
 def 譜尼技能234():
     global you;global bosstype;global noskill
     noskill=False
-    hit=random.randint(1,4)
-    if hit==1:
+    hit=random.randint(1,7)
+    if hit==1 or hit==2:
         if 譜尼pp()[0]>0:
             bosstype=1
             譜尼pp()[0]-=1
             return bossskill[1]
         else:
             return 譜尼技能234()
-    elif hit==2:
+    elif hit==3 or hit==4:
         if 譜尼pp()[1]>0:
             bosstype=2
             譜尼pp()[1]-=1
             return bossskill[2]
         else:
             return 譜尼技能234()
-    elif hit==3:
+    elif hit==5 or hit==6:
         if 譜尼pp()[2]>0:
             bosstype=3
             譜尼pp()[2]-=1
             return bossskill[3]
         else:
             return 譜尼技能234()
-    elif hit==4:
+    elif hit==7:
         if 譜尼pp()[3]>0:
             bosstype=4
             譜尼pp()[3]-=1
@@ -3497,35 +3536,36 @@ def 譜尼技能234():
     
 def 譜尼技能56():
     global you;global bosstype
-    hit=random.randint(1,4)
-    if hit==1:
+    hit=random.randint(1,7)
+    if hit==1 or hit==2:
         bosstype=1
         return bossskill[1]
-    elif hit==2:
+    elif hit==3 or hit==4:
         bosstype=2
         return bossskill[2]
-    elif hit==3:
+    elif hit==5 or hit==6:
         bosstype=3
         return bossskill[3]
-    elif hit==4:
+    elif hit==7:
         bosstype=4
         return bossskill[4]
 def 譜尼技能1():
     global you;global bosstype
-    hit=random.randint(1,3)
-    if hit==1:
+    hit=random.randint(1,5)
+    if hit==1 or hit==2:
         bosstype=1
         return bossskill[1]
-    elif hit==2:
+    elif hit==3 or hit==4:
         bosstype=2
         return bossskill[2]
-    elif hit==3:
+    elif hit==5:
         bosstype=4
         return bossskill[4]
 
 def 譜尼攻擊():
     global you;global bosstype;global noskill;global 迴避;global 疲憊;global 睡眠;global 燒傷;global 寄生
-    global 聖光氣;global bossuse;global 譜尼atk,bosssecond
+    global 聖光氣;global bossuse;global 譜尼atk,bosssecond,boom
+    global 原迴避;global 原疲憊;global 原睡眠;global 原燒傷;global 原寄生
     bosssecond=0
     譜尼atk=False
     if 燒傷>0:
@@ -3543,6 +3583,7 @@ def 譜尼攻擊():
     if 敵方血量(you)<=0:
         you+=1
         迴避=0;疲憊=0;睡眠=0;燒傷=0;寄生=0;聖光氣=0
+        原迴避=0;原疲憊=0;原睡眠=0;原燒傷=0;原寄生=0
         noskill=False
         敵方登場精靈(譜尼登場())
     if you==4:
@@ -3556,9 +3597,7 @@ def 譜尼攻擊():
             print('譜尼回滿血了')
 
     if you>6:                                             
-        print('恭喜你戰勝了譜尼!')
-        time.sleep(1)
-        sys.exit()
+        pass
     if you==1:
         bossuse=譜尼技能1()
         if 疲憊>0 or 睡眠>0:
@@ -3589,12 +3628,14 @@ def 譜尼攻擊():
                     print('譜尼使用了',bossuse,'打出了致命一擊!造成了',damage*2,'傷害')
                     前我方血量(me)
                     我方扣血(me)[0]-=damage*2
+                    boom=True
                     被爆擊(1)
                 elif bosstype==2:
                     damage=譜尼傷害(2)
                     print('譜尼使用了',bossuse,'打出了致命一擊!造成了',damage*2,'傷害')
                     前我方血量(me)
                     我方扣血(me)[0]-=damage*2
+                    boom=True
                     被爆擊(2)
                 if bosstype==4:
                     print('譜尼使用了',bossuse,'自身充滿了能量')
@@ -3649,18 +3690,21 @@ def 譜尼攻擊():
                     print('譜尼使用了',bossuse,'打出了致命一擊!造成了',damage*2,'傷害')
                     前我方血量(me)
                     我方扣血(me)[0]-=damage*2
+                    boom=True
                     被爆擊(1)
                 elif bosstype==2:
                     damage=譜尼傷害(2)
                     print('譜尼使用了',bossuse,'打出了致命一擊!造成了',damage*2,'傷害')
                     前我方血量(me)
                     我方扣血(me)[0]-=damage*2
+                    boom=True
                     被爆擊(2)
                 elif bosstype==3:
                     damage=譜尼傷害(3)
                     print('譜尼使用了',bossuse,'打出了致命一擊!造成了',damage*2,'傷害')
                     前我方血量(me)
                     我方扣血(me)[0]-=damage*2
+                    boom=True
                     被爆擊(2)
                 if bosstype==4:
                     print('譜尼使用了',bossuse,'自身充滿了能量')
@@ -3724,18 +3768,21 @@ def 譜尼攻擊():
                         print('譜尼使用了',bossuse,'打出了致命一擊!造成了',damage*2,'傷害')
                         前我方血量(me)
                         我方扣血(me)[0]-=damage*2
+                        boom=True
                         被爆擊(1)
                     elif bosstype==2:
                         damage=譜尼傷害(2)
                         print('譜尼使用了',bossuse,'打出了致命一擊!造成了',damage*2,'傷害')
                         前我方血量(me)
                         我方扣血(me)[0]-=damage*2
+                        boom=True
                         被爆擊(2)
                     elif bosstype==3:
                         damage=譜尼傷害(3)
                         print('譜尼使用了',bossuse,'打出了致命一擊!造成了',damage*2,'傷害')
                         前我方血量(me)
                         我方扣血(me)[0]-=damage*2
+                        boom=True
                         被爆擊(2)
                     if bosstype==4:
                         print('譜尼使用了',bossuse,'自身充滿了能量')
@@ -3812,6 +3859,10 @@ def startgame():
     global 前哈莫雷特;global 前羅特利斯;global 前魔焰猩猩;global 前薩帕克;global 前卡利斯;global 前雷伊
     global gotattack
     global 前boss1,前boss2,前boss3,前boss4,前boss5,前boss6
+    global lose,boom,win
+    win=False
+    boom=False
+    lose=False
     gotattack=False
     pre=False
     迴避=0;疲憊=0;睡眠=0;燒傷=0;寄生=0;聖光氣=0
@@ -3838,12 +3889,12 @@ def startgame():
     b1h1=[1];b2h1=[1];b3h1=[1];b4h1=[1];b5h1=[1];b6h1=[1]
 
 
-    哈莫雷特=[402,302,225,202,215,0.5,2];原哈莫雷特=[402,302,225,202,215,0.5,2] 
-    羅特利斯=[342,236,191,234,197,1.5,0.75];原羅特利斯=[342,236,191,234,197,1.5,0.75]
-    魔焰猩猩=[378,282,193,231,193,2,0.5];原魔焰猩猩=[378,282,193,231,193,2,0.5]
-    薩帕克=[358,232,191,234,235,0.5,2];原薩帕克=[358,232,191,234,235,0.5,2]
-    卡利斯=[308,256,233,180,201,2,0.5];原卡利斯=[308,256,233,180,201,2,0.5]
-    雷伊=[343,229,206,221,210,2,0.5];原雷伊=[343,229,206,221,210,2,0.5]
+    哈莫雷特=[402,302,225,202,215,0.5,2];原哈莫雷特=[402,302,225,202,215,0.5,2];前哈莫雷特=402
+    羅特利斯=[342,236,191,234,197,1.5,0.75];原羅特利斯=[342,236,191,234,197,1.5,0.75];前羅特利斯=342
+    魔焰猩猩=[378,282,193,231,193,2,0.5];原魔焰猩猩=[378,282,193,231,193,2,0.5];前魔焰猩猩=378
+    薩帕克=[358,232,191,234,235,0.5,2];原薩帕克=[358,232,191,234,235,0.5,2];前薩帕克=358
+    卡利斯=[308,256,233,180,201,2,0.5];原卡利斯=[308,256,233,180,201,2,0.5];前卡利斯=308
+    雷伊=[343,229,206,221,210,2,0.5];原雷伊=[343,229,206,221,210,2,0.5];前雷伊=343
     hskill=[0,'龍之意志','迴避','龍王波','龍王滅碎陣']
     lskill=[0,'幻化之火','火之意志','灼燒','天火鳳凰']
     mskill=[0,'覺醒','絕命火焰','全力一擊','火焰漩渦']
