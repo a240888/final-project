@@ -1763,6 +1763,8 @@ def attacked(background,screen,cha):
 
 def main():
     pygame.init()
+    icon=pygame.image.load('./picture/logo.png')
+    pygame.display.set_icon(icon)
     screen = pygame.display.set_mode((1200, 695))
     pygame.display.set_caption('賽爾號')
     screen.fill((255, 255, 255))
